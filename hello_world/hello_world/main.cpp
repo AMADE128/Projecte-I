@@ -8,8 +8,9 @@ int main() {
 	//Denis
 
 	//Pol
-    printf("Hello world, I'm Pol");
+    printf("Hello world, I'm Pol\n");
 	//Marc
+	printf("Hello world, I'm Marc\n");
 
 	system("pause");
 	return 0;
