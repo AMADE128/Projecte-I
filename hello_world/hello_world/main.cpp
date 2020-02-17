@@ -8,7 +8,7 @@ int main() {
 	//Denis
 
 	//Pol
-
+    printf("Hello world, I'm Pol");
 	//Marc
 
 	system("pause");
