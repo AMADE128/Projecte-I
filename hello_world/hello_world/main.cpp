@@ -6,7 +6,7 @@ int main() {
 	//Himar
 	printf("hello world\n");
 	//Denis
-
+	printf("Hello world\n");
 	//Pol
     printf("Hello world, I'm Pol\n");
 	//Marc
