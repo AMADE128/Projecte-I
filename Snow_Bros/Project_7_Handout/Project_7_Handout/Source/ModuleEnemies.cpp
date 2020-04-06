@@ -133,24 +133,24 @@ void ModuleEnemies::HandleEnemiesDespawn()
 void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 {
 	//// Find an empty slot in the enemies array
-	//for (uint i = 0; i < MAX_ENEMIES; ++i)
-	//{
-	//	if (enemies[i] == nullptr)
-	//	{
-	//		switch (info.type)
-	//		{
-	//			case ENEMY_TYPE::REDBIRD:
-	//				enemies[i] = new Enemy_RedBird(info.x, info.y);
-	//				break;
-	//			case ENEMY_TYPE::BROWNSHIP:
-	//				enemies[i] = new Enemy_BrownShip(info.x, info.y);
-	//				break;
-	//		}
-	//		enemies[i]->texture = texture;
-	//		enemies[i]->destroyedFx = enemyDestroyedFx;
-	//		break;
-	//	}
-	//}
+	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] == nullptr)
+		{
+			switch (info.type)
+			{
+				case ENEMY_TYPE::REDBIRD:
+					enemies[i] = new Enemy_RedBird(info.x, info.y);
+					break;
+				case ENEMY_TYPE::BROWNSHIP:
+					enemies[i] = new Enemy_BrownShip(info.x, info.y);
+					break;
+			}
+			enemies[i]->texture = texture;
+			enemies[i]->destroyedFx = enemyDestroyedFx;
+		break;
+		}
+	}*/
 }
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
