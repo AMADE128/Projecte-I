@@ -7,8 +7,6 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
-#include "Enemy_BrownShip.h"
 
 #define SPAWN_MARGIN 50
 
@@ -96,21 +94,21 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPE type, int x, int y)
 
 void ModuleEnemies::HandleEnemiesSpawn()
 {
-	// Iterate all the enemies queue
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (spawnQueue[i].type != ENEMY_TYPE::NO_TYPE)
-		{
-			// Spawn a new enemy if the screen has reached a spawn position
-			if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
-			{
-				LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+	//// Iterate all the enemies queue
+	//for (uint i = 0; i < MAX_ENEMIES; ++i)
+	//{
+	//	if (spawnQueue[i].type != ENEMY_TYPE::NO_TYPE)
+	//	{
+	//		// Spawn a new enemy if the screen has reached a spawn position
+	//		if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
+	//		{
+	//			LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
 
-				SpawnEnemy(spawnQueue[i]);
-				spawnQueue[i].type = ENEMY_TYPE::NO_TYPE; // Removing the newly spawned enemy from the queue
-			}
-		}
-	}
+	//			SpawnEnemy(spawnQueue[i]);
+	//			spawnQueue[i].type = ENEMY_TYPE::NO_TYPE; // Removing the newly spawned enemy from the queue
+	//		}
+	//	}
+	//}
 }
 
 void ModuleEnemies::HandleEnemiesDespawn()
@@ -134,25 +132,25 @@ void ModuleEnemies::HandleEnemiesDespawn()
 
 void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 {
-	// Find an empty slot in the enemies array
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
-	{
-		if (enemies[i] == nullptr)
-		{
-			switch (info.type)
-			{
-				case ENEMY_TYPE::REDBIRD:
-					enemies[i] = new Enemy_RedBird(info.x, info.y);
-					break;
-				case ENEMY_TYPE::BROWNSHIP:
-					enemies[i] = new Enemy_BrownShip(info.x, info.y);
-					break;
-			}
-			enemies[i]->texture = texture;
-			enemies[i]->destroyedFx = enemyDestroyedFx;
-			break;
-		}
-	}
+	//// Find an empty slot in the enemies array
+	//for (uint i = 0; i < MAX_ENEMIES; ++i)
+	//{
+	//	if (enemies[i] == nullptr)
+	//	{
+	//		switch (info.type)
+	//		{
+	//			case ENEMY_TYPE::REDBIRD:
+	//				enemies[i] = new Enemy_RedBird(info.x, info.y);
+	//				break;
+	//			case ENEMY_TYPE::BROWNSHIP:
+	//				enemies[i] = new Enemy_BrownShip(info.x, info.y);
+	//				break;
+	//		}
+	//		enemies[i]->texture = texture;
+	//		enemies[i]->destroyedFx = enemyDestroyedFx;
+	//		break;
+	//	}
+	//}
 }
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)

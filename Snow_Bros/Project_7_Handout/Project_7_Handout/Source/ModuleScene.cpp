@@ -24,7 +24,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/background.png");
+	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl1.png");
 	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
 
 	//Bottomside collider
@@ -52,7 +52,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x += 3;
+	//App->render->camera.x += 3;
 
 	return update_status::UPDATE_CONTINUE;
 }

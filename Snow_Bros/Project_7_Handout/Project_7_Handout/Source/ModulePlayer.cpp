@@ -14,19 +14,19 @@
 ModulePlayer::ModulePlayer()
 {
 	// idle animation - just one sprite
-	idleAnim.PushBack({ 66, 1, 32, 14 });
+	idleAnim.PushBack({ 13, 13, 32, 32 });
 
 	// move upwards
-	upAnim.PushBack({ 100, 1, 32, 14 });
-	upAnim.PushBack({ 132, 0, 32, 14 });
-	upAnim.loop = false;
-	upAnim.speed = 0.1f;
+	jumpAnim.PushBack({ 100, 1, 32, 14 });
+	jumpAnim.PushBack({ 132, 0, 32, 14 });
+	jumpAnim.loop = false;
+	jumpAnim.speed = 0.1f;
 
 	// Move down
-	downAnim.PushBack({ 33, 1, 32, 14 });
-	downAnim.PushBack({ 0, 1, 32, 14 });
-	downAnim.loop = false;
-	downAnim.speed = 0.1f;
+	fallAnim.PushBack({ 33, 1, 32, 14 });
+	fallAnim.PushBack({ 0, 1, 32, 14 });
+	fallAnim.loop = false;
+	fallAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -40,14 +40,14 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/ship.png");
+	texture = App->textures->Load("Assets/Sprites/Player/Nick_Tom.png");
 	currentAnimation = &idleAnim;
 
-	laserFx = App->audio->LoadFx("Assets/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/explosion.wav");
+	/*laserFx = App->audio->LoadFx("Assets/laser.wav");
+	explosionFx = App->audio->LoadFx("Assets/explosion.wav");*/
 
-	position.x = 150;
-	position.y = 120;
+	position.x = 540;
+	position.y = 800;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
@@ -57,7 +57,6 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	// Moving the player with the camera scroll
-	App->player->position.x += 1;
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
@@ -69,24 +68,14 @@ update_status ModulePlayer::Update()
 		position.x += speed;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
-	{
-		position.y += speed;
-		if (currentAnimation != &downAnim)
-		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-		}
-	}
-
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
-		if (currentAnimation != &upAnim)
+		/*if (currentAnimation != &jumpAnim)
 		{
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-		}
+			jumpAnim.Reset();
+			currentAnimation = &jumpAnim;
+		}*/
 	}
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
