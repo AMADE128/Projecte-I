@@ -32,12 +32,17 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	void StopMovement(Collider* c1, Collider* c2) override;
+
 public:
 	// Position of the player in the map
 	iPoint position;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 2;
+
+	bool rightCollision;
+	bool leftCollision;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;

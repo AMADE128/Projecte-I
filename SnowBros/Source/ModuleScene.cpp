@@ -28,11 +28,12 @@ bool ModuleScene::Start()
 	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
 
 	//Bottomside collider
-	App->collisions->AddCollider({ 40, 933, 1390, 2 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::WALL);
+	
 
 	//First two columns colliders
-	/*App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);*/
+	App->collisions->AddCollider({ 0, 0, 40, 1390}, Collider::Type::WALL);
+	App->collisions->AddCollider({ 1400, 0, 40, 1390}, Collider::Type::WALL);
 
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 600, 80);

@@ -70,15 +70,24 @@ update_status ModulePlayer::Update()
 	// Moving the player with the camera scroll
 	//App->player->position.x += 1;
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT)
 	{
+		if (rightCollision == true)
+		{
+			speed = 2;
+		}
 		position.x -= speed;
 	}
-
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT)
 	{
+		if (leftCollision == true)
+		{
+			speed = 2;
+		}
 		position.x += speed;
 	}
+
+	
 
 	//SOBRA 3: EL PERSONAJE NO PUEDE MOVERSE HACIA ABAJO
 
@@ -157,4 +166,30 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		destroyed = true;
 	}
+}
+
+void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
+{
+
+	if (c1 == collider && destroyed == false)
+	{
+
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed != 0)
+		{
+			speed = 0;
+			leftCollision = false;
+			rightCollision = true;
+			
+		}
+
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed != 0)
+		{
+			speed = 0;
+			rightCollision = false;
+			leftCollision = true;
+			
+		}
+		
+	}
+
 }

@@ -32,7 +32,7 @@ public:
 	//and the module is registered as the listener
 	virtual void OnCollision(Collider* c1, Collider* c2);
 
-	virtual void StopMovement(Collider* c1);
+	virtual void StopMovement(Collider* c1, Collider* c2);
 };
 
 #endif // __MODULE_H__
