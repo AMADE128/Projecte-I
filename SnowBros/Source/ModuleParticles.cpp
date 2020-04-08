@@ -10,7 +10,7 @@
 
 ModuleParticles::ModuleParticles()
 {
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
 }
 
@@ -25,12 +25,12 @@ bool ModuleParticles::Start()
 	texture = App->textures->Load("Assets/particles.png");
 
 	// Explosion particle
-	explosion.anim.PushBack({274, 296, 33, 30});
-	explosion.anim.PushBack({313, 296, 33, 30});
-	explosion.anim.PushBack({346, 296, 33, 30});
-	explosion.anim.PushBack({382, 296, 33, 30});
-	explosion.anim.PushBack({419, 296, 33, 30});
-	explosion.anim.PushBack({457, 296, 33, 30});
+	explosion.anim.PushBack({ 274, 296, 33, 30 });
+	explosion.anim.PushBack({ 313, 296, 33, 30 });
+	explosion.anim.PushBack({ 346, 296, 33, 30 });
+	explosion.anim.PushBack({ 382, 296, 33, 30 });
+	explosion.anim.PushBack({ 419, 296, 33, 30 });
+	explosion.anim.PushBack({ 457, 296, 33, 30 });
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
@@ -48,9 +48,9 @@ bool ModuleParticles::CleanUp()
 	LOG("Unloading particles");
 
 	// Delete all remaining active particles on application exit 
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		if(particles[i] != nullptr)
+		if (particles[i] != nullptr)
 		{
 			delete particles[i];
 			particles[i] = nullptr;
@@ -76,14 +76,14 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 update_status ModuleParticles::Update()
 {
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* particle = particles[i];
 
-		if(particle == nullptr)	continue;
+		if (particle == nullptr)	continue;
 
 		// Call particle Update. If it has reached its lifetime, destroy it
-		if(particle->Update() == false)
+		if (particle->Update() == false)
 		{
 			delete particle;
 			particles[i] = nullptr;

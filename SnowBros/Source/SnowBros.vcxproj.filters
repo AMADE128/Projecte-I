@@ -36,132 +36,132 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Application.h">
+    <ClInclude Include="Application.h">
       <Filter>Source Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Globals.h">
+    <ClInclude Include="Globals.h">
       <Filter>Source Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\MemLeaks.h">
+    <ClInclude Include="MemLeaks.h">
       <Filter>Source Files\Application</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Particle.h">
+    <ClInclude Include="Enemy.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_BrownShip.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy_RedBird.h">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
       <Filter>Source Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Enemy_RedBird.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Enemy.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
+    <ClInclude Include="ModuleCollisions.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Enemy_BrownShip.h">
-      <Filter>Source Files\Entities\Enemies</Filter>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Module.h">
+    <ClInclude Include="ModuleParticles.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEnemies.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
       <Filter>Source Files\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleEnemies.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleScene.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModulePlayer.h">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleAudio.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleCollisions.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleInput.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleParticles.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleRender.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleTextures.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleWindow.h">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Path.h">
+    <ClInclude Include="Animation.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Animation.h">
+    <ClInclude Include="Collider.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Collider.h">
+    <ClInclude Include="p2Point.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\p2Point.h">
+    <ClInclude Include="Path.h">
       <Filter>Source Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Application.cpp">
+    <ClCompile Include="Application.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Globals.cpp">
+    <ClCompile Include="Globals.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Main.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files\Application</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Particle.cpp">
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_BrownShip.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_RedBird.cpp">
+      <Filter>Source Files\Entities\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Enemy.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Enemy_BrownShip.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
+    <ClCompile Include="ModuleCollisions.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Enemy_RedBird.cpp">
-      <Filter>Source Files\Entities\Enemies</Filter>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Module.cpp">
+    <ClCompile Include="ModuleParticles.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Source Files\Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEnemies.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Source Files\Modules\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Module.cpp">
       <Filter>Source Files\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleEnemies.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleScene.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModulePlayer.cpp">
-      <Filter>Source Files\Modules\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleAudio.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleCollisions.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleInput.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleParticles.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleRender.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleTextures.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\ModuleWindow.cpp">
-      <Filter>Source Files\Modules\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Collider.cpp">
+    <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="E:\Uni\semestre 2\PROYECTO I\Clase 16\Project_7_Handout\Source\Path.cpp">
+    <ClCompile Include="Path.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>

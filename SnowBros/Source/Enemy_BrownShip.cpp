@@ -5,15 +5,15 @@
 
 Enemy_BrownShip::Enemy_BrownShip(int x, int y) : Enemy(x, y)
 {
-	fly.PushBack({5,72,21,22});
+	fly.PushBack({ 5,72,21,22 });
 	currentAnim = &fly;
-	
+
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 
-	path.PushBack({-0.4f, -0.3f}, 150, &fly);
-	path.PushBack({-0.4f, 0.3f }, 150, &fly);
-	
-	collider = App->collisions->AddCollider({0, 0, 24, 24}, Collider::Type::ENEMY, (Module*)App->enemies);
+	path.PushBack({ -0.4f, -0.3f }, 150, &fly);
+	path.PushBack({ -0.4f, 0.3f }, 150, &fly);
+
+	//collider = App->collisions->AddCollider({0, 0, 24, 24}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_BrownShip::Update()

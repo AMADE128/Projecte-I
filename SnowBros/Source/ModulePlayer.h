@@ -37,19 +37,19 @@ public:
 	iPoint position;
 
 	// The speed in which we move the player (pixels per frame)
-	int speed = 1;
+	int speed = 2;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
-	
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
 	Animation idleAnim;
-	Animation upAnim;
-	Animation downAnim;
+	Animation jumpAnim;
+	Animation fallAnim;
 
 	// The player's collider
 	Collider* collider = nullptr;
@@ -61,8 +61,12 @@ public:
 	uint destroyedCountdown = 120;
 
 	// Sound effects indices
-	uint laserFx = 0;
+	uint shotFx = 0;
 	uint explosionFx = 0;
+
+	// Animations being played or not
+	bool jumpAnimState;
+	bool shotAnimState;
 
 };
 

@@ -72,7 +72,7 @@ update_status Application::Update()
 
 	return ret;
 }
- 
+
 bool Application::CleanUp()
 {
 	bool ret = true;

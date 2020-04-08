@@ -24,15 +24,15 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/background.png");
+	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl1.png");
 	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
 
 	//Bottomside collider
-	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 40, 933, 1390, 2 }, Collider::Type::WALL);
 
 	//First two columns colliders
-	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
+	/*App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);*/
 
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 600, 80);
@@ -62,7 +62,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x += 3;
+	//App->render->camera.x += 3; SOBRA 2: LO GUARDAMOS PARA CUANDO CAMBIE DE NIVEL Y SUBA HACIA ARRIBA
 
 	return update_status::UPDATE_CONTINUE;
 }

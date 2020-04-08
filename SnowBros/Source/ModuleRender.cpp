@@ -5,6 +5,7 @@
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"
@@ -22,7 +23,7 @@ ModuleRender::~ModuleRender()
 bool ModuleRender::Init()
 {
 	LOG("Creating Renderer context");
-	bool ret = true;	
+	bool ret = true;
 	Uint32 flags = 0;
 
 	if (VSYNC == true)
@@ -55,6 +56,8 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
+	//SOBRA 1: NO HACE FALTA MOVER LA CAMARA EN NUESTRO JUEGO
+	/*
 	//Handle positive vertical movement
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed;
@@ -69,6 +72,7 @@ update_status ModuleRender::Update()
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
 		camera.x += cameraSpeed;
+	*/
 
 
 	return update_status::UPDATE_CONTINUE;
@@ -98,11 +102,11 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 {
 	bool ret = true;
 
-	SDL_Rect rect {
+	SDL_Rect rect{
 		(int)(-camera.x * speed) + x * SCREEN_SIZE,
 		(int)(-camera.y * speed) + y * SCREEN_SIZE,
 		0, 0 };
-	
+
 	if (section != nullptr)
 	{
 		rect.w = section->w;
@@ -114,8 +118,17 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 		SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
 	}
 
-	rect.w *= SCREEN_SIZE;
-	rect.h *= SCREEN_SIZE;
+	if (texture == App->player->texture)
+	{
+		rect.w *= 4.2;
+		rect.h *= 4.2;
+	}
+
+	else
+	{
+		rect.w *= SCREEN_SIZE;
+		rect.h *= SCREEN_SIZE;
+	}
 
 	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
 	{
@@ -133,7 +146,7 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
-	SDL_Rect dstRect {
+	SDL_Rect dstRect{
 		(int)(-camera.x * speed) + rect.x * SCREEN_SIZE,
 		(int)(-camera.y * speed) + rect.y * SCREEN_SIZE,
 		rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
