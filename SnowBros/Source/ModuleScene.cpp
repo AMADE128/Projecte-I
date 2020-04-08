@@ -25,7 +25,7 @@ bool ModuleScene::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl1.png");
-	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
 
 	//Bottomside collider
 	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::WALL);

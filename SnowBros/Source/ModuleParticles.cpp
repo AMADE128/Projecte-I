@@ -22,7 +22,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Sprites/Player/Nick_Tom.png");
+	texture = App->textures->Load("Assets/Sprites/Player/Nick_Tom_right.png");
 
 	shot.anim.PushBack({ 16, 141, 7, 11 });
 	shot.anim.PushBack({ 31, 141, 7, 11 });

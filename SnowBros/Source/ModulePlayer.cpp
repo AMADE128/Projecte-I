@@ -39,7 +39,7 @@ ModulePlayer::ModulePlayer()
 	sideRightAnim.PushBack({ 62, 75, NICK_SPRITE_SIZE - 5, NICK_SPRITE_SIZE });
 	sideRightAnim.PushBack({ 37, 76, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
 	sideRightAnim.loop = true;
-	sideRightAnim.speed = 0.01f;
+	sideRightAnim.speed = 0.07f;
 
 	// Move left
 
@@ -158,7 +158,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->particles->AddParticle(App->particles->shot, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-		App->audio->PlayFx(shotFx);
+  		App->audio->PlayFx(shotFx);
 	}
 
 	// If no up / left / right movement detected, set the current animation back to idle
