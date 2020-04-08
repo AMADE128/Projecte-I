@@ -1,7 +1,5 @@
 #include "ModuleRender.h"
 
-#include "ModulePlayer.h"
-
 #include "Application.h"
 
 #include "ModuleWindow.h"
@@ -57,6 +55,20 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
+	//Handle positive vertical movement
+	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
+		camera.y -= cameraSpeed;
+
+	//Handle negative vertical movement
+	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
+		camera.y += cameraSpeed;
+
+	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
+		camera.x -= cameraSpeed;
+	if (camera.x < 0) camera.x = 0;
+
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
+		camera.x += cameraSpeed;
 
 
 	return update_status::UPDATE_CONTINUE;
@@ -101,16 +113,9 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 		//Collect the texture size into rect.w and rect.h variables
 		SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
 	}
-	if (texture == App->player->texture)
-	{
-		rect.w *= 4.2;
-		rect.h *= 4.2;
-	}
-	else {
 
-		rect.w *= SCREEN_SIZE;
-		rect.h *= SCREEN_SIZE;
-	}
+	rect.w *= SCREEN_SIZE;
+	rect.h *= SCREEN_SIZE;
 
 	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
 	{

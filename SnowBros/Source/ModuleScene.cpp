@@ -24,7 +24,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl1.png");
+	bgTexture = App->textures->Load("Assets/background.png");
 	App->audio->PlayMusic("Assets/stage1.ogg", 1.0f);
 
 	//Bottomside collider
@@ -42,7 +42,17 @@ bool ModuleScene::Start()
 
 	// TODO 1: Add a new wave of red birds
 
+	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 800, 135);
+	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 820, 135);
+	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 850, 135);
+	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 865, 135);
+
 	// TODO 2: Add a new wave of brown cookies
+
+	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1000, 100);
+	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1025, 100);
+	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1050, 100);
+	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1075, 100);
 
 	// TODO 4: Create a new enemy type: The Mech
 
@@ -52,7 +62,7 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	//App->render->camera.x += 3;
+	App->render->camera.x += 3;
 
 	return update_status::UPDATE_CONTINUE;
 }
