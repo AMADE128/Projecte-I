@@ -44,8 +44,13 @@ public:
 	bool rightCollision;
 	bool leftCollision;
 
-	// The player spritesheet loaded into an SDL_Texture
-	SDL_Texture* texture = nullptr;
+	// The player spritesheets loaded into an SDL_Texture
+	SDL_Texture* texture_right = nullptr;
+	SDL_Texture* texture_left = nullptr;
+
+	// Current spritesheet
+	bool Tright;
+	bool Tleft;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -55,6 +60,8 @@ public:
 	Animation idleAnim;
 	Animation jumpAnim;
 	Animation fallAnim;
+	Animation sideRightAnim;
+	Animation sideLeftAnim;
 
 	// The player's collider
 	Collider* collider = nullptr;
@@ -68,10 +75,6 @@ public:
 	// Sound effects indices
 	uint shotFx = 0;
 	uint explosionFx = 0;
-
-	// Animations being played or not
-	bool jumpAnimState;
-	bool shotAnimState;
 
 };
 

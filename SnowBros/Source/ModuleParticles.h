@@ -49,18 +49,16 @@ public:
 	void AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
 private:
-	// Particles spritesheet loaded into an SDL Texture
-	SDL_Texture* texture = nullptr;
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
 public:
-	//Template particle for an explosion
-	Particle explosion;
+	// Particles spritesheet loaded into an SDL Texture
+	SDL_Texture* texture = nullptr;
 
-	//Template particle for a laser
-	Particle laser;
+	//Template particle for a shot
+	Particle shot;
 };
 
 #endif // !__MODULEPARTICLES_H__

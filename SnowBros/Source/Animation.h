@@ -15,12 +15,12 @@ public:
 	bool pingpong = false;
 
 private:
-	float currentFrame = 0.0f;
 	int totalFrames = 0;
 	int loopCount = 0;
 	int pingpongDirection = 1;
 
 public:
+	float currentFrame = 0.0f;
 
 	void PushBack(const SDL_Rect& rect)
 	{
