@@ -20,17 +20,29 @@ ModulePlayer::ModulePlayer()
 	// idle animation - just one sprite
 	idleAnim.PushBack({ 16, 16, 32, 32 });
 
-	// jump
-	jumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 100, 369, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 131, 375, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 157, 376, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 185, 371, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 213, 374, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 243, 375, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	jumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	jumpAnim.loop = false;
-	jumpAnim.speed = 0.1f;
+	// right jump
+	rightjumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 100, 369, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 131, 375, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 157, 376, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 185, 371, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 213, 374, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 243, 375, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.loop = false;
+	rightjumpAnim.speed = 0.1f;
+
+	// left jump
+	leftjumpAnim.PushBack({ 572, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -3});
+	leftjumpAnim.PushBack({ 542, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 514, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 486, 312, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 458, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 430, 310, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 399, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 572, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -3});
+	leftjumpAnim.loop = false;
+	leftjumpAnim.speed = 0.1f;
 
 	// Move right
 
@@ -95,7 +107,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT)
 	{
 		// Enable to escape collision
-		if (rightCollision == true)
+		if (rightCollision == true || (rightCollision == false && speed == 0))
 		{
 			speed = 2;
 		}
@@ -107,7 +119,7 @@ update_status ModulePlayer::Update()
 		Tleft = true;
 		Tright = false;
 
-		if (currentAnimation != &jumpAnim && currentAnimation != &sideLeftAnim)
+		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim)
 		{
 			sideLeftAnim.Reset();
 			currentAnimation = &sideLeftAnim;
@@ -116,7 +128,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT)
 	{
-		if (leftCollision == true)
+		if (leftCollision == true || (leftCollision == false && speed == 0))
 		{
 			speed = 2;
 		}
@@ -126,7 +138,7 @@ update_status ModulePlayer::Update()
 		Tright = true;
 		Tleft = false;
 
-		if (currentAnimation != &jumpAnim && currentAnimation != &sideRightAnim)
+		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim)
 		{
 			sideRightAnim.Reset();
 			currentAnimation = &sideRightAnim;
@@ -138,20 +150,42 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
-		/*if (currentAnimation != &fallAnim)
-		{
-			fallAnim.Reset();
-			currentAnimation = &fallAnim;
-		}*/
 	}
 
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	//right jump
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
 	{
-		position.y -= speed;
-		if (currentAnimation != &jumpAnim)
+		if (rightCollision == true)
 		{
-			jumpAnim.Reset();
-			currentAnimation = &jumpAnim;
+			speed = 2;
+			Tright = true;
+		}
+
+		Tleft = false;
+		speed = 2;
+
+		position.y -= speed;
+		if (currentAnimation != &rightjumpAnim)
+		{
+			rightjumpAnim.Reset();
+			currentAnimation = &rightjumpAnim;
+		}
+	}
+
+	//left jump
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tleft == true || (leftCollision == true && currentAnimation != &rightjumpAnim)))
+	{
+		if (leftCollision == true)
+		{
+			speed = 2;
+			Tleft = true;
+		}
+
+		position.y -= speed;
+		if (currentAnimation != &leftjumpAnim)
+		{
+			leftjumpAnim.Reset();
+			currentAnimation = &leftjumpAnim;
 		}
 	}
 
