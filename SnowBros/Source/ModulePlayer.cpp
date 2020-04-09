@@ -112,6 +112,11 @@ update_status ModulePlayer::Update()
 			speed = 2;
 		}
 
+		if (rightCollision == false && leftCollision == false && speed == 0)
+		{
+			speed = 2;
+		}
+
 		// Move player
 		position.x -= speed;
 
@@ -129,6 +134,11 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT)
 	{
 		if (leftCollision == true)
+		{
+			speed = 2;
+		}
+
+		if (rightCollision == false && leftCollision == false && speed == 0)
 		{
 			speed = 2;
 		}
@@ -155,11 +165,16 @@ update_status ModulePlayer::Update()
 	//right jump
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
 	{
-		/*if (rightCollision == true)
+		if (rightCollision == true)
 		{
 			speed = 2;
 			Tright = true;
-		}*/
+		}
+
+		if (leftCollision == false)
+		{
+			rightCollision = false;
+		}
 
 		Tleft = false;
 		speed = 2;
@@ -175,11 +190,19 @@ update_status ModulePlayer::Update()
 	//left jump
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tleft == true || (leftCollision == true && currentAnimation != &rightjumpAnim)))
 	{
-		/*if (leftCollision == true)
+		if (leftCollision == true)
 		{
 			speed = 2;
 			Tleft = true;
-		}*/
+		}
+
+		if (rightCollision == false)
+		{
+			leftCollision = false;
+		}
+
+		Tright = false;
+		speed = 2;
 
 		position.y -= speed;
 		if (currentAnimation != &leftjumpAnim)
@@ -255,7 +278,7 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed != 0)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed != 0 && Tleft == false)
 		{
 			speed = 0;
 			leftCollision = false;
@@ -263,7 +286,7 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 			
 		}
 
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed != 0)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed != 0 && Tright == false)
 		{
 			speed = 0;
 			rightCollision = false;

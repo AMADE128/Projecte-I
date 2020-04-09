@@ -48,7 +48,7 @@ public:
 	SDL_Texture* texture_right = nullptr;
 	SDL_Texture* texture_left = nullptr;
 
-	// Current spritesheet
+	// Selected spritesheet
 	bool Tright;
 	bool Tleft;
 
