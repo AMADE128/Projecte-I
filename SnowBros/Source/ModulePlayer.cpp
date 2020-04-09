@@ -107,7 +107,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT)
 	{
 		// Enable to escape collision
-		if (rightCollision == true || (rightCollision == false && speed == 0))
+		if (rightCollision == true)
 		{
 			speed = 2;
 		}
@@ -128,7 +128,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT)
 	{
-		if (leftCollision == true || (leftCollision == false && speed == 0))
+		if (leftCollision == true)
 		{
 			speed = 2;
 		}
@@ -155,11 +155,11 @@ update_status ModulePlayer::Update()
 	//right jump
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
 	{
-		if (rightCollision == true)
+		/*if (rightCollision == true)
 		{
 			speed = 2;
 			Tright = true;
-		}
+		}*/
 
 		Tleft = false;
 		speed = 2;
@@ -175,11 +175,11 @@ update_status ModulePlayer::Update()
 	//left jump
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tleft == true || (leftCollision == true && currentAnimation != &rightjumpAnim)))
 	{
-		if (leftCollision == true)
+		/*if (leftCollision == true)
 		{
 			speed = 2;
 			Tleft = true;
-		}
+		}*/
 
 		position.y -= speed;
 		if (currentAnimation != &leftjumpAnim)
