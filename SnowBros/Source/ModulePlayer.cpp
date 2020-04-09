@@ -176,7 +176,6 @@ update_status ModulePlayer::Update()
 			rightCollision = false;
 		}
 
-		Tleft = false;
 		speed = 2;
 
 		position.y -= speed;
