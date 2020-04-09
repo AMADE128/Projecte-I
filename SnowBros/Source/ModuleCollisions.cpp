@@ -12,30 +12,42 @@ ModuleCollisions::ModuleCollisions()
 		colliders[i] = nullptr;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = NOTHING;
-	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = STOP;
-	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = STOP;
+	matrix[Collider::Type::WALL][Collider::Type::GROUND] = NOTHING;
+	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = NOTHING;
+	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = NOTHING;
 
+	matrix[Collider::Type::GROUND][Collider::Type::WALL] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::PLAYER] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::ENEMY_SHOT] = NOTHING;
+
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = STOP;
+	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = STOP_Y;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = NOTHING;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = DIE;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = DIE;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = STOP;
+	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = STOP_Y;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = NOTHING;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = DIE;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = NOTHING;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = DIE;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = DIE;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::GROUND] = DIE;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = NOTHING;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = NOTHING;
@@ -95,8 +107,11 @@ update_status ModuleCollisions::PreUpdate()
 				if (matrix[c2->type][c1->type] == STOP && c2->listener)
 					c2->listener->StopMovement(c2, c1);
 
-				/*if (matrix[c2->type][c1->type] == STOP && c2->listener)
-					c2->listener->StopMovement(c2);*/
+				if (matrix[c1->type][c2->type] == STOP_Y && c1->listener)
+					c1->listener->StopMovementY(c1, c2);
+
+				if (matrix[c2->type][c1->type] == STOP_Y && c2->listener)
+					c2->listener->StopMovementY(c2, c1);
 
 
 			}
@@ -136,6 +151,9 @@ void ModuleCollisions::DebugDraw()
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
 		case Collider::Type::WALL: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
+		case Collider::Type::GROUND: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
 		case Collider::Type::PLAYER: // green

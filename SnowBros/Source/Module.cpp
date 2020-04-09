@@ -38,3 +38,7 @@ void Module::OnCollision(Collider* c1, Collider* c2)
 void Module::StopMovement(Collider* c1, Collider* c2){
 
 }
+
+void Module::StopMovementY(Collider* c1, Collider* c2) {
+
+}

@@ -34,12 +34,16 @@ public:
 
 	void StopMovement(Collider* c1, Collider* c2) override;
 
+	void StopMovementY(Collider* c1, Collider* c2) override;
+
 public:
 	// Position of the player in the map
 	iPoint position;
 
 	// The speed in which we move the player (pixels per frame)
-	int speed = 2;
+	int speed_x = 2;
+
+	int speed_y = 2;
 
 	bool rightCollision;
 	bool leftCollision;
@@ -49,7 +53,7 @@ public:
 	SDL_Texture* texture_left = nullptr;
 
 	// Selected spritesheet
-	bool Tright;
+	bool Tright = true;
 	bool Tleft;
 
 	// The pointer to the current player animation
@@ -57,7 +61,8 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
+	Animation r_idleAnim;
+	Animation l_idleAnim;
 	Animation rightjumpAnim;
 	Animation leftjumpAnim;
 	Animation fallAnim;

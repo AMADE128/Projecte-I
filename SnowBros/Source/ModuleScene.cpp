@@ -28,7 +28,7 @@ bool ModuleScene::Start()
 	//App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
 
 	//Bottomside collider
-	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::GROUND);
 	
 
 	//First two columns colliders

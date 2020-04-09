@@ -42,6 +42,7 @@ public:
 	{
 		DIE,
 		STOP,
+		STOP_Y,
 		NOTHING
 	};
 

@@ -33,6 +33,8 @@ public:
 	virtual void OnCollision(Collider* c1, Collider* c2);
 
 	virtual void StopMovement(Collider* c1, Collider* c2);
+
+	virtual void StopMovementY(Collider* c1, Collider* c2);
 };
 
 #endif // __MODULE_H__

@@ -18,7 +18,10 @@
 ModulePlayer::ModulePlayer()
 {
 	// idle animation - just one sprite
-	idleAnim.PushBack({ 16, 16, 32, 32 });
+	//Right
+	r_idleAnim.PushBack({ 16, 16, 32, 32 });
+	//Left
+	l_idleAnim.PushBack({ 569, 16, 32, 32 });
 
 	// right jump
 	rightjumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
@@ -82,7 +85,7 @@ bool ModulePlayer::Start()
 
 	texture_right = App->textures->Load("Assets/Sprites/Player/Nick_Tom_right.png");
 	texture_left = App->textures->Load("Assets/Sprites/Player/Nick_Tom_left.png");
-	currentAnimation = &idleAnim;
+	currentAnimation = &r_idleAnim;
 
 	shotFx = App->audio->LoadFx("Assets/Audio/SFX/Player/#028.wav");
 	//explosionFx = App->audio->LoadFx("Assets/explosion.wav");
@@ -109,16 +112,16 @@ update_status ModulePlayer::Update()
 		// Enable to escape collision
 		if (rightCollision == true)
 		{
-			speed = 2;
+			speed_x = 2;
 		}
 
-		if (rightCollision == false && leftCollision == false && speed == 0)
+		if (rightCollision == false && leftCollision == false && speed_x == 0)
 		{
-			speed = 2;
+			speed_x = 2;
 		}
 
 		// Move player
-		position.x -= speed;
+		position.x -= speed_x;
 
 		// Set left textures spritesheet to true
 		Tleft = true;
@@ -135,15 +138,15 @@ update_status ModulePlayer::Update()
 	{
 		if (leftCollision == true)
 		{
-			speed = 2;
+			speed_x = 2;
 		}
 
-		if (rightCollision == false && leftCollision == false && speed == 0)
+		if (rightCollision == false && leftCollision == false && speed_x == 0)
 		{
-			speed = 2;
+			speed_x = 2;
 		}
 
-		position.x += speed;
+		position.x += speed_x;
 
 		Tright = true;
 		Tleft = false;
@@ -159,7 +162,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
-		position.y += speed;
+		position.y += speed_x;
 	}
 
 	//right jump
@@ -167,7 +170,7 @@ update_status ModulePlayer::Update()
 	{
 		if (rightCollision == true)
 		{
-			speed = 2;
+			speed_x = 2;
 			Tright = true;
 		}
 
@@ -176,9 +179,9 @@ update_status ModulePlayer::Update()
 			rightCollision = false;
 		}
 
-		speed = 2;
+		speed_x = 2;
 
-		position.y -= speed;
+		position.y -= speed_x;
 		if (currentAnimation != &rightjumpAnim)
 		{
 			rightjumpAnim.Reset();
@@ -191,7 +194,7 @@ update_status ModulePlayer::Update()
 	{
 		if (leftCollision == true)
 		{
-			speed = 2;
+			speed_x = 2;
 			Tleft = true;
 		}
 
@@ -201,9 +204,9 @@ update_status ModulePlayer::Update()
 		}
 
 		Tright = false;
-		speed = 2;
+		speed_x = 2;
 
-		position.y -= speed;
+		position.y -= speed_x;
 		if (currentAnimation != &leftjumpAnim)
 		{
 			leftjumpAnim.Reset();
@@ -217,11 +220,21 @@ update_status ModulePlayer::Update()
   		App->audio->PlayFx(shotFx);
 	}
 
+	//Gravity
+
+
+
 	// If no up / left / right movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
 	{
-		currentAnimation = &idleAnim;
-		Tright = true;
+		if (Tright == true)
+		{
+			currentAnimation = &r_idleAnim;
+		}
+		if (Tleft == true)
+		{
+			currentAnimation = &l_idleAnim;
+		}
 	}
 
 	collider->SetPos(position.x, position.y);
@@ -277,22 +290,27 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed != 0 && Tleft == false)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed_x != 0 && Tleft == false)
 		{
-			speed = 0;
+			speed_x = 0;
 			leftCollision = false;
 			rightCollision = true;
 			
 		}
 
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed != 0 && Tright == false)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed_x != 0 && Tright == false)
 		{
-			speed = 0;
+			speed_x = 0;
 			rightCollision = false;
 			leftCollision = true;
 			
 		}
 		
 	}
+
+}
+
+void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
+{
 
 }
