@@ -41,11 +41,11 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 359, 241, 701, 2 }, Collider::Type::GROUND);
 	App->collisions->AddCollider({ 1061, 319, 175, 2 }, Collider::Type::GROUND);
 
-	//First two columns colliders
+	//Last platform walls
 	App->collisions->AddCollider({ 361, 245, 2, 76}, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1060, 245, 2, 76}, Collider::Type::WALL);
 
-	//Last platform walls
+	//First two columns colliders
 	App->collisions->AddCollider({ 0, 0, 40, 1390 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1400, 0, 40, 1390 }, Collider::Type::WALL);
 

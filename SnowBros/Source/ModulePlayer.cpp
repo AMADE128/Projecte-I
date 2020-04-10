@@ -337,12 +337,12 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 
 void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
 {
-	if (currentAnimation == &rightjumpAnim)
+	if (currentAnimation == &rightjumpAnim && ((c1->rect.y + c1->rect.w +13) <= c2->rect.y))
 	{
 		groundCollision = true;
 	}
 
-	else if (currentAnimation == &leftjumpAnim)
+	else if (currentAnimation == &leftjumpAnim && ((c1->rect.y + c1->rect.w +13) <= c2->rect.y))
 	{
 		groundCollision = true;
 	}
