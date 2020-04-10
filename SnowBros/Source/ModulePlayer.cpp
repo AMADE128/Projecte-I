@@ -164,10 +164,10 @@ update_status ModulePlayer::Update()
 
 	//SOBRA 3: EL PERSONAJE NO PUEDE MOVERSE HACIA ABAJO
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	/*if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed_x;
-	}
+	}*/
 
 	//right jump
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
@@ -183,7 +183,7 @@ update_status ModulePlayer::Update()
 			rightCollision = false;
 		}
 
-		position.y -= speed_x;
+		position.y -= speed_y;
 		if (currentAnimation != &rightjumpAnim && (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim))
 		{
 			rightjumpAnim.Reset();
@@ -207,7 +207,7 @@ update_status ModulePlayer::Update()
 
 		//Tright = false; SOBRA 5: PUEDE QUE SOBRE, NO LO SE
 
-		position.y -= speed_x;
+		position.y -= speed_y;
 		if (currentAnimation != &leftjumpAnim || (currentAnimation == &leftjumpAnim && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE))
 		{
 			leftjumpAnim.Reset();
@@ -225,22 +225,22 @@ update_status ModulePlayer::Update()
 
 	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x != lastLeftJumpSprite.x))
 	{
-		position.y -= speed_x;
+		position.y -= speed_y;
 	}
 
 	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x))
 	{
-		position.y += speed_x;
+		position.y += speed_y;
 	}
 
 	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x != lastRightJumpSprite.x))
 	{
-		position.y -= speed_x;
+		position.y -= speed_y;
 	}
 
 	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x))
 	{
-		position.y += speed_x;
+		position.y += speed_y;
 	}
 
 	//Gravity

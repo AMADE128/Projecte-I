@@ -153,8 +153,8 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::WALL: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
-		case Collider::Type::GROUND: // blue
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+		case Collider::Type::GROUND: // purple
+			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 			break;
 		case Collider::Type::PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
