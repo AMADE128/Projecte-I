@@ -24,6 +24,8 @@ ModulePlayer::ModulePlayer()
 	l_idleAnim.PushBack({ 569, 16, 32, 32 });
 
 	// right jump
+	lastRightJumpSprite = { 217, 305, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE };
+
 	rightjumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
 	rightjumpAnim.PushBack({ 100, 369, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
 	rightjumpAnim.PushBack({ 131, 375, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
@@ -31,11 +33,13 @@ ModulePlayer::ModulePlayer()
 	rightjumpAnim.PushBack({ 185, 371, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
 	rightjumpAnim.PushBack({ 213, 374, NICK_SPRITE_SIZE - 3, NICK_SPRITE_SIZE });
 	rightjumpAnim.PushBack({ 243, 375, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	rightjumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	rightjumpAnim.PushBack(lastRightJumpSprite);
 	rightjumpAnim.loop = false;
 	rightjumpAnim.speed = 0.1f;
 
 	// left jump
+	lastLeftJumpSprite = { 371, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 3 };
+
 	leftjumpAnim.PushBack({ 572, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -3});
 	leftjumpAnim.PushBack({ 542, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
 	leftjumpAnim.PushBack({ 514, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
@@ -43,7 +47,7 @@ ModulePlayer::ModulePlayer()
 	leftjumpAnim.PushBack({ 458, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
 	leftjumpAnim.PushBack({ 430, 310, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
 	leftjumpAnim.PushBack({ 399, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
-	leftjumpAnim.PushBack({ 572, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -3});
+	leftjumpAnim.PushBack(lastLeftJumpSprite);
 	leftjumpAnim.loop = false;
 	leftjumpAnim.speed = 0.1f;
 
@@ -179,8 +183,6 @@ update_status ModulePlayer::Update()
 			rightCollision = false;
 		}
 
-		speed_x = 2;
-
 		position.y -= speed_x;
 		if (currentAnimation != &rightjumpAnim && (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim))
 		{
@@ -204,7 +206,6 @@ update_status ModulePlayer::Update()
 		}
 
 		//Tright = false; SOBRA 5: PUEDE QUE SOBRE, NO LO SE
-		speed_x = 2;
 
 		position.y -= speed_x;
 		if (currentAnimation != &leftjumpAnim || (currentAnimation == &leftjumpAnim && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE))
@@ -222,22 +223,22 @@ update_status ModulePlayer::Update()
 
 	//We make the player go up or down
 
-	if (currentAnimation == &leftjumpAnim && leftjumpAnim.HasFinished() == false)
+	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x != lastLeftJumpSprite.x))
 	{
 		position.y -= speed_x;
 	}
 
-	if (currentAnimation == &leftjumpAnim && leftjumpAnim.HasFinished() == true)
+	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x))
 	{
 		position.y += speed_x;
 	}
 
-	if (currentAnimation == &rightjumpAnim && rightjumpAnim.HasFinished() == false)
+	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x != lastRightJumpSprite.x))
 	{
 		position.y -= speed_x;
 	}
 
-	if (currentAnimation == &rightjumpAnim && rightjumpAnim.HasFinished() == true)
+	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x))
 	{
 		position.y += speed_x;
 	}

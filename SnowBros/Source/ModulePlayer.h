@@ -76,6 +76,10 @@ public:
 	//Chech ground collision
 	bool groundCollision;
 
+	//Last jumping Sprites
+	SDL_Rect lastLeftJumpSprite;
+	SDL_Rect lastRightJumpSprite;
+
 	// The player's collider
 	Collider* collider = nullptr;
 
