@@ -69,6 +69,13 @@ public:
 	Animation sideRightAnim;
 	Animation sideLeftAnim;
 
+	// Jumping estate
+	bool up = true;
+	bool down;
+
+	//Chech ground collision
+	bool groundCollision;
+
 	// The player's collider
 	Collider* collider = nullptr;
 

@@ -182,7 +182,7 @@ update_status ModulePlayer::Update()
 		speed_x = 2;
 
 		position.y -= speed_x;
-		if (currentAnimation != &rightjumpAnim)
+		if (currentAnimation != &rightjumpAnim && (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim))
 		{
 			rightjumpAnim.Reset();
 			currentAnimation = &rightjumpAnim;
@@ -203,11 +203,11 @@ update_status ModulePlayer::Update()
 			leftCollision = false;
 		}
 
-		Tright = false;
+		//Tright = false; SOBRA 5: PUEDE QUE SOBRE, NO LO SE
 		speed_x = 2;
 
 		position.y -= speed_x;
-		if (currentAnimation != &leftjumpAnim)
+		if (currentAnimation != &leftjumpAnim || (currentAnimation == &leftjumpAnim && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE))
 		{
 			leftjumpAnim.Reset();
 			currentAnimation = &leftjumpAnim;
@@ -220,13 +220,37 @@ update_status ModulePlayer::Update()
   		App->audio->PlayFx(shotFx);
 	}
 
+	//We make the player go up or down
+
+	if (currentAnimation == &leftjumpAnim && leftjumpAnim.HasFinished() == false)
+	{
+		position.y -= speed_x;
+	}
+
+	if (currentAnimation == &leftjumpAnim && leftjumpAnim.HasFinished() == true)
+	{
+		position.y += speed_x;
+	}
+
+	if (currentAnimation == &rightjumpAnim && rightjumpAnim.HasFinished() == false)
+	{
+		position.y -= speed_x;
+	}
+
+	if (currentAnimation == &rightjumpAnim && rightjumpAnim.HasFinished() == true)
+	{
+		position.y += speed_x;
+	}
+
 	//Gravity
 
 
 
 	// If no up / left / right movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim) && groundCollision == true))
 	{
+		groundCollision = false;
+
 		if (Tright == true)
 		{
 			currentAnimation = &r_idleAnim;
@@ -312,5 +336,13 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 
 void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
 {
+	if (currentAnimation == &rightjumpAnim)
+	{
+		groundCollision = true;
+	}
 
+	else if (currentAnimation == &leftjumpAnim)
+	{
+		groundCollision = true;
+	}
 }
