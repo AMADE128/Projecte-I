@@ -170,7 +170,7 @@ update_status ModulePlayer::Update()
 	}*/
 
 	//right jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
 	{
 		if (rightCollision == true)
 		{
@@ -192,7 +192,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//left jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && (Tleft == true || (leftCollision == true && currentAnimation != &rightjumpAnim)))
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && (Tleft == true || (leftCollision == true && currentAnimation != &rightjumpAnim)))
 	{
 		if (leftCollision == true)
 		{
@@ -225,7 +225,7 @@ update_status ModulePlayer::Update()
 
 	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x != lastLeftJumpSprite.x))
 	{
-		position.y -= speed_y;
+		position.y -= (speed_y + 1);
 	}
 
 	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x))
@@ -235,7 +235,7 @@ update_status ModulePlayer::Update()
 
 	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x != lastRightJumpSprite.x))
 	{
-		position.y -= speed_y;
+		position.y -= (speed_y + 1);
 	}
 
 	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x))
