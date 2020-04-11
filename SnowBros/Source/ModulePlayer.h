@@ -36,17 +36,20 @@ public:
 
 	void StopMovementY(Collider* c1, Collider* c2) override;
 
+	void Fall(Collider* c1, Collider* c2) override;
+
 public:
 	// Position of the player in the map
 	iPoint position;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed_x = 2;
-
 	int speed_y = 2;
 
 	bool rightCollision;
 	bool leftCollision;
+
+	bool fall;
 
 	// The player spritesheets loaded into an SDL_Texture
 	SDL_Texture* texture_right = nullptr;

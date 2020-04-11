@@ -131,6 +131,13 @@ update_status ModulePlayer::Update()
 		Tleft = true;
 		Tright = false;
 
+		//change sprite while jumping
+		if (currentAnimation == &rightjumpAnim)
+		{
+			leftjumpAnim.currentFrame = 18;
+			currentAnimation = &leftjumpAnim;
+		}
+
 		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim)
 		{
 			sideLeftAnim.Reset();
@@ -155,6 +162,13 @@ update_status ModulePlayer::Update()
 		Tright = true;
 		Tleft = false;
 
+		//change sprite while jumping
+		if (currentAnimation == &leftjumpAnim)
+		{
+			rightjumpAnim.currentFrame = 10;
+			currentAnimation = &rightjumpAnim;
+		}
+
 		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim)
 		{
 			sideRightAnim.Reset();
@@ -172,6 +186,7 @@ update_status ModulePlayer::Update()
 	//right jump
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
 	{
+
 		if (rightCollision == true)
 		{
 			speed_x = 2;
@@ -243,9 +258,19 @@ update_status ModulePlayer::Update()
 		position.y += speed_y;
 	}
 
+	//GRAVEDAD 1
+	/*
 	//Gravity
 
+	if (fall == true)
+	{
+		position.y += speed_y;
+	}
 
+	if (fall == true && groundCollision == true)
+	{
+		fall = false;
+	}*/
 
 	// If no up / left / right movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim) && groundCollision == true))
@@ -337,13 +362,31 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 
 void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
 {
+	//GRAVEDAD 2
+	if (fall == true && currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
+	{
+		groundCollision = true;
+		fall = false;
+	}
+
 	if (currentAnimation == &rightjumpAnim && ((c1->rect.y + c1->rect.w +13) <= c2->rect.y))
 	{
 		groundCollision = true;
+		fall = false;
 	}
 
 	else if (currentAnimation == &leftjumpAnim && ((c1->rect.y + c1->rect.w +13) <= c2->rect.y))
 	{
 		groundCollision = true;
+		fall = false;
 	}
+}
+
+void ModulePlayer::Fall(Collider* c1, Collider* c2)
+{
+	//GRAVEDAD 3
+	/*if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
+	{
+		fall = true;
+	}*/
 }

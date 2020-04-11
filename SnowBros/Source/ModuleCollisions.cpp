@@ -4,6 +4,7 @@
 
 #include "ModuleRender.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 #include "SDL/include/SDL_Scancode.h"
 
 ModuleCollisions::ModuleCollisions()
@@ -17,6 +18,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::WALL][Collider::Type::AIR] = NOTHING;
 
 	matrix[Collider::Type::GROUND][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = NOTHING;
@@ -24,6 +26,15 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::GROUND][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::AIR] = NOTHING;
+
+	matrix[Collider::Type::AIR][Collider::Type::WALL] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::GROUND] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::PLAYER] = FALL;
+	matrix[Collider::Type::AIR][Collider::Type::ENEMY] = FALL;
+	matrix[Collider::Type::AIR][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::AIR] = NOTHING;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = STOP_Y;
@@ -31,6 +42,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = DIE;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = DIE;
+	matrix[Collider::Type::PLAYER][Collider::Type::AIR] = FALL;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = STOP_Y;
@@ -38,6 +50,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = DIE;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::ENEMY][Collider::Type::AIR] = FALL;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND] = DIE;
@@ -45,6 +58,7 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::AIR] = NOTHING;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::GROUND] = DIE;
@@ -52,6 +66,9 @@ ModuleCollisions::ModuleCollisions()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::AIR] = NOTHING;
+
+
 }
 
 // Destructor
@@ -100,7 +117,6 @@ update_status ModuleCollisions::PreUpdate()
 				if (matrix[c2->type][c1->type] == DIE && c2->listener)
 					c2->listener->OnCollision(c2, c1);
 
-
 				if (matrix[c1->type][c2->type] == STOP && c1->listener)
 					c1->listener->StopMovement(c1, c2);
 
@@ -113,8 +129,25 @@ update_status ModuleCollisions::PreUpdate()
 				if (matrix[c2->type][c1->type] == STOP_Y && c2->listener)
 					c2->listener->StopMovementY(c2, c1);
 
+				if (matrix[c1->type][c2->type] == FALL && c1->listener)
+					c1->listener->Fall(c1, c2);
 
+				if (matrix[c2->type][c1->type] == FALL && c2->listener)
+					c2->listener->Fall(c2, c1);
 			}
+
+			//SOBRA 7: INTENTO DE QUE CAIGA EL JUGADOR SI NO ESTÁ EN UNA PLATAFORMA
+
+			/*else if (c2->Intersects(c1->rect) == false)
+			{
+			if ((c1->type == Collider::GROUND && c2->type == Collider::PLAYER))
+				{
+					if ((App->player->currentAnimation == &App->player->sideLeftAnim || App->player->currentAnimation == &App->player->sideRightAnim || App->player->currentAnimation == &App->player->r_idleAnim || App->player->currentAnimation == &App->player->l_idleAnim) && ((c2->rect.x >= (c1->rect.x + c1->rect.w)) || ((c2->rect.x + c2->rect.w) <= c1->rect.x)) && ((c2->rect.y + c2->rect.h) <= c1->rect.y) && (c2->rect.y > (c1->rect.y + 32)))
+					{
+						App->player->position.y += App->player->speed_y;
+					}
+				}
+			}*/
 		}
 	}
 
@@ -155,6 +188,9 @@ void ModuleCollisions::DebugDraw()
 			break;
 		case Collider::Type::GROUND: // purple
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+			break;
+		case Collider::Type::AIR: // black
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
 			break;
 		case Collider::Type::PLAYER: // green
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);

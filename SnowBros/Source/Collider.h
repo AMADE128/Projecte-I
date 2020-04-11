@@ -11,6 +11,7 @@ struct Collider
 	{
 		NONE = -1,
 		GROUND,
+		AIR,
 		WALL,
 		PLAYER,
 		ENEMY,

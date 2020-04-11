@@ -43,6 +43,7 @@ public:
 		DIE,
 		STOP,
 		STOP_Y,
+		FALL,
 		NOTHING
 	};
 

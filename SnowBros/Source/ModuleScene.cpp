@@ -41,6 +41,17 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 359, 241, 701, 2 }, Collider::Type::GROUND);
 	App->collisions->AddCollider({ 1061, 319, 175, 2 }, Collider::Type::GROUND);
 
+	//Fall colliders
+	App->collisions->AddCollider({ 341, 777, 193, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 888, 777, 201, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 622, 234, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1156, 622, 244, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 611, 468, 203, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 316, 144, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 350, 238, 8, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1061, 238, 8, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1237, 316, 163, 2 }, Collider::Type::AIR);
+
 	//Last platform walls
 	App->collisions->AddCollider({ 361, 245, 2, 76}, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1060, 245, 2, 76}, Collider::Type::WALL);
