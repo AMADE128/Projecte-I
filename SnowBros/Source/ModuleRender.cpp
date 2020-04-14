@@ -119,7 +119,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 		SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
 	}
 
-	if (texture == App->player->texture_right || texture == App->player->texture_left || texture == App->particles->texture)
+	if (texture == App->player->spritesheet || texture == App->particles->texture)
 	{
 		rect.w *= 4.2;
 		rect.h *= 4.2;

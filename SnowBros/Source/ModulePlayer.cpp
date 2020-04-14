@@ -21,7 +21,7 @@ ModulePlayer::ModulePlayer()
 	//Right
 	r_idleAnim.PushBack({ 16, 16, 32, 32 });
 	//Left
-	l_idleAnim.PushBack({ 569, 16, 32, 32 });
+	l_idleAnim.PushBack({ 1177, 16, 32, 32 });
 
 	// right jump
 	lastRightJumpSprite = { 217, 305, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE };
@@ -38,15 +38,15 @@ ModulePlayer::ModulePlayer()
 	rightjumpAnim.speed = 0.1f;
 
 	// left jump
-	lastLeftJumpSprite = { 371, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 3 };
+	lastLeftJumpSprite = { 979, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 3 };
 
-	leftjumpAnim.PushBack({ 572, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -3});
-	leftjumpAnim.PushBack({ 542, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
-	leftjumpAnim.PushBack({ 514, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
-	leftjumpAnim.PushBack({ 486, 312, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
-	leftjumpAnim.PushBack({ 458, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
-	leftjumpAnim.PushBack({ 430, 310, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
-	leftjumpAnim.PushBack({ 399, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE -4});
+	leftjumpAnim.PushBack({ 1180, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 3 });
+	leftjumpAnim.PushBack({ 1150, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 4 });
+	leftjumpAnim.PushBack({ 1122, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 4 });
+	leftjumpAnim.PushBack({ 1094, 312, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 4 });
+	leftjumpAnim.PushBack({ 1066, 307, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 4 });
+	leftjumpAnim.PushBack({ 1038, 310, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 4 });
+	leftjumpAnim.PushBack({ 1007, 311, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 4 });
 	leftjumpAnim.PushBack(lastLeftJumpSprite);
 	leftjumpAnim.loop = false;
 	leftjumpAnim.speed = 0.1f;
@@ -62,10 +62,10 @@ ModulePlayer::ModulePlayer()
 
 	// Move left
 
-	sideLeftAnim.PushBack({ 574, 76, NICK_SPRITE_SIZE, NICK_SPRITE_SIZE +3});
-	sideLeftAnim.PushBack({ 550, 77, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE +3});
-	sideLeftAnim.PushBack({ 523, 76, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE +3});
-	sideLeftAnim.PushBack({ 550, 77, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE +3});
+	sideLeftAnim.PushBack({ 1182, 76, NICK_SPRITE_SIZE, NICK_SPRITE_SIZE + 3 });
+	sideLeftAnim.PushBack({ 1158, 77, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE + 3 });
+	sideLeftAnim.PushBack({ 1131, 76, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE + 3 });
+	sideLeftAnim.PushBack({ 1158, 77, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE + 3 });
 	sideLeftAnim.loop = true;
 	sideLeftAnim.speed = 0.07f;
 	/*
@@ -87,8 +87,7 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture_right = App->textures->Load("Assets/Sprites/Player/Nick_Tom_right.png");
-	texture_left = App->textures->Load("Assets/Sprites/Player/Nick_Tom_left.png");
+	spritesheet = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
 	currentAnimation = &r_idleAnim;
 
 	shotFx = App->audio->LoadFx("Assets/Audio/SFX/Player/#028.wav");
@@ -127,10 +126,6 @@ update_status ModulePlayer::Update()
 		// Move player
 		position.x -= speed_x;
 
-		// Set left textures spritesheet to true
-		Tleft = true;
-		Tright = false;
-
 		//change sprite while jumping
 		if (currentAnimation == &rightjumpAnim)
 		{
@@ -159,9 +154,6 @@ update_status ModulePlayer::Update()
 
 		position.x += speed_x;
 
-		Tright = true;
-		Tleft = false;
-
 		//change sprite while jumping
 		if (currentAnimation == &leftjumpAnim)
 		{
@@ -184,18 +176,23 @@ update_status ModulePlayer::Update()
 	}*/
 
 	//right jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && (Tright == true || (rightCollision == true && currentAnimation != &leftjumpAnim)))
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim)
 	{
 
 		if (rightCollision == true)
 		{
 			speed_x = 2;
-			Tright = true;
 		}
 
 		if (leftCollision == false)
 		{
 			rightCollision = false;
+		}
+
+		if (groundCollision == true)
+		{
+			speed_y = 2;
+			groundCollision = false;
 		}
 
 		position.y -= speed_y;
@@ -207,12 +204,11 @@ update_status ModulePlayer::Update()
 	}
 
 	//left jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && (Tleft == true || (leftCollision == true && currentAnimation != &rightjumpAnim)))
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim)
 	{
 		if (leftCollision == true)
 		{
 			speed_x = 2;
-			Tleft = true;
 		}
 
 		if (rightCollision == false)
@@ -220,7 +216,11 @@ update_status ModulePlayer::Update()
 			leftCollision = false;
 		}
 
-		//Tright = false; SOBRA 5: PUEDE QUE SOBRE, NO LO SE
+		if (groundCollision == true)
+		{
+			speed_y = 2;
+			groundCollision = false;
+		}
 
 		position.y -= speed_y;
 		if (currentAnimation != &leftjumpAnim || (currentAnimation == &leftjumpAnim && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE))
@@ -233,7 +233,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->particles->AddParticle(App->particles->shot, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-  		App->audio->PlayFx(shotFx);
+		App->audio->PlayFx(shotFx);
 	}
 
 	//We make the player go up or down
@@ -243,7 +243,7 @@ update_status ModulePlayer::Update()
 		position.y -= (speed_y + 1);
 	}
 
-	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x))
+	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x) && groundCollision == false)
 	{
 		position.y += speed_y;
 	}
@@ -253,7 +253,7 @@ update_status ModulePlayer::Update()
 		position.y -= (speed_y + 1);
 	}
 
-	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x))
+	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x) && groundCollision == false)
 	{
 		position.y += speed_y;
 	}
@@ -273,15 +273,17 @@ update_status ModulePlayer::Update()
 	}*/
 
 	// If no up / left / right movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim) && groundCollision == true))
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
 	{
-		groundCollision = false;
+		//groundCollision = false;
 
-		if (Tright == true)
+		speed_y = 2;
+
+		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true))
 		{
 			currentAnimation = &r_idleAnim;
 		}
-		if (Tleft == true)
+		if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true))
 		{
 			currentAnimation = &l_idleAnim;
 		}
@@ -303,17 +305,12 @@ update_status ModulePlayer::Update()
 
 update_status ModulePlayer::PostUpdate()
 {
-	if (!destroyed && Tright == true)
+	if (!destroyed)
 	{
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture_right, position.x, position.y, &rect);
+		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
 
-	else if (!destroyed && Tleft == true)
-	{
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture_left, position.x, position.y, &rect);
-	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -340,22 +337,22 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed_x != 0 && Tleft == false)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed_x != 0)
 		{
 			speed_x = 0;
 			leftCollision = false;
 			rightCollision = true;
-			
+
 		}
 
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed_x != 0 && Tright == false)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed_x != 0)
 		{
 			speed_x = 0;
 			rightCollision = false;
 			leftCollision = true;
-			
+
 		}
-		
+
 	}
 
 }
@@ -363,22 +360,25 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
 {
 	//GRAVEDAD 2
-	if (fall == true && currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
+	/*if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
 	{
 		groundCollision = true;
-		fall = false;
+		speed_y = 0;
+		//fall = false;
+	}*/
+
+	if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && ((c1->rect.y + c1->rect.w + 13) <= c2->rect.y))
+	{
+		groundCollision = true;
+		speed_y = 0;
+		//fall = false;
 	}
 
-	if (currentAnimation == &rightjumpAnim && ((c1->rect.y + c1->rect.w +13) <= c2->rect.y))
+	else if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && ((c1->rect.y + c1->rect.w + 13) <= c2->rect.y))
 	{
 		groundCollision = true;
-		fall = false;
-	}
-
-	else if (currentAnimation == &leftjumpAnim && ((c1->rect.y + c1->rect.w +13) <= c2->rect.y))
-	{
-		groundCollision = true;
-		fall = false;
+		speed_y = 0;
+		//fall = false;
 	}
 }
 

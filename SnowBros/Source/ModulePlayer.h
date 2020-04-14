@@ -52,12 +52,7 @@ public:
 	bool fall;
 
 	// The player spritesheets loaded into an SDL_Texture
-	SDL_Texture* texture_right = nullptr;
-	SDL_Texture* texture_left = nullptr;
-
-	// Selected spritesheet
-	bool Tright = true;
-	bool Tleft;
+	SDL_Texture* spritesheet = nullptr;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
