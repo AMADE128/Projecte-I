@@ -68,9 +68,9 @@ ModulePlayer::ModulePlayer()
 	sideLeftAnim.PushBack({ 1158, 77, NICK_SPRITE_SIZE - 8, NICK_SPRITE_SIZE + 3 });
 	sideLeftAnim.loop = true;
 	sideLeftAnim.speed = 0.07f;
-	/*
+	
 	// Move down
-	jumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
+	/*jumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
 	fallAnim.loop = true;
 	fallAnim.speed = 0.1f;*/
 }
@@ -151,6 +151,8 @@ update_status ModulePlayer::Update()
 		{
 			speed_x = 2;
 		}
+
+		
 
 		position.x += speed_x;
 
@@ -259,18 +261,13 @@ update_status ModulePlayer::Update()
 	}
 
 	//GRAVEDAD 1
-	/*
+	
 	//Gravity
 
 	if (fall == true)
 	{
 		position.y += speed_y;
 	}
-
-	if (fall == true && groundCollision == true)
-	{
-		fall = false;
-	}*/
 
 	// If no up / left / right movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
@@ -360,33 +357,34 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
 {
 	//GRAVEDAD 2
-	/*if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
+	if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
 	{
 		groundCollision = true;
 		speed_y = 0;
-		//fall = false;
-	}*/
-
-	if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && ((c1->rect.y + c1->rect.w + 13) <= c2->rect.y))
-	{
-		groundCollision = true;
-		speed_y = 0;
-		//fall = false;
+		fall = false;
 	}
 
-	else if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && ((c1->rect.y + c1->rect.w + 13) <= c2->rect.y))
+	if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && ((c1->rect.y + c1->rect.h - 5) <= c2->rect.y))
 	{
 		groundCollision = true;
 		speed_y = 0;
-		//fall = false;
+		fall = false;
+	}
+
+	else if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && ((c1->rect.y + c1->rect.h - 5) <= c2->rect.y))
+	{
+		groundCollision = true;
+		speed_y = 0;
+		fall = false;
 	}
 }
 
 void ModulePlayer::Fall(Collider* c1, Collider* c2)
 {
 	//GRAVEDAD 3
-	/*if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim)
+	if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim && c1->rect.x > c2->rect.x && ((c1->rect.x + c1->rect.w) < (c2->rect.x + c2->rect.w)))
 	{
 		fall = true;
-	}*/
+		groundCollision = false;
+	}
 }
