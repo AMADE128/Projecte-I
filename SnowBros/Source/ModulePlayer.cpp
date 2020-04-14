@@ -127,13 +127,13 @@ update_status ModulePlayer::Update()
 		position.x -= speed_x;
 
 		//change sprite while jumping
-		if (currentAnimation == &rightjumpAnim)
+		if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x)
 		{
 			leftjumpAnim.currentFrame = 18;
 			currentAnimation = &leftjumpAnim;
 		}
 
-		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim)
+		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim && currentAnimation != &rightjumpAnim)
 		{
 			sideLeftAnim.Reset();
 			currentAnimation = &sideLeftAnim;
@@ -155,13 +155,13 @@ update_status ModulePlayer::Update()
 		position.x += speed_x;
 
 		//change sprite while jumping
-		if (currentAnimation == &leftjumpAnim)
+		if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x)
 		{
 			rightjumpAnim.currentFrame = 10;
 			currentAnimation = &rightjumpAnim;
 		}
 
-		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim)
+		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim && currentAnimation != &leftjumpAnim)
 		{
 			sideRightAnim.Reset();
 			currentAnimation = &sideRightAnim;
