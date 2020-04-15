@@ -63,7 +63,8 @@ public:
 	Animation l_idleAnim;
 	Animation rightjumpAnim;
 	Animation leftjumpAnim;
-	Animation fallAnim;
+	Animation fallRightAnim;
+	Animation fallLeftAnim;
 	Animation sideRightAnim;
 	Animation sideLeftAnim;
 

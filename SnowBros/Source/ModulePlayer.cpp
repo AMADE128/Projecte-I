@@ -70,9 +70,13 @@ ModulePlayer::ModulePlayer()
 	sideLeftAnim.speed = 0.07f;
 	
 	// Move down
-	/*jumpAnim.PushBack({ 72, 368, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
-	fallAnim.loop = true;
-	fallAnim.speed = 0.1f;*/
+	fallRightAnim.PushBack( lastRightJumpSprite );
+	fallRightAnim.loop = false;
+	fallRightAnim.speed = 0.1f;
+
+	fallLeftAnim.PushBack(lastLeftJumpSprite);
+	fallLeftAnim.loop = false;
+	fallLeftAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -234,7 +238,7 @@ update_status ModulePlayer::Update()
 		}
 
 		position.y -= speed_y;
-		if (currentAnimation != &leftjumpAnim || (currentAnimation == &leftjumpAnim && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE))
+		if (currentAnimation != &leftjumpAnim && (currentAnimation == &l_idleAnim || currentAnimation == &sideLeftAnim))
 		{
 			leftjumpAnim.Reset();
 			currentAnimation = &leftjumpAnim;
@@ -276,6 +280,14 @@ update_status ModulePlayer::Update()
 	if (fall == true)
 	{
 		position.y += speed_y;
+
+		if (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim) {
+			currentAnimation = &fallRightAnim;
+		}
+
+		if (currentAnimation == &l_idleAnim || currentAnimation == &sideLeftAnim) {
+			currentAnimation = &fallLeftAnim;
+		}
 	}
 
 	// If no up / left / right movement detected, set the current animation back to idle
