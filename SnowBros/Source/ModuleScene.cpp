@@ -38,7 +38,7 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 40, 471, 570, 2 }, Collider::Type::GROUND);
 	App->collisions->AddCollider({ 815, 471, 583, 2 }, Collider::Type::GROUND);
 	App->collisions->AddCollider({ 185, 319, 175, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 359, 241, 701, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 362, 241, 698, 2 }, Collider::Type::GROUND);
 	App->collisions->AddCollider({ 1061, 319, 175, 2 }, Collider::Type::GROUND);
 
 	//Fall colliders

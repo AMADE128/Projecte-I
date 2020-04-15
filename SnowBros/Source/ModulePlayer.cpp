@@ -297,11 +297,11 @@ update_status ModulePlayer::Update()
 
 		speed_y = 2;
 
-		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true))
+		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false))
 		{
 			currentAnimation = &r_idleAnim;
 		}
-		if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true))
+		if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true) || (currentAnimation == &fallLeftAnim && fall == false))
 		{
 			currentAnimation = &l_idleAnim;
 		}
@@ -362,7 +362,7 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 			rightCollision = true;
 
 		}
-
+		
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed_x != 0)
 		{
 			speed_x = 0;
