@@ -5,7 +5,7 @@
 
 Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 {
-	idle.PushBack({ 0,0,32,32 });
+	idle.PushBack({ 3,2,29,30 });
 	currentAnim = &idle;
 
 
@@ -13,10 +13,8 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 
 	/*path.PushBack({ -0.4f, -0.3f }, 150, &fly);
 	path.PushBack({ -0.4f, 0.3f }, 150, &fly);*/
-	position.x = x / 2;
-	position.y = y / 2;
 
-	collider = App->collisions->AddCollider({position.x, position.y, 32 * 3, 32 * 3}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({position.x, position.y, 32 * 4 - 15, 32 * 4 - 15}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_Demon::Update()
