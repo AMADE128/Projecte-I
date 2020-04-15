@@ -7,8 +7,7 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
-#include "Enemy_BrownShip.h"
+#include "Enemy_Demon.h"
 
 #define SPAWN_MARGIN 50
 
@@ -26,7 +25,7 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/enemies.png");
+	texture = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
 	//enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav"); SOBRA: HAY QUE PONER SONIDO SI HAY CUANDO GOLPEAMOS UN ENEMIGO
 
 	return true;
@@ -141,11 +140,8 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-			case ENEMY_TYPE::REDBIRD:
-				enemies[i] = new Enemy_RedBird(info.x, info.y);
-				break;
-			case ENEMY_TYPE::BROWNSHIP:
-				enemies[i] = new Enemy_BrownShip(info.x, info.y);
+			case ENEMY_TYPE::DEMON:
+				enemies[i] = new Enemy_Demon(info.x, info.y);
 				break;
 			}
 			enemies[i]->texture = texture;

@@ -61,26 +61,7 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 1400, 0, 40, 1390 }, Collider::Type::WALL);
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 600, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 625, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 640, 80);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 665, 80);
-
-	// TODO 1: Add a new wave of red birds
-
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 800, 135);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 820, 135);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 850, 135);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 865, 135);
-
-	// TODO 2: Add a new wave of brown cookies
-
-	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1000, 100);
-	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1025, 100);
-	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1050, 100);
-	App->enemies->AddEnemy(ENEMY_TYPE::BROWNSHIP, 1075, 100);
-
-	// TODO 4: Create a new enemy type: The Mech
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 120);
 
 
 	return ret;
