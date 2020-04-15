@@ -191,7 +191,7 @@ update_status ModulePlayer::Update()
 	}*/
 
 	//right jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false)
 	{
 
 		if (rightCollision == true)
@@ -219,7 +219,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//left jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false)
 	{
 		if (leftCollision == true)
 		{
