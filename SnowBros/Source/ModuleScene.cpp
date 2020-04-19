@@ -46,7 +46,7 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 888, 777, 201, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 40, 622, 234, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 1156, 622, 244, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 611, 468, 203, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 611, 460, 203, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 40, 316, 144, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 258, 200, 100, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 1061, 200, 100, 2 }, Collider::Type::AIR);
@@ -62,6 +62,10 @@ bool ModuleScene::Start()
 
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 120);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 916, 120);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 250, 350);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1132, 350);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 372, 510);
 
 
 	return ret;

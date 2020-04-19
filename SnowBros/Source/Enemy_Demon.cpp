@@ -19,12 +19,13 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	r_walk.PushBack({ 256, 0, 32, 32 });
 	r_walk.PushBack({ 224, 0, 32, 32 });
 	r_walk.PushBack({ 192, 0, 32, 32 });
-	//r_walk.loop = true;
+	r_walk.loop = true;
 	r_walk.speed = 0.07f;
 
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 
 	path.PushBack({ 1, 0 }, 1000, &r_walk);
+	path.PushBack({ 1, 0 }, 2000, &l_walk);
 
 	collider = App->collisions->AddCollider({position.x, position.y, 32 * 4 - 15, 32 * 4 - 15}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
@@ -33,7 +34,18 @@ void Enemy_Demon::Update()
 {
 
 	path.Update();
-	position = spawnPos + path.GetRelativePosition();
+
+	if (currentAnim == &r_walk)
+	{
+		position.x++;
+	}
+
+	if (currentAnim == &l_walk)
+	{
+		//position = spawnPos - path.GetRelativePosition();
+		position.x--;
+	}
+
 	currentAnim = path.GetCurrentAnimation();
 
 	// Call to the base class. It must be called at the end
@@ -41,16 +53,42 @@ void Enemy_Demon::Update()
 	Enemy::Update();
 }
 
-void Enemy_Demon::Fall(Collider* c1, Collider* c2) {
+void Enemy_Demon::Fall(Collider* collider) {
 
-	position.x = 0;
+	//position.x = 0;
 	if (currentAnim == &r_walk)
 	{
-		r_walk.pingpong = true;
+		currentAnim = &l_walk;
+		path.currentStep = 1;
+		path.currentStepFrame = 0;
 	}
-	if (currentAnim == &l_walk)
+
+	else if (currentAnim == &l_walk)
 	{
-		l_walk.pingpong = true;
+		//path.relativePosition = { 0,0 };
+		currentAnim = &r_walk;
+		path.currentStep = 0;
+		path.currentStepFrame = 0;
+	}
+
+}
+
+void Enemy_Demon::StopMovement(Collider* collider) {
+
+	//position.x = 0;
+	if (currentAnim == &r_walk)
+	{
+		currentAnim = &l_walk;
+		path.currentStep = 1;
+		path.currentStepFrame = 0;
+	}
+
+	else if (currentAnim == &l_walk)
+	{
+		//path.relativePosition = { 0,0 };
+		currentAnim = &r_walk;
+		path.currentStep = 0;
+		path.currentStepFrame = 0;
 	}
 
 }

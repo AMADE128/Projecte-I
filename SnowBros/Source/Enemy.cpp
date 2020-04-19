@@ -44,6 +44,10 @@ void Enemy::OnCollision(Collider* collider)
 	//App->audio->PlayFx(destroyedFx);
 }
 
-void Enemy::Fall(Collider* c1, Collider* c2) {
+void Enemy::Fall(Collider* collider) {
+
+}
+
+void Enemy::StopMovement(Collider* collider) {
 
 }

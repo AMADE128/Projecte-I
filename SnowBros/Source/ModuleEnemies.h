@@ -51,6 +51,10 @@ public:
 	// The enemy is destroyed and an explosion particle is fired
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	void Fall(Collider* c1, Collider* c2) override;
+
+	void StopMovement(Collider* c1, Collider* c2) override;
+
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(ENEMY_TYPE type, int x, int y);
 

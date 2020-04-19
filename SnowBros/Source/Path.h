@@ -39,18 +39,18 @@ public:
 	// The set of steps that will define the path
 	Step steps[MAX_STEPS];
 
-private:
-	// Total amount of steps
-	uint totalSteps = 0;
-
-	// Current frame from the current step
-	uint currentStepFrame = 0;
-
 	// The position relative to the start of the path
 	fPoint relativePosition = fPoint(0.0f, 0.0f);
 
 	// The current step in the path
 	uint currentStep = 0;
+
+	// Current frame from the current step
+	uint currentStepFrame = 0;
+
+private:
+	// Total amount of steps
+	uint totalSteps = 0;
 };
 
 #endif // __PATH_H__

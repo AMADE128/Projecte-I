@@ -31,7 +31,9 @@ public:
 	// Triggers an animation and a sound fx
 	virtual void OnCollision(Collider* collider);
 
-	virtual void Fall(Collider* c1, Collider* c2);
+	virtual void Fall(Collider* collider);
+
+	virtual void StopMovement(Collider* collider);
 
 public:
 	// The current position in the world

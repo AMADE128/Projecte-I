@@ -15,7 +15,9 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
-	void Fall(Collider* c1, Collider* c2) override;
+	void Fall(Collider* collider) override;
+
+	void StopMovement(Collider* collider) override;
 
 private:
 	// A set of steps that define the position in the screen
