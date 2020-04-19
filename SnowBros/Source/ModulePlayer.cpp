@@ -247,8 +247,16 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->shot, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-		App->audio->PlayFx(shotFx);
+		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
+		{
+			App->particles->AddParticle(App->particles->shotright, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			App->audio->PlayFx(shotFx);
+		}
+		else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
+		{
+			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y, Collider::Type::PLAYER_SHOT);
+			App->audio->PlayFx(shotFx);
+		}
 	}
 
 	//We make the player go up or down

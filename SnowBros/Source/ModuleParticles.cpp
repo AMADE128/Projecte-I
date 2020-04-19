@@ -24,11 +24,19 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
 
-	shot.anim.PushBack({ 16, 141, 7, 11 });
-	shot.anim.PushBack({ 31, 141, 7, 11 });
-	shot.speed.x = 5;
-	shot.lifetime = 180;
-	shot.anim.speed = 0.2f;
+	//Right Shot
+	shotright.anim.PushBack({ 16, 141, 7, 11 });
+	shotright.anim.PushBack({ 31, 141, 7, 11 });
+	shotright.speed.x = 5;
+	shotright.lifetime = 180;
+	shotright.anim.speed = 0.2f;
+
+	//Left Shot
+	shotleft.anim.PushBack({ 1190, 140, 13, 13 });
+	shotleft.anim.PushBack({ 1175, 140, 13, 13 });
+	shotleft.speed.x = -5;
+	shotleft.lifetime = 180;
+	shotleft.anim.speed = 0.2f;
 
 	return true;
 }

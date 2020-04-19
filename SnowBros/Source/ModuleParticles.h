@@ -58,7 +58,8 @@ public:
 	SDL_Texture* texture = nullptr;
 
 	//Template particle for a shot
-	Particle shot;
+	Particle shotright;
+	Particle shotleft;
 };
 
 #endif // !__MODULEPARTICLES_H__
