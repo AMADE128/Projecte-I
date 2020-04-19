@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModulePlayer.h"
+#include "Enemy_Demon.h"
 #include "SDL/include/SDL_Scancode.h"
 
 ModuleCollisions::ModuleCollisions()
