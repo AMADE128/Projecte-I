@@ -19,11 +19,13 @@ public:
 
 	void StopMovement(Collider* collider) override;
 
+	void Freeze(Collider* collider) override;
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
 	Path path;
-	
+	int life = 7;
 	bool fall = false;
 	bool groundCollision = true;
 
@@ -32,6 +34,10 @@ private:
 	Animation idle;
 	Animation l_walk;
 	Animation r_walk;
+	Animation l_stun;
+	Animation r_stun;
+	Animation r_snowball;
+	Animation l_snowball;
 
 };
 

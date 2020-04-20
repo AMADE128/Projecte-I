@@ -51,3 +51,7 @@ void Enemy::Fall(Collider* collider) {
 void Enemy::StopMovement(Collider* collider) {
 
 }
+
+void Enemy::Freeze(Collider* collider) {
+
+}

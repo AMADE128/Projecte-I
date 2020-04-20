@@ -44,6 +44,7 @@ public:
 		STOP,
 		STOP_Y,
 		FALL,
+		FREEZE,
 		NOTHING
 	};
 

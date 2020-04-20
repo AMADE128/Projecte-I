@@ -8,6 +8,20 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
 
+	//Right Snowball
+	r_snowball.PushBack({ 16, 716, 20, 18 });
+	r_snowball.PushBack({ 42, 710, 25, 24 });
+	r_snowball.PushBack({ 74, 707, 27, 28 });
+	r_snowball.PushBack({ 107, 704, 28, 31 });
+	r_snowball.PushBack({ 141, 703, 28, 33 });
+	
+	//Left Snowball
+	l_snowball.PushBack({ 1179, 716, 20, 18 });
+	l_snowball.PushBack({ 1148, 710, 25, 24 });
+	l_snowball.PushBack({ 1115, 707, 27, 28 });
+	l_snowball.PushBack({ 1081, 704, 28, 31 });
+	l_snowball.PushBack({ 1048, 703, 28, 33 });
+
 	//Left Walk Animation
 	l_walk.PushBack({ 32, 0, 32, 32 });
 	l_walk.PushBack({ 64, 0, 32, 32 });
@@ -22,10 +36,24 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	r_walk.loop = true;
 	r_walk.speed = 0.07f;
 
+	//Left Stun
+	l_stun.PushBack({ 0, 32, 32, 32 });
+	l_stun.PushBack({ 32, 32, 32, 32 });
+	l_stun.loop = true;
+	l_stun.speed = 0.05f;
+
+	//Right Snowball
+	r_stun.PushBack({ 256, 32, 32, 32 });
+	r_stun.PushBack({ 288, 32, 32, 32 });
+	r_stun.loop = true;
+	r_stun.speed = 0.05f;
+
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 
 	path.PushBack({ 1, 0 }, 1000, &r_walk);
 	path.PushBack({ 1, 0 }, 2000, &l_walk);
+	path.PushBack({ 0, 0 }, 594058, &r_stun);
+	path.PushBack({ 0, 0 }, 594058, &l_stun);
 
 	collider = App->collisions->AddCollider({position.x, position.y, 32 * 4 - 15, 32 * 4 - 15}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
@@ -88,6 +116,26 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 		//path.relativePosition = { 0,0 };
 		currentAnim = &r_walk;
 		path.currentStep = 0;
+		path.currentStepFrame = 0;
+	}
+
+}
+
+void Enemy_Demon::Freeze(Collider* collider) {
+	life--;
+
+	if (currentAnim == &r_walk)
+	{
+		currentAnim = &r_stun;
+		path.currentStep = 2;
+		path.currentStepFrame = 0;
+	}
+
+	else if (currentAnim == &l_walk)
+	{
+		//path.relativePosition = { 0,0 };
+		currentAnim = &l_stun;
+		path.currentStep = 3;
 		path.currentStepFrame = 0;
 	}
 

@@ -55,6 +55,8 @@ public:
 
 	void StopMovement(Collider* c1, Collider* c2) override;
 
+	void Freeze(Collider* c1, Collider* c2) override;
+
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(ENEMY_TYPE type, int x, int y);
 
@@ -80,6 +82,7 @@ private:
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
+
 };
 
 #endif // __MODULE_ENEMIES_H__

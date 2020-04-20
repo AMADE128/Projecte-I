@@ -46,3 +46,7 @@ void Module::StopMovementY(Collider* c1, Collider* c2) {
 void Module::Fall(Collider* c1, Collider* c2) {
 
 }
+
+void Module::Freeze(Collider* c1, Collider* c2) {
+
+}

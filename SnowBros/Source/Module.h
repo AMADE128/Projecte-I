@@ -37,6 +37,8 @@ public:
 	virtual void StopMovementY(Collider* c1, Collider* c2);
 
 	virtual void Fall(Collider* c1, Collider* c2);
+
+	virtual void Freeze(Collider* c1, Collider* c2);
 };
 
 #endif // __MODULE_H__

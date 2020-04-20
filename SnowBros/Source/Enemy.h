@@ -35,6 +35,8 @@ public:
 
 	virtual void StopMovement(Collider* collider);
 
+	virtual void Freeze(Collider* collider);
+
 public:
 	// The current position in the world
 	iPoint position;
@@ -54,6 +56,7 @@ protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
+
 };
 
 #endif // __ENEMY_H__
