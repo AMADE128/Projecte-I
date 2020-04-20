@@ -21,7 +21,13 @@ public:
 
 	void Freeze(Collider* collider) override;
 
-	int life = 8;
+	// This enemy has one sprite and one frame
+    // We are keeping it an animation for consistency with other enemies
+	Animation idle;
+	Animation l_walk;
+	Animation r_walk;
+	Animation l_stun;
+	Animation r_stun;
 
 private:
 	// A set of steps that define the position in the screen
@@ -30,14 +36,6 @@ private:
 
 	bool fall = false;
 	bool groundCollision = true;
-
-	// This enemy has one sprite and one frame
-	// We are keeping it an animation for consistency with other enemies
-	Animation idle;
-	Animation l_walk;
-	Animation r_walk;
-	Animation l_stun;
-	Animation r_stun;
 
 };
 

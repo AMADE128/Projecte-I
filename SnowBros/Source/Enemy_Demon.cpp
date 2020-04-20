@@ -8,6 +8,10 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
 
+	//life of the Enemy
+
+	life = 8;
+
 	//Left Walk Animation
 	l_walk.PushBack({ 32, 0, 32, 32 });
 	l_walk.PushBack({ 64, 0, 32, 32 });

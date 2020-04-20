@@ -51,7 +51,21 @@ update_status ModuleEnemies::PostUpdate()
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
+		{
 			enemies[i]->Draw();
+		}
+
+		switch (enemies[i]->life)
+		{
+		case 1: 
+			if(enemies[i]->currentAnim == enemies[i]->l_walk)
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		}
 	}
 
 	return update_status::UPDATE_CONTINUE;

@@ -47,10 +47,11 @@ public:
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 
-protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
+	int life;
+protected:
 	// The enemy's collider
 	Collider* collider = nullptr;
 
