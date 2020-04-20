@@ -25,7 +25,9 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
+	demon = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
+	/*snow = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");*/
+
 	//enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav"); SOBRA: HAY QUE PONER SONIDO SI HAY CUANDO GOLPEAMOS UN ENEMIGO
 
 	return true;
@@ -53,18 +55,6 @@ update_status ModuleEnemies::PostUpdate()
 		if (enemies[i] != nullptr)
 		{
 			enemies[i]->Draw();
-		}
-
-		switch (enemies[i]->life)
-		{
-		case 1: 
-			if(enemies[i]->currentAnim == enemies[i]->l_walk)
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
 		}
 	}
 
@@ -158,7 +148,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				enemies[i] = new Enemy_Demon(info.x, info.y);
 				break;
 			}
-			enemies[i]->texture = texture;
+			enemies[i]->texture = demon;
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}

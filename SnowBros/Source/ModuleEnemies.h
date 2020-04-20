@@ -67,7 +67,11 @@ public:
 	void HandleEnemiesDespawn();
 
 	// The enemies sprite sheet
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* demon = nullptr;
+	/*SDL_Texture* snow = nullptr;*/
+
+	// All spawned enemies in the scene
+	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 private:
 	// Spawns a new enemy using the data from the queue
@@ -76,9 +80,6 @@ private:
 private:
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
-
-	// All spawned enemies in the scene
-	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

@@ -1,16 +1,20 @@
 #include "Enemy_Demon.h"
 
 #include "Application.h"
+#include "ModuleRender.h"
 #include "ModuleCollisions.h"
+#include "ModuleParticles.h"
+#include "ModuleTextures.h"
 
 Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 {
+
+	snow = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
+
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
 
 	//life of the Enemy
-
-	life = 8;
 
 	//Left Walk Animation
 	l_walk.PushBack({ 32, 0, 32, 32 });
@@ -37,6 +41,8 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	r_stun.PushBack({ 288, 32, 32, 32 });
 	r_stun.loop = true;
 	r_stun.speed = 0.05f;
+
+	snowball.PushBack({ 141, 703, 28, 33 });
 
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 
@@ -65,7 +71,6 @@ void Enemy_Demon::Update()
 	}
 
 	currentAnim = path.GetCurrentAnimation();
-
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
@@ -127,6 +132,29 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		currentAnim = &l_stun;
 		path.currentStep = 3;
 		path.currentStepFrame = 0;
+	}
+
+	switch (life)
+	{
+		/*case 1:
+			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[4].GetCurrentFrame());
+			break;
+		case 2:
+			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[3].GetCurrentFrame());
+			break;
+		case 3:
+			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[2].GetCurrentFrame());
+			break;
+		case 4:
+			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[1].GetCurrentFrame());
+			break;*/
+	case 5:
+	case 6:
+		App->render->Blit(snow, position.x + 200, position.y, &(snowball.GetCurrentFrame()));
+		break;
+	case 7:
+		break;
+
 	}
 
 }
