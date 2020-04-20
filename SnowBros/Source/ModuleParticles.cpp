@@ -45,11 +45,11 @@ bool ModuleParticles::Start()
 	shotleft.anim.speed = 0.2f;
 
 	//left snowball
-	snowball[0].anim.PushBack({ 15, 716, 22, 19 });
-	snowball[1].anim.PushBack({ 43, 709, 25, 26 });
-	snowball[2].anim.PushBack({ 74, 707, 27, 28 });
+	snowball[0].anim.PushBack({ 12, 702, 28, 32 });
+	snowball[1].anim.PushBack({ 41, 702, 28, 32 });
+	snowball[2].anim.PushBack({ 74, 702, 28, 32 });
 	snowball[3].anim.PushBack({ 107, 703, 28, 32 });
-	snowball[4].anim.PushBack({ 141, 702, 27, 33 });
+	snowball[4].anim.PushBack({ 140, 702, 28, 32 });
 
 	return true;
 }
@@ -71,15 +71,10 @@ bool ModuleParticles::CleanUp()
 	return true;
 }
 
-void ModuleParticles::DeleteParticles(const Particle& particle) {
-
-	for (int i = 0; i < MAX_ACTIVE_PARTICLES; i++)
-	{
-		if (particles[i] == &particle) {
-			delete particles[i];
-			particles[i] = nullptr;
-		}
-	}
+void ModuleParticles::DeleteParticles(int num) {
+	
+	
+	/*delete particles;*/
 
 }
 

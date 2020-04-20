@@ -50,7 +50,7 @@ public:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
-	int life;
+	int life = 7;
 protected:
 	// The enemy's collider
 	Collider* collider = nullptr;

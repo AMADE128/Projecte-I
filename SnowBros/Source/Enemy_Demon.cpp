@@ -5,6 +5,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "ModuleEnemies.h"
 
 Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 {
@@ -119,14 +120,14 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 void Enemy_Demon::Freeze(Collider* collider) {
 	life--;
 
-	if (currentAnim == &r_walk && life < 7)
+	if (currentAnim == &r_walk && life > 2)
 	{
 		currentAnim = &r_stun;
 		path.currentStep = 2;
 		path.currentStepFrame = 0;
 	}
 
-	else if (currentAnim == &l_walk && life < 7)
+	else if (currentAnim == &l_walk && life > 2)
 	{
 		//path.relativePosition = { 0,0 };
 		currentAnim = &l_stun;
@@ -137,19 +138,19 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	switch (life)
 	{
 	case 1:
-		App->particles->DeleteParticles(App->particles->snowball[3]);
+		App->particles->DeleteParticles(3);
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
 		break;
 	case 2:
-		App->particles->DeleteParticles(App->particles->snowball[2]);
+		App->particles->DeleteParticles(2);
 		App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
 		break;
 	case 3:
-		App->particles->DeleteParticles(App->particles->snowball[1]);
+		App->particles->DeleteParticles(1);
 		App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
 		break;
 	case 4:
-		App->particles->DeleteParticles(App->particles->snowball[0]);
+		App->particles->DeleteParticles(0);
 		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
 		break;
 	case 5:

@@ -48,7 +48,7 @@ public:
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
 	void AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
-	void DeleteParticles(const Particle& particle);
+	void DeleteParticles(int num);
 
 private:
 
