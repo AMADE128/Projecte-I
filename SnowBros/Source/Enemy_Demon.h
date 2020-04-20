@@ -30,14 +30,13 @@ public:
 	Animation r_stun;
 
 	Animation snowball;
-	SDL_Texture* snow = nullptr;
+
+	int life = 7;
 
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
 	Path path;
-
-	int life = 7;
 
 	bool fall = false;
 	bool groundCollision = true;

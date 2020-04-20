@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
+#include "ModuleParticles.h"
 
 ModuleScene::ModuleScene()
 {

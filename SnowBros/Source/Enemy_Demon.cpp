@@ -9,7 +9,6 @@
 Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 {
 
-	snow = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
 
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
@@ -42,8 +41,6 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	r_stun.loop = true;
 	r_stun.speed = 0.05f;
 
-	snowball.PushBack({ 141, 703, 28, 33 });
-
 	// TODO 3: Have the Brown Cookies describe a path in the screen
 
 	path.PushBack({ 1, 0 }, 1000, &r_walk);
@@ -70,7 +67,10 @@ void Enemy_Demon::Update()
 		position.x--;
 	}
 
-	currentAnim = path.GetCurrentAnimation();
+	if (life >= 7)
+	{
+		currentAnim = path.GetCurrentAnimation();
+	}
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
@@ -119,14 +119,14 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 void Enemy_Demon::Freeze(Collider* collider) {
 	life--;
 
-	if (currentAnim == &r_walk)
+	if (currentAnim == &r_walk && life < 7)
 	{
 		currentAnim = &r_stun;
 		path.currentStep = 2;
 		path.currentStepFrame = 0;
 	}
 
-	else if (currentAnim == &l_walk)
+	else if (currentAnim == &l_walk && life < 7)
 	{
 		//path.relativePosition = { 0,0 };
 		currentAnim = &l_stun;
@@ -136,21 +136,25 @@ void Enemy_Demon::Freeze(Collider* collider) {
 
 	switch (life)
 	{
-		/*case 1:
-			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[4].GetCurrentFrame());
-			break;
-		case 2:
-			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[3].GetCurrentFrame());
-			break;
-		case 3:
-			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[2].GetCurrentFrame());
-			break;
-		case 4:
-			App->render->Blit(ball, enemies[i]->position.x, enemies[i]->position.y, &ballAnim[1].GetCurrentFrame());
-			break;*/
+	case 1:
+		App->particles->DeleteParticles(App->particles->snowball[3]);
+		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
+		break;
+	case 2:
+		App->particles->DeleteParticles(App->particles->snowball[2]);
+		App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
+		break;
+	case 3:
+		App->particles->DeleteParticles(App->particles->snowball[1]);
+		App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
+		break;
+	case 4:
+		App->particles->DeleteParticles(App->particles->snowball[0]);
+		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
+		break;
 	case 5:
 	case 6:
-		App->render->Blit(snow, position.x + 200, position.y, &(snowball.GetCurrentFrame()));
+		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
 		break;
 	case 7:
 		break;

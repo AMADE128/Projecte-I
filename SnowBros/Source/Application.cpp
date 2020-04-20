@@ -24,8 +24,8 @@ Application::Application()
 
 	modules[4] = scene = new ModuleScene();
 	modules[5] = player = new ModulePlayer();
-	modules[6] = particles = new ModuleParticles();
-	modules[7] = enemies = new ModuleEnemies();
+	modules[7] = particles = new ModuleParticles();
+	modules[6] = enemies = new ModuleEnemies();
 
 	modules[8] = collisions = new ModuleCollisions();
 
