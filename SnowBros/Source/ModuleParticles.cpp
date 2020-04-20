@@ -5,6 +5,8 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleCollisions.h"
+#include "Enemy_Demon.h"
+
 
 #include "SDL/include/SDL_timer.h"
 
@@ -37,6 +39,20 @@ bool ModuleParticles::Start()
 	shotleft.speed.x = -5;
 	shotleft.lifetime = 180;
 	shotleft.anim.speed = 0.2f;
+
+	//Right snowball
+	r_snowball.anim.PushBack({ 16, 716, 20, 18 });
+	r_snowball.anim.PushBack({ 42, 710, 25, 24 });
+	r_snowball.anim.PushBack({ 74, 707, 27, 28 });
+	r_snowball.anim.PushBack({ 107, 704, 28, 31 });
+	r_snowball.anim.PushBack({ 141, 703, 28, 33 });
+
+	//Left snowball
+	l_snowball.anim.PushBack({ 1179, 716, 20, 18 });
+	l_snowball.anim.PushBack({ 1148, 710, 25, 24 });
+	l_snowball.anim.PushBack({ 1115, 707, 27, 28 });
+	l_snowball.anim.PushBack({ 1081, 704, 28, 31 });
+	l_snowball.anim.PushBack({ 1048, 703, 28, 33 });
 
 	return true;
 }
@@ -102,6 +118,20 @@ update_status ModuleParticles::PostUpdate()
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
+	}
+
+	switch (Enemy_Demon::life)
+	{
+	case 7:
+		if()
+	case 6:
+	case 5:
+	case 4:
+	case 3:
+	case 2:
+	case 1:
+	case 0:
+		break;
 	}
 
 	return update_status::UPDATE_CONTINUE;

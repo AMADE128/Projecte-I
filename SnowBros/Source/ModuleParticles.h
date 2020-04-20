@@ -60,6 +60,9 @@ public:
 	//Template particle for a shot
 	Particle shotright;
 	Particle shotleft;
+
+	Particle r_snowball;
+	Particle l_snowball;
 };
 
 #endif // !__MODULEPARTICLES_H__

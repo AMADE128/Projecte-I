@@ -8,20 +8,6 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
 
-	//Right Snowball
-	r_snowball.PushBack({ 16, 716, 20, 18 });
-	r_snowball.PushBack({ 42, 710, 25, 24 });
-	r_snowball.PushBack({ 74, 707, 27, 28 });
-	r_snowball.PushBack({ 107, 704, 28, 31 });
-	r_snowball.PushBack({ 141, 703, 28, 33 });
-	
-	//Left Snowball
-	l_snowball.PushBack({ 1179, 716, 20, 18 });
-	l_snowball.PushBack({ 1148, 710, 25, 24 });
-	l_snowball.PushBack({ 1115, 707, 27, 28 });
-	l_snowball.PushBack({ 1081, 704, 28, 31 });
-	l_snowball.PushBack({ 1048, 703, 28, 33 });
-
 	//Left Walk Animation
 	l_walk.PushBack({ 32, 0, 32, 32 });
 	l_walk.PushBack({ 64, 0, 32, 32 });
