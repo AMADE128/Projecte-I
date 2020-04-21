@@ -96,13 +96,10 @@ update_status SceneLevel1::PostUpdate()
 
 bool SceneLevel1::CleanUp()
 {
-	// TODO 2: Enable (and properly disable) the player module
 	App->player->Disable();
 	App->enemies->Disable();
 	App->collisions->Disable();
 	App->particles->Disable();
-
-	// TODO 5: Remove All Memory Leaks - no solution here guys ;)
 
 	return true;
 }

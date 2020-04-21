@@ -42,7 +42,6 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	r_stun.loop = true;
 	r_stun.speed = 0.05f;
 
-	// TODO 3: Have the Brown Cookies describe a path in the screen
 
 	path.PushBack({ 1, 0 }, 1000, &r_walk);
 	path.PushBack({ 1, 0 }, 2000, &l_walk);
