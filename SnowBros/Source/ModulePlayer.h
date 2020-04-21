@@ -38,7 +38,13 @@ public:
 
 	void Fall(Collider* c1, Collider* c2) override;
 
-public:
+	//Player Health
+
+	int pHealth = 3;
+
+	//Count
+
+	bool contador = false;
 	// Position of the player in the map
 	iPoint position;
 

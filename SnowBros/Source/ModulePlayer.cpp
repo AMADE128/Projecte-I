@@ -324,9 +324,22 @@ update_status ModulePlayer::Update()
 
 	if (destroyed)
 	{
-		destroyedCountdown--;
-		if (destroyedCountdown <= 0)
-			return update_status::UPDATE_STOP;
+		destroyed = false;
+		if (pHealth < 0) {
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+			pHealth = 3;
+		}
+		else {
+			if (contador == false) {
+				pHealth--;
+				contador = true;
+			}
+			else {
+				position.x = 528;
+				position.y = 955 - (32 * 4.2);
+			}
+		}
+		contador = false;
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -355,8 +368,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		App->audio->PlayFx(explosionFx);
-
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 
 		destroyed = true;
 	}
