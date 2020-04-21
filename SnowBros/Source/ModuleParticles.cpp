@@ -51,6 +51,21 @@ bool ModuleParticles::Start()
 	snowball[3].anim.PushBack({ 107, 703, 28, 32 });
 	snowball[4].anim.PushBack({ 140, 702, 28, 32 });
 
+	//Death
+	death.anim.PushBack({ 15,527,32,32 });
+	for (int i = 0; i < 4; i++)
+	{
+		death.anim.PushBack({ 52,527,32,32 });
+		death.anim.PushBack({ 90,527,32,32 });
+	}
+	death.anim.PushBack({ 127,527,32,32 });
+	death.anim.PushBack({ 164,527,32,32 });
+	death.anim.PushBack({ 203,527,32,32 });
+	death.anim.PushBack({ 243,527,32,32 });
+	death.anim.PushBack({ 283,527,32,32 });
+	death.anim.loop = false;
+	death.anim.speed = 0.07f;
+
 	return true;
 }
 
@@ -69,13 +84,6 @@ bool ModuleParticles::CleanUp()
 	}
 
 	return true;
-}
-
-void ModuleParticles::DeleteParticles(int num) {
-	
-	
-	/*delete particles;*/
-
 }
 
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
@@ -120,7 +128,6 @@ update_status ModuleParticles::PostUpdate()
 
 		if (particle != nullptr && particle->isAlive)
 		{
-			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 	}

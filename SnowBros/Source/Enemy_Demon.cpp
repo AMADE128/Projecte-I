@@ -137,19 +137,15 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	switch (life)
 	{
 	case 1:
-		App->particles->DeleteParticles(3);
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
 		break;
 	case 2:
-		App->particles->DeleteParticles(2);
 		App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
 		break;
 	case 3:
-		App->particles->DeleteParticles(1);
 		App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
 		break;
 	case 4:
-		App->particles->DeleteParticles(0);
 		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
 		break;
 	case 5:

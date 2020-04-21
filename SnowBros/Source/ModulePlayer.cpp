@@ -78,6 +78,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	fallLeftAnim.PushBack(lastLeftJumpSprite);
 	fallLeftAnim.loop = false;
 	fallLeftAnim.speed = 0.1f;
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -96,7 +97,6 @@ bool ModulePlayer::Start()
 	currentAnimation = &r_idleAnim;
 
 	shotFx = App->audio->LoadFx("Assets/Audio/SFX/Player/#028.wav");
-	//explosionFx = App->audio->LoadFx("Assets/explosion.wav");
 
 	position.x = 528;
 	position.y = 955 - (32 * 4.2);
@@ -132,7 +132,7 @@ update_status ModulePlayer::Update()
 
 		if (fall == true)
 		{
-			speed_y = 2;
+			speed_y = SPEED_Y;
 		}
 
 		// Move player
@@ -166,7 +166,7 @@ update_status ModulePlayer::Update()
 
 		if (fall == true)
 		{
-			speed_y = 2;
+			speed_y = SPEED_Y;
 		}
 		
 
@@ -209,7 +209,7 @@ update_status ModulePlayer::Update()
 
 		if (groundCollision == true)
 		{
-			speed_y = 2;
+			speed_y = SPEED_Y;
 			groundCollision = false;
 		}
 
@@ -236,7 +236,7 @@ update_status ModulePlayer::Update()
 
 		if (groundCollision == true)
 		{
-			speed_y = 2;
+			speed_y = SPEED_Y;
 			groundCollision = false;
 		}
 
@@ -306,7 +306,7 @@ update_status ModulePlayer::Update()
 	{
 		//groundCollision = false;
 
-		speed_y = 2;
+		speed_y = SPEED_Y;
 
 		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false))
 		{
@@ -324,22 +324,18 @@ update_status ModulePlayer::Update()
 
 	if (destroyed)
 	{
-		destroyed = false;
-		if (pHealth < 0) {
+		if (pHealth <= 0) {
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
-			pHealth = 3;
+			pHealth = 6;
+			
 		}
 		else {
-			if (contador == false) {
-				pHealth--;
-				contador = true;
-			}
-			else {
-				position.x = 528;
-				position.y = 955 - (32 * 4.2);
-			}
+			destroyed = false;
+			pHealth--;
+			position.x = 528;
+			position.y = 955 - (32 * 4.2);
 		}
-		contador = false;
+
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -368,6 +364,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		App->audio->PlayFx(explosionFx);
+
+		App->particles->AddParticle(App->particles->death, position.x, position.y, Collider::NONE);
 
 		destroyed = true;
 	}

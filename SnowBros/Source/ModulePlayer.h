@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "p2Point.h"
 
+#define SPEED_Y 2
+
 struct SDL_Texture;
 struct Collider;
 
@@ -40,17 +42,14 @@ public:
 
 	//Player Health
 
-	int pHealth = 3;
+	int pHealth = 4;
 
-	//Count
-
-	bool contador = false;
 	// Position of the player in the map
 	iPoint position;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed_x = 2;
-	int speed_y = 2;
+	float speed_y = SPEED_Y;
 
 	bool rightCollision;
 	bool leftCollision;
