@@ -1,4 +1,4 @@
-#include "ModuleScene.h"
+#include "SceneLevel1.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -7,19 +7,20 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
-ModuleScene::ModuleScene()
+SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-ModuleScene::~ModuleScene()
+SceneLevel1::~SceneLevel1()
 {
 
 }
 
 // Load assets
-bool ModuleScene::Start()
+bool SceneLevel1::Start()
 {
 	LOG("Loading background assets");
 
@@ -68,11 +69,16 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1132, 350);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 372, 510);
 
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+	App->particles->Enable();
+
 
 	return ret;
 }
 
-update_status ModuleScene::Update()
+update_status SceneLevel1::Update()
 {
 	//App->render->camera.x += 3; SOBRA 2: LO GUARDAMOS PARA CUANDO CAMBIE DE NIVEL Y SUBA HACIA ARRIBA
 
@@ -80,10 +86,23 @@ update_status ModuleScene::Update()
 }
 
 // Update: draw background
-update_status ModuleScene::PostUpdate()
+update_status SceneLevel1::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+bool SceneLevel1::CleanUp()
+{
+	// TODO 2: Enable (and properly disable) the player module
+	App->player->Disable();
+	App->enemies->Disable();
+	App->collisions->Disable();
+	App->particles->Disable();
+
+	// TODO 5: Remove All Memory Leaks - no solution here guys ;)
+
+	return true;
 }

@@ -7,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+#include "ModuleFadeToBlack.h"
 #include "Animation.h"
 
 #include "SDL/include/SDL_scancode.h"
@@ -15,7 +16,7 @@
 #define NICK_SPRITE_SIZE 32
 
 
-ModulePlayer::ModulePlayer()
+ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle animation - just one sprite
 	//Right
@@ -99,6 +100,8 @@ bool ModulePlayer::Start()
 
 	position.x = 528;
 	position.y = 955 - (32 * 4.2);
+
+	destroyed = false;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -352,6 +355,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		App->audio->PlayFx(explosionFx);
+
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
 
 		destroyed = true;
 	}
