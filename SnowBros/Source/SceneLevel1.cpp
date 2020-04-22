@@ -8,6 +8,8 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+#include "SDL/include/SDL_scancode.h"
+#include "SDL/include/SDL.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
@@ -100,6 +102,8 @@ bool SceneLevel1::CleanUp()
 	App->enemies->Disable();
 	App->collisions->Disable();
 	App->particles->Disable();
+
+	SDL_DestroyTexture(bgTexture);
 
 	return true;
 }

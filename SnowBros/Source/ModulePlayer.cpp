@@ -123,6 +123,19 @@ update_status ModulePlayer::Update()
 	// Moving the player with the camera scroll
 	//App->player->position.x += 1;
 
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	{
+		if (godmode == false)
+		{
+			godmode = true;
+			collider->type = Collider::NONE;
+		}
+		else if (godmode == true)
+		{
+			godmode = false;
+			collider->type = Collider::PLAYER;
+		}
+	}
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT)
 	{
@@ -175,7 +188,7 @@ update_status ModulePlayer::Update()
 		{
 			speed_y = SPEED_Y;
 		}
-		
+
 
 		position.x += speed_x;
 
@@ -195,15 +208,21 @@ update_status ModulePlayer::Update()
 
 	//SOBRA 3: EL PERSONAJE NO PUEDE MOVERSE HACIA ABAJO
 
-	/*if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (godmode == true)
 	{
-		position.y += speed_x;
-	}*/
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+		{
+			position.y -= speed_y;
+		}
+		if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+		{
+			position.y += speed_y;
+		}
+	}
 
 	//right jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false && godmode == false)
 	{
-
 		if (rightCollision == true)
 		{
 			speed_x = 2;
@@ -229,7 +248,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//left jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false && godmode == false)
 	{
 		if (leftCollision == true)
 		{
@@ -259,12 +278,12 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 		{
-			App->particles->AddParticle(App->particles->shotright, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->shotright, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
 		else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
 		{
-			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
 	}
@@ -292,7 +311,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//GRAVEDAD 1
-	
+
 	//Gravity
 
 	if (fall == true)
@@ -331,18 +350,20 @@ update_status ModulePlayer::Update()
 
 	if (destroyed)
 	{
-		if (pHealth <= 0) {
+		pHealth--;
+		if (pHealth == 0) {
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
-			pHealth = 6;
-			
+			pHealth = 4;
+
 		}
 		else {
+			speed_x = 0;
+			speed_y = 0,
 			destroyed = false;
-			pHealth--;
 			position.x = 528;
 			position.y = 955 - (32 * 4.2);
+			collider->SetPos(position.x, position.y);
 		}
-
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -374,9 +395,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		App->audio->PlayFx(explosionFx);
 
-		App->particles->AddParticle(App->particles->death, position.x, position.y, Collider::NONE);
-
 		destroyed = true;
+
+		App->particles->AddParticle(App->particles->death, position.x, position.y, Collider::NONE);
 	}
 }
 
@@ -439,4 +460,15 @@ void ModulePlayer::Fall(Collider* c1, Collider* c2)
 		fall = true;
 		groundCollision = false;
 	}
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("Unloading particles");
+
+	// Delete collider and texture
+	SDL_DestroyTexture(spritesheet);
+	
+
+	return true;
 }

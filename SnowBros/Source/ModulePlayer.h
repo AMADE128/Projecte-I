@@ -31,6 +31,8 @@ public:
 	// Performs the render call of the player sprite
 	update_status PostUpdate() override;
 
+	bool CleanUp() override;
+
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
@@ -42,7 +44,7 @@ public:
 
 	//Player Health
 
-	int pHealth = 4;
+	int pHealth = 3;
 
 	// Position of the player in the map
 	iPoint position;
@@ -96,6 +98,8 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
+
+	bool godmode = false;
 
 	// Sound effects indices
 	uint shotFx = 0;

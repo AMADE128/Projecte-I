@@ -48,7 +48,6 @@ bool ModuleTextures::CleanUp()
 			textures[i] = nullptr;
 		}
 	}
-
 	//Quit SDL_Image subsystems
 	IMG_Quit();
 	return true;

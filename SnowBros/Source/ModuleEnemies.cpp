@@ -27,9 +27,8 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	demon = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
-	/*snow = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");*/
 
-	//enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav"); SOBRA: HAY QUE PONER SONIDO SI HAY CUANDO GOLPEAMOS UN ENEMIGO
+	//enemyDestroyedFx = App->audio->LoadFx("Assets/");
 
 	return true;
 }

@@ -54,3 +54,11 @@ update_status SceneIntro::PostUpdate()
 
 	return update_status::UPDATE_CONTINUE;
 }
+
+
+bool SceneIntro::CleanUp()
+{
+	SDL_DestroyTexture(bgTexture);
+
+	return true;
+}

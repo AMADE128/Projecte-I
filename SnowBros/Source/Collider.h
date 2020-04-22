@@ -9,7 +9,7 @@ struct Collider
 {
 	enum Type
 	{
-		NONE = -1,
+		NONE,
 		GROUND,
 		AIR,
 		WALL,
