@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
 
 #include "Enemy.h"
 #include "Enemy_Demon.h"
@@ -217,6 +218,7 @@ void ModuleEnemies::WinCondition() {
 	if (wincondition == 0)
 	{
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
+		App->player->pHealth = 3;
 	}
 }
 

@@ -108,7 +108,7 @@ bool ModulePlayer::Start()
 	destroyed = false;
 
 	char lookupTable[] = { "0123456789" };
-	//scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
+	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -278,7 +278,7 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 		{
-			App->particles->AddParticle(App->particles->shotright, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->shotright, position.x + 75, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
 		else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
@@ -376,9 +376,12 @@ update_status ModulePlayer::PostUpdate()
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
-	//sprintf_s(scoreText, 10, "%7d", score);
 
-	//App->fonts->BlitText(10, 10, scoreFont, scoreText);
+	sprintf_s(scoreText, 10, "%d", pHealth);
+
+	App->fonts->BlitText(80, 40, scoreFont, scoreText);
+
+	App->render->Blit(App->particles->texture, -10, -20, &App->particles->healthFace.anim.GetCurrentFrame());
 
 	return update_status::UPDATE_CONTINUE;
 }

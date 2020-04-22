@@ -57,6 +57,9 @@ public:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture = nullptr;
 
+	// Lifes face texture
+	Particle healthFace;
+
 	//Template particle for a shot
 	Particle shotright;
 	Particle shotleft;
