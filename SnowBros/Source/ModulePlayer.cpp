@@ -354,8 +354,9 @@ update_status ModulePlayer::PostUpdate()
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
+	//sprintf_s(scoreText, 10, "%7d", score);
 
-	App->fonts->BlitText(10, 10, scoreFont, "12");
+	App->fonts->BlitText(10, 10, scoreFont, scoreText);
 
 	return update_status::UPDATE_CONTINUE;
 }
