@@ -9,6 +9,9 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "Animation.h"
+#include "ModuleFonts.h"
+
+#include <stdio.h>
 
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
@@ -102,6 +105,9 @@ bool ModulePlayer::Start()
 	position.y = 955 - (32 * 4.2);
 
 	destroyed = false;
+
+	char lookupTable[] = { "0123456789" };
+	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -349,6 +355,7 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
 
+	App->fonts->BlitText(10, 10, scoreFont, "12");
 
 	return update_status::UPDATE_CONTINUE;
 }

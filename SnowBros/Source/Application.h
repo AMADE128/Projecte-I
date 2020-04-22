@@ -18,6 +18,7 @@ class ModuleCollisions;
 class ModuleEnemies;
 class ModuleFadeToBlack;
 class ModuleRender;
+class ModuleFonts;
 
 class Application
 {
@@ -60,6 +61,7 @@ public:
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;
 
+	ModuleFonts* fonts = nullptr;
 	ModuleRender* render = nullptr;
 };
 
