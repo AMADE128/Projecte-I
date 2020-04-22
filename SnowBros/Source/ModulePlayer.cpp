@@ -107,7 +107,7 @@ bool ModulePlayer::Start()
 	destroyed = false;
 
 	char lookupTable[] = { "0123456789" };
-	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
+	//scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -356,7 +356,7 @@ update_status ModulePlayer::PostUpdate()
 	}
 	//sprintf_s(scoreText, 10, "%7d", score);
 
-	App->fonts->BlitText(10, 10, scoreFont, scoreText);
+	//App->fonts->BlitText(10, 10, scoreFont, scoreText);
 
 	return update_status::UPDATE_CONTINUE;
 }
