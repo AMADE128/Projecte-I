@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModuleFadeToBlack.h"
 
 #include "Enemy.h"
 #include "Enemy_Demon.h"
@@ -44,6 +45,8 @@ update_status ModuleEnemies::Update()
 	}
 
 	HandleEnemiesDespawn();
+
+	WinCondition();
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -200,6 +203,21 @@ void ModuleEnemies::Freeze(Collider* c1, Collider* c2)
 			enemies[i]->Freeze(c2); //Notify the enemy of a collision
 			break;
 		}
+	}
+}
+
+void ModuleEnemies::WinCondition() {
+	int wincondition = 0;
+	for (int i = 0; i < MAX_ENEMIES; i++)
+	{
+		if (enemies[i] != nullptr)
+		{
+			wincondition++;
+		}
+	}
+	if (wincondition == 0)
+	{
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
 	}
 }
 

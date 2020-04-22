@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "Animation.h"
 #include "ModuleFonts.h"
+#include "ModuleEnemies.h"
 
 #include <stdio.h>
 
@@ -331,7 +332,7 @@ update_status ModulePlayer::Update()
 	if (destroyed)
 	{
 		if (pHealth <= 0) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
 			pHealth = 6;
 			
 		}

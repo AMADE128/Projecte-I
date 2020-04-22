@@ -117,18 +117,21 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 }
 
 void Enemy_Demon::Freeze(Collider* collider) {
-	life--;
 
-	if (currentAnim == &r_walk && life > 2)
+	if (life >= 0)
+	{
+		life--;
+	}
+
+	if (currentAnim == &r_walk && life > 0)
 	{
 		currentAnim = &r_stun;
 		path.currentStep = 2;
 		path.currentStepFrame = 0;
 	}
 
-	else if (currentAnim == &l_walk && life > 2)
+	else if (currentAnim == &l_walk && life > 0)
 	{
-		//path.relativePosition = { 0,0 };
 		currentAnim = &l_stun;
 		path.currentStep = 3;
 		path.currentStepFrame = 0;

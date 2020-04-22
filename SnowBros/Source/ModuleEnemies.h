@@ -64,12 +64,20 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	void WinCondition();
+
 	// The enemies sprite sheet
 	SDL_Texture* demon = nullptr;
 	/*SDL_Texture* snow = nullptr;*/
 
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
+
+	//Enemies life
+	int life = 7;
+
+	//WIN CONDITION
+	bool win = false;
 
 private:
 	// Spawns a new enemy using the data from the queue
