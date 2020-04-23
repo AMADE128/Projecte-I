@@ -353,7 +353,6 @@ update_status ModulePlayer::Update()
 		pHealth--;
 		if (pHealth == 0) {
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
-
 			pHealth = 4;
 
 		}
@@ -377,8 +376,6 @@ update_status ModulePlayer::PostUpdate()
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
-
-	App->fonts->BlitText(150, 248, scoreFont, "AAASSSDDD");
 	//sprintf_s(scoreText, 10, "%7d", score);
 
 	//App->fonts->BlitText(10, 10, scoreFont, scoreText);
