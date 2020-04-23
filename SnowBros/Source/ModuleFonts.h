@@ -44,6 +44,8 @@ public:
 	// Unloads the texture and removes it from the fonts array
 	void UnLoad(int fontIndex);
 
+	bool CleanUp() override;
+
 	// Create a surface from text
 	void BlitText(int x, int y, int fontIndex, const char* text) const;
 

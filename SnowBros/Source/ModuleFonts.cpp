@@ -83,6 +83,15 @@ void ModuleFonts::UnLoad(int font_id)
 	}
 }
 
+bool ModuleFonts::CleanUp() 
+{
+	for (int i = 0; i < MAX_FONTS; i++)
+	{
+		UnLoad(i);
+	}
+	return true;
+}
+
 void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 {
 	if (text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].texture == nullptr)

@@ -77,10 +77,10 @@ bool SceneLevel1::Start()
 
 	App->enemies->win = false;
 
-	App->player->Enable();
 	App->enemies->Enable();
-	App->collisions->Enable();
+	App->player->Enable();
 	App->particles->Enable();
+	App->collisions->Enable();
 
 	return ret;
 }
@@ -103,10 +103,10 @@ update_status SceneLevel1::PostUpdate()
 
 bool SceneLevel1::CleanUp()
 {
-	App->player->Disable();
-	App->enemies->Disable();
 	App->collisions->Disable();
 	App->particles->Disable();
+	App->player->Disable();
+	App->enemies->Disable();
 
 	SDL_DestroyTexture(bgTexture);
 
