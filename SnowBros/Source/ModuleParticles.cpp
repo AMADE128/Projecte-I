@@ -31,6 +31,10 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
 
+	//Health face
+	healthFace.anim.PushBack({ 112, 16, 32, 32 });
+	healthFace.anim.speed = 0;
+
 	//Right Shot
 	shotright.anim.PushBack({ 16, 141, 7, 11 });
 	shotright.anim.PushBack({ 31, 141, 7, 11 });
@@ -165,8 +169,13 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 			p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
 			p->position.y = y;
 
+			if (colliderType == Collider::Type::PLAYER_SHOT)
+			{
+				p->collider = App->collisions->AddCollider({ p->anim.GetCurrentFrame().x, p->anim.GetCurrentFrame().y, 10, 50 }, colliderType, this);
+			}
+
 			//Adding the particle's collider
-			if (colliderType != Collider::Type::NONE)
+			else if (colliderType != Collider::Type::NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
 
 			particles[i] = p;
