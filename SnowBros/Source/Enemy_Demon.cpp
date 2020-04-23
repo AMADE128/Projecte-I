@@ -7,7 +7,10 @@
 #include "ModuleTextures.h"
 #include "ModuleEnemies.h"
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ModulePlayer.h"
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 
@@ -145,7 +148,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	{
 	case 1:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 500;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 		App->particles->snowball[3].lifetime = 0;
@@ -153,7 +159,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		break;
 	case 2:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 		App->particles->snowball[2].lifetime = 0;
@@ -161,7 +170,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		break;
 	case 3:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 		App->particles->snowball[1].lifetime = 0;
@@ -169,7 +181,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		break;
 	case 4:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 		App->particles->snowball[0].lifetime = 0;
@@ -178,7 +193,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 5:
 	case 6:
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
