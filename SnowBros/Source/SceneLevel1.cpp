@@ -8,8 +8,12 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModulePlayer.h"
+
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
+#include "SDL_mixer/include/SDL_mixer.h"
+#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
+
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
@@ -29,7 +33,7 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl1.png");
-	//App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
 
 	//Bottomside collider
 	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::GROUND);
@@ -71,11 +75,12 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1132, 350);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 372, 510);
 
+	App->enemies->win = false;
+
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
 	App->particles->Enable();
-
 
 	return ret;
 }

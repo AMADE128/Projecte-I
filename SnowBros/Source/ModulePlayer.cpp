@@ -11,6 +11,7 @@
 #include "Animation.h"
 #include "ModuleFonts.h"
 #include "ModuleEnemies.h"
+#include "SceneLevel1.h"
 
 #include <stdio.h>
 
@@ -83,6 +84,12 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	fallLeftAnim.loop = false;
 	fallLeftAnim.speed = 0.1f;
 
+	//Win animation
+	winAnim.PushBack({ 374, 366, 32, 32 });
+	winAnim.PushBack({ 404, 366, 32, 32 });
+	winAnim.loop = true;
+	winAnim.speed = 0.1f;
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -101,14 +108,17 @@ bool ModulePlayer::Start()
 	currentAnimation = &r_idleAnim;
 
 	shotFx = App->audio->LoadFx("Assets/Audio/SFX/Player/#028.wav");
+	looseFx = App->audio->LoadFx("Assets/Audio/Music/Menus/9.#046 Game Over.ogg");
+	deathFx = App->audio->LoadFx("Assets/Audio/SFX/Others/#008.wav");
 
 	position.x = 528;
 	position.y = 955 - (32 * 4.2);
 
 	destroyed = false;
 
-	char lookupTable[] = { "0123456789" };
-	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
+	char life_score_Table[] = { "0123456789" };
+	lifeFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
+	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/points.png", life_score_Table, 1);
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -137,7 +147,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
 	{
 		// Enable to escape collision
 		if (rightCollision == true)
@@ -172,7 +182,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
 	{
 		if (leftCollision == true)
 		{
@@ -221,7 +231,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//right jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false && godmode == false)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false && godmode == false && App->enemies->win == false)
 	{
 		if (rightCollision == true)
 		{
@@ -248,7 +258,7 @@ update_status ModulePlayer::Update()
 	}
 
 	//left jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false && godmode == false)
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false && godmode == false && App->enemies->win == false)
 	{
 		if (leftCollision == true)
 		{
@@ -274,7 +284,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->enemies->win == false)
 	{
 		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 		{
@@ -314,7 +324,7 @@ update_status ModulePlayer::Update()
 
 	//Gravity
 
-	if (fall == true)
+	if (fall == true && App->enemies->win == false)
 	{
 		position.y += speed_y;
 
@@ -352,18 +362,29 @@ update_status ModulePlayer::Update()
 	{
 		pHealth--;
 		if (pHealth == 0) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 200);
+			//App->audio->PlayFx(looseFx);
 			pHealth = 4;
+			score = 0;
 
 		}
 		else {
+			App->audio->PlayFx(deathFx);
 			speed_x = 0;
 			speed_y = 0,
 			destroyed = false;
 			position.x = 528;
 			position.y = 955 - (32 * 4.2);
+			App->particles->AddParticle(App->particles->snowDeath, position.x - 55, position.y - 60, Collider::NONE);
 			collider->SetPos(position.x, position.y);
 		}
+	}
+
+	if (App->enemies->win == true) 
+	{
+		currentAnimation = &winAnim;
+		collider->type = Collider::NONE;
+		position.y -= 4;
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -377,9 +398,11 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
 
-	sprintf_s(scoreText, 10, "%d", pHealth);
+	sprintf_s(lifeText, 10, "%d", pHealth);
+	sprintf_s(scoreText, 10, "%d", score);
 
-	App->fonts->BlitText(80, 40, scoreFont, scoreText);
+	App->fonts->BlitText(80, 40, lifeFont, lifeText);
+	App->fonts->BlitText(1200, 53, scoreFont, scoreText);
 
 	App->render->Blit(App->particles->texture, -10, -20, &App->particles->healthFace.anim.GetCurrentFrame());
 

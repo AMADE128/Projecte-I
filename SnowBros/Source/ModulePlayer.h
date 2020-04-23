@@ -74,6 +74,7 @@ public:
 	Animation fallLeftAnim;
 	Animation sideRightAnim;
 	Animation sideLeftAnim;
+	Animation winAnim;
 
 	// Jumping estate
 	bool up = true;
@@ -97,12 +98,16 @@ public:
 
 	uint score = 000;
 	int scoreFont = -1;
+	int lifeFont = -1;
+	char lifeText[10] = { "\0" };
 	char scoreText[10] = { "\0" };
 
 	bool godmode = false;
 
 	// Sound effects indices
 	uint shotFx = 0;
+	uint looseFx = 0;
+	uint deathFx = 0;
 	uint explosionFx = 0;
 
 };

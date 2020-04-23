@@ -65,6 +65,7 @@ public:
 	Particle shotleft;
 	Particle snowball[5];
 	Particle death;
+	Particle snowDeath;
 
 };
 

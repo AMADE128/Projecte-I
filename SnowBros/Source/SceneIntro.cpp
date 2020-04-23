@@ -9,6 +9,9 @@
 #include "ModuleEnemies.h"
 #include "Globals.h"
 #include "ModuleRender.h"
+#include "ModulePlayer.h"
+#include "ModuleCollisions.h"
+#include "ModuleParticles.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
@@ -39,8 +42,8 @@ update_status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 150);
-		App->enemies->CleanUp();
+		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
+		//App->enemies->CleanUp();
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -58,6 +61,9 @@ update_status SceneIntro::PostUpdate()
 
 bool SceneIntro::CleanUp()
 {
+	App->player->Disable();
+	App->enemies->Disable();
+	App->collisions->Disable();
 	SDL_DestroyTexture(bgTexture);
 
 	return true;

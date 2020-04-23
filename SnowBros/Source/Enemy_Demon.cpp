@@ -6,7 +6,7 @@
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
 #include "ModuleEnemies.h"
-//#include "ModulePlayer.h"
+#include "ModulePlayer.h"
 
 Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 {
@@ -49,7 +49,7 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	path.PushBack({ 0, 0 }, 594058, &r_stun);
 	path.PushBack({ 0, 0 }, 594058, &l_stun);
 
-	collider = App->collisions->AddCollider({position.x, position.y, 32 * 4 - 15, 32 * 4 - 15}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({(position.x) + 14, position.y, 32 * 4 - 15, 32 * 4 - 15}, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_Demon::Update()
@@ -141,28 +141,28 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	switch (life)
 	{
 	case 1:
-		//App->player->points += 10;
+		App->player->score += 500;
 		App->particles->snowball[3].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
 		break;
 	case 2:
-		//App->player->points += 10;
+		App->player->score += 10;
 		App->particles->snowball[2].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
 		break;
 	case 3:
-		//App->player->points += 10;
+		App->player->score += 10;
 		App->particles->snowball[1].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
 		break;
 	case 4:
-		//App->player->points += 10;
+		App->player->score += 10;
 		App->particles->snowball[0].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
 		break;
 	case 5:
 	case 6:
-		//App->player->points += 10;
+		App->player->score += 10;
 		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
 		break;
 	case 7:
