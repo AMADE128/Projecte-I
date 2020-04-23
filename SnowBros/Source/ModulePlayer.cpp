@@ -116,14 +116,9 @@ bool ModulePlayer::Start()
 
 	destroyed = false;
 
-<<<<<<< HEAD
 	char life_score_Table[] = { "0123456789" };
 	lifeFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
 	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/points.png", life_score_Table, 1);
-=======
-	char lookupTable[] = { "0123456789" };
-	//scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
->>>>>>> parent of 7e0a729... Life font implemented
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -293,7 +288,7 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 		{
-			App->particles->AddParticle(App->particles->shotright, position.x + 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+			App->particles->AddParticle(App->particles->shotright, position.x + 75, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
 		else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
@@ -402,9 +397,7 @@ update_status ModulePlayer::PostUpdate()
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
-	//sprintf_s(scoreText, 10, "%7d", score);
 
-<<<<<<< HEAD
 	sprintf_s(lifeText, 10, "%d", pHealth);
 	sprintf_s(scoreText, 10, "%d", score);
 
@@ -412,9 +405,6 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(1200, 53, scoreFont, scoreText);
 
 	App->render->Blit(App->particles->texture, -10, -20, &App->particles->healthFace.anim.GetCurrentFrame());
-=======
-	//App->fonts->BlitText(10, 10, scoreFont, scoreText);
->>>>>>> parent of 7e0a729... Life font implemented
 
 	return update_status::UPDATE_CONTINUE;
 }
