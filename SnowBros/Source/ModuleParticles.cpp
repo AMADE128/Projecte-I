@@ -9,6 +9,7 @@
 #include "ModuleEnemies.h"
 #include "Enemy.h"
 #include "ModuleInput.h"
+#include "ModulePlayer.h"
 
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
@@ -29,6 +30,10 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	texture = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
+
+	//Health face
+	healthFace.anim.PushBack({ 112, 16, 32, 32 });
+	healthFace.anim.speed = 0;
 
 	//Right Shot
 	shotright.anim.PushBack({ 16, 141, 7, 11 });
@@ -63,8 +68,23 @@ bool ModuleParticles::Start()
 	death.anim.PushBack({ 203,527,32,32 });
 	death.anim.PushBack({ 243,527,32,32 });
 	death.anim.PushBack({ 283,527,32,32 });
-	death.anim.loop = false;
+	death.lifetime = 200;
 	death.anim.speed = 0.07f;
+
+	//Snow Death animation
+	snowDeath.anim.PushBack({ 7, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 53, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 93, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 140, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 196, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 256, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 318, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 380, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 470, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 510, 608, 50, 48 });
+	snowDeath.anim.PushBack({ 553, 608, 50, 48 });
+	snowDeath.lifetime = 100;
+	snowDeath.anim.speed = 0.09f;
 
 	return true;
 }
@@ -102,6 +122,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 update_status ModuleParticles::Update()
 {
+	death.anim.Reset();
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* particle = particles[i];
@@ -148,8 +169,13 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collid
 			p->position.x = x;						// so when frameCount reaches 0 the particle will be activated
 			p->position.y = y;
 
+			if (colliderType == Collider::Type::PLAYER_SHOT)
+			{
+				p->collider = App->collisions->AddCollider({ p->anim.GetCurrentFrame().x, p->anim.GetCurrentFrame().y, 10, 50 }, colliderType, this);
+			}
+
 			//Adding the particle's collider
-			if (colliderType != Collider::Type::NONE)
+			else if (colliderType != Collider::Type::NONE)
 				p->collider = App->collisions->AddCollider(p->anim.GetCurrentFrame(), colliderType, this);
 
 			particles[i] = p;

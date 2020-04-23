@@ -61,7 +61,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = NOTHING;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = DIE;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = DIE, NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::AIR] = NOTHING;
