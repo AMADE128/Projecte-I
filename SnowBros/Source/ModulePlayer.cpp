@@ -124,6 +124,9 @@ bool ModulePlayer::Start()
 	char lookupTable[] = { "0123456789" };
 	//scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", lookupTable, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 7e0a729... Life font implemented
+=======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
@@ -409,6 +412,7 @@ update_status ModulePlayer::PostUpdate()
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	sprintf_s(lifeText, 10, "%d", pHealth);
 	sprintf_s(scoreText, 10, "%d", score);
 
@@ -416,6 +420,9 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(1200, 53, scoreFont, scoreText);
 
 	App->render->Blit(App->particles->texture, -10, -20, &App->particles->healthFace.anim.GetCurrentFrame());
+=======
+	//App->fonts->BlitText(10, 10, scoreFont, scoreText);
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 	//App->fonts->BlitText(10, 10, scoreFont, scoreText);
 >>>>>>> parent of 7e0a729... Life font implemented

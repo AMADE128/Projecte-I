@@ -8,7 +8,10 @@
 #include "ModuleEnemies.h"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "ModulePlayer.h"
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
@@ -149,7 +152,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 1:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 500;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
@@ -160,7 +166,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 2:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
@@ -171,7 +180,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 3:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
@@ -182,7 +194,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 4:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
@@ -194,7 +209,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 6:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->score += 10;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======

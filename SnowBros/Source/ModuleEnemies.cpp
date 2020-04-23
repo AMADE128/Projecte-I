@@ -220,8 +220,11 @@ void ModuleEnemies::WinCondition() {
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		App->player->pHealth = 3;
 		App->player->score = 0;
+=======
+>>>>>>> parent of 7e0a729... Life font implemented
 =======
 >>>>>>> parent of 7e0a729... Life font implemented
 =======
