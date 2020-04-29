@@ -456,6 +456,10 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 void ModulePlayer::StopMovementY(Collider* c1, Collider* c2)
 {
 	//GRAVEDAD 2
+
+	if ((c1->rect.y + c1->rect.w) < c2->rect.y && groundCollision == false)
+		fall = true;
+
 	if (currentAnimation != &rightjumpAnim && currentAnimation != &leftjumpAnim && ((c1->rect.y + c1->rect.h - 5) <= c2->rect.y))
 	{
 		groundCollision = true;
@@ -485,6 +489,12 @@ void ModulePlayer::Fall(Collider* c1, Collider* c2)
 	{
 		fall = true;
 		groundCollision = false;
+	}
+
+	if ((c1->rect.y + c1->rect.w) < c2->rect.y && groundCollision == false)
+	{
+		fall = true;
+		//groundCollision = false;
 	}
 }
 
