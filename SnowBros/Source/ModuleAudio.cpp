@@ -2,6 +2,8 @@
 
 #include "Application.h"
 
+#include "SceneIntro.h"
+
 #include "SDL/include/SDL.h"
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
@@ -54,7 +56,7 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing sound FX, closing Mixer and Audio subsystem");
 
-	if (music != NULL)
+	if (music != NULL && App->sceneIntro->IsEnabled() == false)
 	{
 		Mix_FreeMusic(music);
 	}
@@ -87,8 +89,6 @@ bool ModuleAudio::PlayMusic(const char* path, float fade_time)
 		{
 			Mix_HaltMusic();
 		}
-
-		Mix_FreeMusic(music);
 	}
 
 	music = Mix_LoadMUS(path);
