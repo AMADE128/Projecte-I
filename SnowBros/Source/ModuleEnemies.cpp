@@ -2,6 +2,7 @@
 
 #include "Application.h"
 
+#include "ModuleCollisions.h"
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
@@ -78,6 +79,8 @@ bool ModuleEnemies::CleanUp()
 		}
 	}
 
+	App->textures->Unload(demon);
+
 	return true;
 }
 
@@ -149,7 +152,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				break;
 			}
 			enemies[i]->texture = demon;
-			enemies[i]->destroyedFx = enemyDestroyedFx;
+			//enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}
 	}

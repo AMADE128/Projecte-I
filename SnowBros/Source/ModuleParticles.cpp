@@ -103,6 +103,8 @@ bool ModuleParticles::CleanUp()
 		}
 	}
 
+	App->textures->Unload(texture);
+
 	return true;
 }
 

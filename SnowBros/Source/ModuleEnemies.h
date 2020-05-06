@@ -88,7 +88,7 @@ private:
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
 
 	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
+	//int enemyDestroyedFx = 0;
 
 };
 

@@ -49,7 +49,7 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	path.PushBack({ 0, 0 }, 594058, &r_stun);
 	path.PushBack({ 0, 0 }, 594058, &l_stun);
 
-	collider = App->collisions->AddCollider({(position.x) + 14, position.y, 32 * 4 - 15, 32 * 4 - 15}, Collider::Type::ENEMY, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ (position.x) + 14, position.y, 32 * 4 - 15, 32 * 4 - 15 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_Demon::Update()
@@ -115,6 +115,13 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 		path.currentStepFrame = 0;
 	}
 
+}
+
+bool Enemy_Demon::CleanUp()
+{
+	App->collisions->RemoveCollider(collider);
+
+	return true;
 }
 
 void Enemy_Demon::Freeze(Collider* collider) {

@@ -38,6 +38,9 @@ public:
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
 
+
+	void RemoveCollider(Collider* collider);
+
 	enum CollType
 	{
 		DIE,

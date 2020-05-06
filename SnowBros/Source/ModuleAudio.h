@@ -46,6 +46,8 @@ public:
 	// The current playing music
 	Mix_Music* music = nullptr;
 
+	bool UnloadFx(uint index);
+
 private:
 
 	// An array of all the loaded sound effects

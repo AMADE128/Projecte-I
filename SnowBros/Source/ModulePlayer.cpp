@@ -503,8 +503,13 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading particles");
 
 	// Delete collider and texture
-	SDL_DestroyTexture(spritesheet);
+	App->textures->Unload(spritesheet);
+	App->fonts->UnLoad(lifeFont);
+	App->fonts->UnLoad(scoreFont);
+	App->collisions->RemoveCollider(collider);
+	App->audio->UnloadFx(shotFx);
+	App->audio->UnloadFx(looseFx);
+	App->audio->UnloadFx(deathFx);
 	
-
 	return true;
 }

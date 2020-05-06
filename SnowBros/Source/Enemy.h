@@ -51,9 +51,11 @@ public:
 	Animation* currentAnim = nullptr;
 
 	int life = 7;
-protected:
+
 	// The enemy's collider
 	Collider* collider = nullptr;
+protected:
+
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
