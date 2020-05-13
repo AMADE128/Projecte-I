@@ -85,5 +85,5 @@ int main(int argc, char* argv[])
 
 	delete App;
 
-	return main_return;
+	return 0;
 }
