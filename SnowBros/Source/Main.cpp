@@ -25,6 +25,8 @@ int main(int argc, char* argv[])
 	int main_return = EXIT_FAILURE;
 	main_states state = main_states::MAIN_CREATION;
 
+	::ShowWindow(::GetConsoleWindow(), SW_HIDE);
+
 	while (state != main_states::MAIN_EXIT)
 	{
 		switch (state)
@@ -85,5 +87,5 @@ int main(int argc, char* argv[])
 
 	delete App;
 
-	return 0;
-}
+	return main_return;
+} 

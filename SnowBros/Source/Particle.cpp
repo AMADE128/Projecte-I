@@ -17,7 +17,9 @@ frameCount(p.frameCount), lifetime(p.lifetime)
 Particle::~Particle()
 {
 	if (collider != nullptr)
+	{
 		collider->pendingToDelete = true;
+	}
 }
 
 bool Particle::Update()

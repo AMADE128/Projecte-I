@@ -147,6 +147,10 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	if (App->input->keys[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
+	{
+		return update_status::UPDATE_STOP;
+	}
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
 	{
 		// Enable to escape collision
