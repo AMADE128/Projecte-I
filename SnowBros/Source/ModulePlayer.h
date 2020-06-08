@@ -5,7 +5,7 @@
 #include "Animation.h"
 #include "p2Point.h"
 
-#define SPEED_Y 2
+#define SPEED_Y 4
 
 struct SDL_Texture;
 struct Collider;

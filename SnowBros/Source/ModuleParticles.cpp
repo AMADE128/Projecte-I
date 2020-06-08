@@ -38,14 +38,14 @@ bool ModuleParticles::Start()
 	//Right Shot
 	shotright.anim.PushBack({ 16, 141, 7, 11 });
 	shotright.anim.PushBack({ 31, 141, 7, 11 });
-	shotright.speed.x = 5;
+	shotright.speed.x = 10;
 	shotright.lifetime = 180;
 	shotright.anim.speed = 0.2f;
 
 	//Left Shot
 	shotleft.anim.PushBack({ 1190, 140, 13, 13 });
 	shotleft.anim.PushBack({ 1175, 140, 13, 13 });
-	shotleft.speed.x = -5;
+	shotleft.speed.x = -10;
 	shotleft.lifetime = 180;
 	shotleft.anim.speed = 0.2f;
 
