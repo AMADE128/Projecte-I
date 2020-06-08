@@ -96,8 +96,28 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	r_shootAnim.PushBack({ 197, 77, 28, 34 });
 	r_shootAnim.PushBack({ 232, 77, 28, 34 });
 	r_shootAnim.loop = false;
-	r_shootAnim.speed = 0.1f;
+	r_shootAnim.speed = 0.07f;
 
+	l_shootAnim.PushBack({ 1051, 77, 28, 34 });
+	l_shootAnim.PushBack({ 1023, 77, 28, 34 });
+	l_shootAnim.PushBack({ 991, 77, 28, 34 });
+	l_shootAnim.PushBack({ 956, 77, 28, 34 });
+	l_shootAnim.loop = false;
+	l_shootAnim.speed = 0.07f;
+
+	r_jumpShoot.PushBack({ 294, 304, 32, 32 });
+	r_jumpShoot.PushBack({ 320, 304, 32, 32 });
+	r_jumpShoot.PushBack({ 354, 304, 32, 32 });
+	r_jumpShoot.PushBack({ 390, 304, 32, 32 });
+	r_jumpShoot.loop = false;
+	r_jumpShoot.speed = 0.07f;
+
+	l_jumpShoot.PushBack({ 895, 304, 32, 32 });
+	l_jumpShoot.PushBack({ 861, 304, 32, 32 });
+	l_jumpShoot.PushBack({ 827, 304, 32, 32 });
+	l_jumpShoot.PushBack({ 793, 304, 32, 32 });
+	l_jumpShoot.loop = false;
+	l_jumpShoot.speed = 0.07f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -183,7 +203,7 @@ update_status ModulePlayer::Update()
 			currentAnimation = &leftjumpAnim;
 		}
 
-		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim && currentAnimation != &rightjumpAnim)
+		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim && currentAnimation != &rightjumpAnim && (currentAnimation != &l_shootAnim || (currentAnimation == &l_shootAnim && l_shootAnim.GetCurrentFrame().x == 956)))
 		{
 			sideLeftAnim.Reset();
 			currentAnimation = &sideLeftAnim;
@@ -217,7 +237,7 @@ update_status ModulePlayer::Update()
 			currentAnimation = &rightjumpAnim;
 		}
 
-		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim && currentAnimation != &leftjumpAnim)
+		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim && currentAnimation != &leftjumpAnim && (currentAnimation != &r_shootAnim || (currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)))
 		{
 			sideRightAnim.Reset();
 			currentAnimation = &sideRightAnim;
@@ -296,12 +316,15 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 		{
+			r_shootAnim.Reset();
 			currentAnimation = &r_shootAnim;
 			App->particles->AddParticle(App->particles->shotright, position.x + 75, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
 		else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
 		{
+			l_shootAnim.Reset();
+			currentAnimation = &l_shootAnim;
 			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
@@ -353,11 +376,11 @@ update_status ModulePlayer::Update()
 
 		speed_y = SPEED_Y;
 
-		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.HasFinished())
+		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)
 		{
 			currentAnimation = &r_idleAnim;
 		}
-		if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true) || (currentAnimation == &fallLeftAnim && fall == false))
+		if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true) || (currentAnimation == &fallLeftAnim && fall == false) || currentAnimation == &l_shootAnim && l_shootAnim.GetCurrentFrame().x == 956)
 		{
 			currentAnimation = &l_idleAnim;
 		}

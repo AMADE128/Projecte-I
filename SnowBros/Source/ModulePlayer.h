@@ -77,10 +77,8 @@ public:
 	Animation winAnim;
 	Animation r_shootAnim;
 	Animation l_shootAnim;
-
-	// Jumping estate
-	bool up = true;
-	bool down;
+	Animation r_jumpShoot;
+	Animation l_jumpShoot;
 
 	//Chech ground collision
 	bool groundCollision;
