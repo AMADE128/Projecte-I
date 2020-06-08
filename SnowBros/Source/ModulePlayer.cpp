@@ -96,28 +96,28 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	r_shootAnim.PushBack({ 197, 77, 28, 34 });
 	r_shootAnim.PushBack({ 232, 77, 28, 34 });
 	r_shootAnim.loop = false;
-	r_shootAnim.speed = 0.07f;
+	r_shootAnim.speed = 0.16f;
 
 	l_shootAnim.PushBack({ 1051, 77, 28, 34 });
 	l_shootAnim.PushBack({ 1023, 77, 28, 34 });
 	l_shootAnim.PushBack({ 991, 77, 28, 34 });
 	l_shootAnim.PushBack({ 956, 77, 28, 34 });
 	l_shootAnim.loop = false;
-	l_shootAnim.speed = 0.07f;
+	l_shootAnim.speed = 0.16f;
 
 	r_jumpShoot.PushBack({ 294, 304, 32, 32 });
 	r_jumpShoot.PushBack({ 320, 304, 32, 32 });
 	r_jumpShoot.PushBack({ 354, 304, 32, 32 });
 	r_jumpShoot.PushBack({ 390, 304, 32, 32 });
 	r_jumpShoot.loop = false;
-	r_jumpShoot.speed = 0.07f;
+	r_jumpShoot.speed = 0.16f;
 
 	l_jumpShoot.PushBack({ 895, 304, 32, 32 });
 	l_jumpShoot.PushBack({ 861, 304, 32, 32 });
 	l_jumpShoot.PushBack({ 827, 304, 32, 32 });
 	l_jumpShoot.PushBack({ 793, 304, 32, 32 });
 	l_jumpShoot.loop = false;
-	l_jumpShoot.speed = 0.07f;
+	l_jumpShoot.speed = 0.16f;
 }
 
 ModulePlayer::~ModulePlayer()
