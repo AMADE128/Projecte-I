@@ -23,11 +23,15 @@ typedef unsigned int uint;
 #define SCREEN_WIDTH 1440
 #define SCREEN_HEIGHT 995
 
+/*#define SCREEN_WIDTH 1080
+#define SCREEN_HEIGHT 720*/
+
 #define SCREEN_SIZE 1
 #define WIN_FULLSCREEN 0
-#define WIN_FULLSCREEN_DESKTOP 0
+#define WIN_FULLSCREEN_DESKTOP 1
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
+#define WINDOW_MAXIMIZED 0
 #define VSYNC 1
 
 #endif // __GLOBALS_H__
