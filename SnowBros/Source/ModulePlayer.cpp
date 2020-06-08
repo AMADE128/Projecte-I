@@ -41,7 +41,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rightjumpAnim.PushBack({ 243, 375, NICK_SPRITE_SIZE - 2, NICK_SPRITE_SIZE });
 	rightjumpAnim.PushBack(lastRightJumpSprite);
 	rightjumpAnim.loop = false;
-	rightjumpAnim.speed = 0.2f;
+	rightjumpAnim.speed = 0.1f;
 
 	// left jump
 	lastLeftJumpSprite = { 979, 305, NICK_SPRITE_SIZE - 4, NICK_SPRITE_SIZE - 3 };
@@ -204,7 +204,7 @@ update_status ModulePlayer::Update()
 		}
 
 
-		position.x += 2 * speed_x;
+		position.x += speed_x;
 
 		//change sprite while jumping
 		if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x)
@@ -219,6 +219,8 @@ update_status ModulePlayer::Update()
 			currentAnimation = &sideRightAnim;
 		}
 	}
+
+	//SOBRA 3: EL PERSONAJE NO PUEDE MOVERSE HACIA ABAJO
 
 	if (godmode == true)
 	{
