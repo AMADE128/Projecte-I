@@ -75,6 +75,8 @@ public:
 	Animation sideRightAnim;
 	Animation sideLeftAnim;
 	Animation winAnim;
+	Animation r_shootAnim;
+	Animation l_shootAnim;
 
 	// Jumping estate
 	bool up = true;

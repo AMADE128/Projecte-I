@@ -90,6 +90,14 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	winAnim.loop = true;
 	winAnim.speed = 0.1f;
 
+	//Shoot Animation
+	r_shootAnim.PushBack({ 138, 77, 28, 34 });
+	r_shootAnim.PushBack({ 165, 77, 28, 34 });
+	r_shootAnim.PushBack({ 197, 77, 28, 34 });
+	r_shootAnim.PushBack({ 232, 77, 28, 34 });
+	r_shootAnim.loop = false;
+	r_shootAnim.speed = 0.1f;
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -288,6 +296,7 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 		{
+			currentAnimation = &r_shootAnim;
 			App->particles->AddParticle(App->particles->shotright, position.x + 75, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
@@ -296,13 +305,6 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
-	}
-
-
-	//no deberia ser error pero oye funcionar funciona.
-	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
-	{
-		return update_status::UPDATE_ERROR;
 	}
 
 	//We make the player go up or down
@@ -351,7 +353,7 @@ update_status ModulePlayer::Update()
 
 		speed_y = SPEED_Y;
 
-		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false))
+		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.HasFinished())
 		{
 			currentAnimation = &r_idleAnim;
 		}
