@@ -59,13 +59,13 @@ void Enemy_Demon::Update()
 
 	if (currentAnim == &r_walk)
 	{
-		position.x++;
+		position.x+= 2;
 	}
 
 	if (currentAnim == &l_walk)
 	{
 		//position = spawnPos - path.GetRelativePosition();
-		position.x--;
+		position.x-= 2;
 	}
 
 	if (life >= 7)

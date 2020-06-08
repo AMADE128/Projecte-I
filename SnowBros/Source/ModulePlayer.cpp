@@ -147,10 +147,6 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
-	{
-		return update_status::UPDATE_STOP;
-	}
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
 	{
 		// Enable to escape collision
@@ -170,7 +166,7 @@ update_status ModulePlayer::Update()
 		}
 
 		// Move player
-		position.x -= speed_x;
+		position.x -= speed_x * 1.5;
 
 		//change sprite while jumping
 		if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x)
@@ -204,7 +200,7 @@ update_status ModulePlayer::Update()
 		}
 
 
-		position.x += speed_x;
+		position.x += speed_x * 1.5;
 
 		//change sprite while jumping
 		if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x)
@@ -300,6 +296,13 @@ update_status ModulePlayer::Update()
 			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y + 20, Collider::Type::PLAYER_SHOT);
 			App->audio->PlayFx(shotFx);
 		}
+	}
+
+
+	//no deberia ser error pero oye funcionar funciona.
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+	{
+		return update_status::UPDATE_ERROR;
 	}
 
 	//We make the player go up or down
