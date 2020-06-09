@@ -42,6 +42,10 @@ public:
 
 	void Fall(Collider* c1, Collider* c2) override;
 
+	void PushR(Collider* c1, Collider* c2) override;
+
+	void PushL(Collider* c1, Collider* c2) override;
+
 	//Player Health
 
 	int pHealth = 3;

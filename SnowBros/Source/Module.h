@@ -48,6 +48,10 @@ public:
 
 	virtual void Freeze(Collider* c1, Collider* c2);
 
+	virtual void PushR(Collider* c1, Collider* c2);
+
+	virtual void PushL(Collider* c1, Collider* c2);
+
 	inline bool IsEnabled() const { return isEnabled; }
 
 private:

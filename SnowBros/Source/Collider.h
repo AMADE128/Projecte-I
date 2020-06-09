@@ -13,10 +13,13 @@ struct Collider
 		GROUND,
 		AIR,
 		WALL,
+		WALLPUSHR,
+		WALLPUSHL,  //Wall that lets the player pass from one side
 		PLAYER,
 		ENEMY,
 		PLAYER_SHOT,
 		ENEMY_SHOT,
+		
 
 		MAX
 	};
@@ -36,5 +39,5 @@ struct Collider
 };
 
 
-#endif // !__COLLIDER_H__
+#endif // !__COLLIDER_H_
 

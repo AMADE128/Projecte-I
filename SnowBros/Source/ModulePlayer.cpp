@@ -530,6 +530,16 @@ void ModulePlayer::Fall(Collider* c1, Collider* c2)
 	}
 }
 
+void ModulePlayer::PushR(Collider* c1, Collider* c2)
+{
+	position.x+=4;
+}
+
+void ModulePlayer::PushL(Collider* c1, Collider* c2)
+{
+	position.x-=4;
+}
+
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading particles");

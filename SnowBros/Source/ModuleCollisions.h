@@ -48,7 +48,9 @@ public:
 		STOP_Y,
 		FALL,
 		FREEZE,
-		NOTHING
+		NOTHING,
+		PUSHR,
+		PUSHL
 	};
 
 	// All existing colliders in the scene
