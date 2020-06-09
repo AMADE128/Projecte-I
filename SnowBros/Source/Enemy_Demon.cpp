@@ -1,5 +1,6 @@
 #include "Enemy_Demon.h"
 
+#include <stdio.h>
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleCollisions.h"
@@ -7,10 +8,12 @@
 #include "ModuleTextures.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
+#include "ModuleFonts.h"
 
 Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 {
-
+	char life_score_Table[] = { "0123456789" };
+	enemydiesFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
 
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
@@ -151,6 +154,8 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		App->player->score += 500;
 		App->particles->snowball[3].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
+		sprintf_s(enemydiesText, 10, "%d", scoreD);
+		App->fonts->BlitText(position.x, position.y + 100, enemydiesFont, enemydiesText);
 		break;
 	case 2:
 		App->player->score += 10;

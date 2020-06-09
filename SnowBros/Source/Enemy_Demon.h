@@ -33,6 +33,8 @@ public:
 
 	bool CleanUp();
 
+	int scoreD = 1500;
+
 private:
 	// A set of steps that define the position in the screen
 	// And an animation for each step
@@ -40,6 +42,8 @@ private:
 
 	bool fall = false;
 	bool groundCollision = true;
+	int enemydiesFont = -1;
+	char enemydiesText[10] = { "\0" };
 
 };
 
