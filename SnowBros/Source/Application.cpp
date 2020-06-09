@@ -14,6 +14,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleRender.h"
 #include "ModuleFonts.h"
+#include "GameOver.h"
 
 Application::Application()
 {
@@ -30,12 +31,15 @@ Application::Application()
 	modules[7] = player = new ModulePlayer(false);	//Player starts disabled
 	modules[8] = particles = new ModuleParticles(false);
 	modules[6] = enemies = new ModuleEnemies(false);	//Enemies start disabled
+	modules[12] = gameOver = new GameOver(false);
 
 	modules[9] = collisions = new ModuleCollisions(false);
 	modules[10] = fade = new ModuleFadeToBlack(true);
 
 	modules[11] = fonts = new ModuleFonts(true);
-	modules[12] = render = new ModuleRender(true);
+	modules[13] = render = new ModuleRender(true);
+	
+	
 }
 
 Application::~Application()

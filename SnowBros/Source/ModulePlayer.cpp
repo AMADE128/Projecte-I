@@ -395,7 +395,7 @@ update_status ModulePlayer::Update()
 	{
 		pHealth--;
 		if (pHealth == 0) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 200);
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 200);
 			//App->audio->PlayFx(looseFx);
 			pHealth = 4;
 			score = 0;
