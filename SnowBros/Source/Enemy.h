@@ -52,6 +52,8 @@ public:
 
 	int life = 7;
 
+	int current_time = 0;
+
 	// The enemy's collider
 	Collider* collider = nullptr;
 protected:

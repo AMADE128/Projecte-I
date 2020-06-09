@@ -76,6 +76,8 @@ public:
 	//Enemies life
 	int life = 7;
 
+	int scoreD = 500;
+
 	//WIN CONDITION
 	bool win = false;
 
@@ -86,6 +88,9 @@ private:
 private:
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
+
+	int enemydiesFont = -1;
+	char enemydiesText[10] = { "\0" };
 
 	// The audio fx for destroying an enemy
 	//int enemyDestroyedFx = 0;

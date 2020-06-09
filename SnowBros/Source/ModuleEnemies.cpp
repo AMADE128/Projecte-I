@@ -8,9 +8,13 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModuleFonts.h"
+#include <stdio.h>
 
 #include "Enemy.h"
 #include "Enemy_Demon.h"
+
+#include "SDL/include/SDL.h"
 
 #define SPAWN_MARGIN 50
 
@@ -30,6 +34,9 @@ bool ModuleEnemies::Start()
 {
 	demon = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
 
+	char life_score_Table[] = { "0123456789" };
+	enemydiesFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
+
 	//enemyDestroyedFx = App->audio->LoadFx("Assets/");
 
 	return true;
@@ -43,6 +50,11 @@ update_status ModuleEnemies::Update()
 	{
 		if (enemies[i] != nullptr && enemies[i]->life > 2)
 			enemies[i]->Update();
+		int time = SDL_GetTicks();
+		if (enemies[i] != nullptr && time - enemies[i]->current_time >= 10000)
+		{
+			App->fonts->UnLoad(enemydiesFont);
+		}
 	}
 
 	HandleEnemiesDespawn();
@@ -59,6 +71,13 @@ update_status ModuleEnemies::PostUpdate()
 		if (enemies[i] != nullptr && enemies[i]->life > 2)
 		{
 			enemies[i]->Draw();
+		}
+
+		if (enemies[i] != nullptr && enemies[i]->life <= 2)
+		{
+			sprintf_s(enemydiesText, 10, "%d", scoreD);
+			App->fonts->BlitText(enemies[i]->position.x, enemies[i]->position.y - 50, enemydiesFont, enemydiesText);
+			enemies[i]->current_time = SDL_GetTicks();
 		}
 	}
 
@@ -124,7 +143,7 @@ void ModuleEnemies::HandleEnemiesSpawn()
 
 void ModuleEnemies::HandleEnemiesDespawn()
 {
-	// Iterate existing enemies
+	//// Iterate existing enemies
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
@@ -134,7 +153,7 @@ void ModuleEnemies::HandleEnemiesDespawn()
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}
-		}
+	    }
 	}
 }
 
