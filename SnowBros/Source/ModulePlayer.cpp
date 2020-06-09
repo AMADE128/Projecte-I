@@ -12,6 +12,7 @@
 #include "ModuleFonts.h"
 #include "ModuleEnemies.h"
 #include "SceneLevel1.h"
+#include "Enemy_Demon.h"
 
 #include <stdio.h>
 

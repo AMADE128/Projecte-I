@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "Particle.h"
 #include "Collider.h"
+#include "Path.h"
 
 #define MAX_ACTIVE_PARTICLES 100
 
@@ -67,6 +68,7 @@ public:
 	Particle death;
 	Particle snowDeath;
 
+	Path path;
 };
 
 #endif // !__MODULEPARTICLES_H__

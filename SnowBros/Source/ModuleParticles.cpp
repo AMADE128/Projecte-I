@@ -86,6 +86,27 @@ bool ModuleParticles::Start()
 	snowDeath.lifetime = 100;
 	snowDeath.anim.speed = 0.09f;
 
+	path.PushBack({ 1, 0 }, 5, &shotright.anim);
+	path.PushBack({ 1, 0.25 }, 3, &shotright.anim);
+	path.PushBack({ 1, 0.5 }, 3, &shotright.anim);
+	path.PushBack({ 1, 1 }, 2, &shotright.anim);
+	path.PushBack({ 1, 1.5 }, 2, &shotright.anim);
+	path.PushBack({ 1, 2 }, 2, &shotright.anim);
+	path.PushBack({ 0.75, 4 }, 2, &shotright.anim);
+	path.PushBack({ 0.75, 8 }, 2, &shotright.anim);
+	path.PushBack({ 0.75, 12 }, 2, &shotright.anim);
+
+	path.PushBack({ -1, 0 }, 5, &shotleft.anim);
+	path.PushBack({ -1, 0.25 }, 3, &shotleft.anim);
+	path.PushBack({ -1, 0.5 }, 3, &shotleft.anim);
+	path.PushBack({ -1, 1 }, 2, &shotleft.anim);
+	path.PushBack({ -1, 1.5 }, 2, &shotleft.anim);
+	path.PushBack({ -1, 2 }, 2, &shotleft.anim);
+	path.PushBack({ -0.75, 4 }, 2, &shotleft.anim);
+	path.PushBack({ -0.75, 8 }, 2, &shotleft.anim);
+	path.PushBack({ -0.75, 12 }, 2, &shotleft.anim);
+	
+
 	return true;
 }
 
@@ -115,6 +136,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
+			path.Reset();
 			delete particles[i];
 			particles[i] = nullptr;
 			break;
@@ -125,6 +147,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 update_status ModuleParticles::Update()
 {
 	death.anim.Reset();
+
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* particle = particles[i];
@@ -149,8 +172,41 @@ update_status ModuleParticles::PostUpdate()
 	{
 		Particle* particle = particles[i];
 
-		if (particle != nullptr && particle->isAlive)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x != shotright.anim.frames[0].x && particle->anim.frames[0].x != shotleft.anim.frames[0].x)
 		{
+			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotright.anim.frames[0].x)
+		{
+			path.Update();
+
+			if (path.currentStep > 8)
+			{
+				path.currentStep = 8;
+			}
+
+			particle->position.x += path.steps[path.currentStep].speed.x;
+			particle->position.y += path.steps[path.currentStep].speed.y;
+			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotleft.anim.frames[0].x)
+		{
+			path.Update();
+
+			if (path.currentStep < 9)
+			{
+				path.currentStep = 9;
+			}
+
+			if (path.currentStep > 16)
+			{
+				path.currentStep = 16;
+			}
+
+			particle->position.x += path.steps[path.currentStep].speed.x;
+			particle->position.y += path.steps[path.currentStep].speed.y;
 			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 	}
