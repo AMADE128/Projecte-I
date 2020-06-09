@@ -21,6 +21,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::WALL][Collider::Type::WALLPUSHR] = NOTHING;
+	matrix[Collider::Type::WALL][Collider::Type::WALLPUSHL] = NOTHING;
 
 	matrix[Collider::Type::GROUND][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = NOTHING;
@@ -30,6 +32,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::GROUND][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::WALLPUSHR] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::WALLPUSHL] = NOTHING;
 
 	matrix[Collider::Type::AIR][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::AIR][Collider::Type::GROUND] = NOTHING;
@@ -39,6 +43,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::AIR][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::AIR][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::AIR][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::WALLPUSHR] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::WALLPUSHL] = NOTHING;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = STOP_Y;
@@ -48,6 +54,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = DIE;
 	matrix[Collider::Type::PLAYER][Collider::Type::AIR] = FALL;
 	matrix[Collider::Type::PLAYER][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::PLAYER][Collider::Type::WALLPUSHR] = PUSHR;
+	matrix[Collider::Type::PLAYER][Collider::Type::WALLPUSHL] = PUSHL;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = STOP_Y;
@@ -57,6 +65,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::ENEMY][Collider::Type::AIR] = FALL;
 	matrix[Collider::Type::ENEMY][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::ENEMY][Collider::Type::WALLPUSHR] = PUSHR;
+	matrix[Collider::Type::ENEMY][Collider::Type::WALLPUSHL] = PUSHL;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND] = DIE;
@@ -66,6 +76,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALLPUSHR] = DIE;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALLPUSHL] = DIE;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::GROUND] = DIE;
@@ -75,6 +87,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALLPUSHR] = DIE;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALLPUSHL] = DIE;
 
 	matrix[Collider::Type::NONE][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::GROUND] = NOTHING;
@@ -84,6 +98,30 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::NONE][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::NONE][Collider::Type::WALLPUSHR] = NOTHING;
+	matrix[Collider::Type::NONE][Collider::Type::WALLPUSHL] = NOTHING;
+
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::WALL] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::GROUND] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::PLAYER] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::ENEMY] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::AIR] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::WALLPUSHR] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::WALLPUSHL] = NOTHING;
+
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALL] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::GROUND] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::PLAYER] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::ENEMY] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::AIR] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALLPUSHR] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALLPUSHL] = NOTHING;
 
 
 }
@@ -157,6 +195,18 @@ update_status ModuleCollisions::PreUpdate()
 
 				if (matrix[c2->type][c1->type] == FREEZE && c2->listener)
 					c2->listener->Freeze(c2, c1);
+
+				if (matrix[c1->type][c2->type] == PUSHR && c1->listener)
+					c1->listener->PushR(c1, c2);
+
+				if (matrix[c2->type][c1->type] == PUSHR && c2->listener)
+					c2->listener->PushR(c2, c1);
+
+				if (matrix[c1->type][c2->type] == PUSHL && c1->listener)
+					c1->listener->PushL(c1, c2);
+
+				if (matrix[c2->type][c1->type] == PUSHL && c2->listener)
+					c2->listener->PushL(c2, c1);
 			}
 
 			//SOBRA 7: INTENTO DE QUE CAIGA EL JUGADOR SI NO ESTÁ EN UNA PLATAFORMA
@@ -227,6 +277,12 @@ void ModuleCollisions::DebugDraw()
 		case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case Collider::Type::WALLPUSHL: //light blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 150, alpha);
+
+		case Collider::Type::WALLPUSHR: //light blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 150, alpha);
+
 		}
 	}
 }

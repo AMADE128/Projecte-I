@@ -56,6 +56,14 @@ void Module::Freeze(Collider* c1, Collider* c2) {
 
 }
 
+void Module::PushR(Collider* c1, Collider* c2) {
+
+}
+
+void Module::PushL(Collider* c1, Collider* c2) {
+
+}
+
 void Module::Enable()
 {
 	if (!isEnabled)
