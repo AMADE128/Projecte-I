@@ -8,10 +8,13 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
+<<<<<<< HEAD
 
 #include "GameOver.h"
 
 #include "ModuleWindow.h"
+=======
+>>>>>>> parent of 796023f... ui + cerrar con la cruz a veces
 
 
 #include "SDL/include/SDL_render.h"

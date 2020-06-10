@@ -28,16 +28,15 @@ update_status ModuleInput::PreUpdate()
 {
 	//Read new SDL events, mostly from the window
 	SDL_Event event;
+	if (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_QUIT)	
+			return update_status::UPDATE_STOP;
+	}
 
 	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
 	{
 		return update_status::UPDATE_ERROR;
-	}
-
-	if (SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_QUIT)
-			return update_status::UPDATE_ERROR;
 	}
 
 	//Read all keyboard data and update our custom array

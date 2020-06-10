@@ -13,7 +13,6 @@
 #include "ModuleEnemies.h"
 #include "SceneLevel1.h"
 #include "Enemy_Demon.h"
-#include "ModuleWindow.h"
 
 #include <stdio.h>
 
@@ -120,8 +119,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	l_jumpShoot.PushBack({ 793, 304, 32, 32 });
 	l_jumpShoot.loop = false;
 	l_jumpShoot.speed = 0.16f;
-
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -434,17 +431,13 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
 
-	SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, 1);
-	SDL_RenderDrawRect(App->render->renderer, &rect);
-	SDL_RenderFillRect(App->render->renderer, &rect);
-
 	sprintf_s(lifeText, 10, "%d", pHealth);
 	sprintf_s(scoreText, 10, "%d", score);
 
-	App->fonts->BlitText(80, 10, lifeFont, lifeText);
-	App->fonts->BlitText(1200, 25, scoreFont, scoreText);
+	App->fonts->BlitText(80, 40, lifeFont, lifeText);
+	App->fonts->BlitText(1200, 53, scoreFont, scoreText);
 
-	App->render->Blit(App->particles->texture, -10, -45, &App->particles->healthFace.anim.GetCurrentFrame());
+	App->render->Blit(App->particles->texture, -10, -20, &App->particles->healthFace.anim.GetCurrentFrame());
 
 	return update_status::UPDATE_CONTINUE;
 }
