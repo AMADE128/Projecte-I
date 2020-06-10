@@ -129,7 +129,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 		rect.h *= 4.2;
 	}
 
-	else if (texture == App->gameOver->RanaTexture)
+	else if (texture == App->gameOver->RanaTexture || texture == App->gameOver->DemonioTexture)
 	{
 		rect.w *= 3.5;
 		rect.h *= 3.5;
@@ -139,6 +139,12 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 	{
 		rect.w *= 1.3;
 		rect.h *= 1.3;
+	}
+
+	else if (texture == App->gameOver->MonoTexture)
+	{
+		rect.w *= 1.6;
+		rect.h *= 1.6;
 	}
 
 	else if (texture == App->gameOver->GameOverTexture)

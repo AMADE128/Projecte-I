@@ -14,7 +14,7 @@ void Path::Update()
 {
 	currentStepFrame += 1;
 
- 	if (currentStepFrame > steps[currentStep].framesDuration)
+  	if (currentStepFrame > steps[currentStep].framesDuration)
 	{
 		if (currentStep < totalSteps - 1) // If it is not the last step, advance
 		{
