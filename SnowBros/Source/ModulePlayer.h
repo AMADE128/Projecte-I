@@ -108,6 +108,9 @@ public:
 
 	bool godmode = false;
 
+
+	SDL_Rect rect = { 0, 0, SCREEN_WIDTH, 70 };
+
 	// Sound effects indices
 	uint shotFx = 0;
 	uint looseFx = 0;
