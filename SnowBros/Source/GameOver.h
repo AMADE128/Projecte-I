@@ -37,7 +37,16 @@ public:
 	SDL_Texture* MonoTexture = nullptr;
 	SDL_Texture* DemonioTexture = nullptr;
 
-	SDL_Rect GameOverRect = { 1539,147,570,90 };
+	SDL_Rect GameOverRect = { 1440, 48, 378, 48 };
+
+	Animation* currentAnimationNinja = nullptr;
+	Animation* currentAnimationRana = nullptr;
+	Animation* currentAnimationMono = nullptr;
+	Animation* currentAnimationDemonio = nullptr;
+	Animation Ninja;
+	Animation Rana;
+	Animation Mono;
+	Animation Demonio;
 };
 
 #endif

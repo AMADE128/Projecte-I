@@ -8,6 +8,7 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
+#include "GameOver.h"
 
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"
@@ -126,6 +127,24 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 	{
 		rect.w *= 4.2;
 		rect.h *= 4.2;
+	}
+
+	else if (texture == App->gameOver->RanaTexture)
+	{
+		rect.w *= 3.5;
+		rect.h *= 3.5;
+	}
+
+	else if (texture == App->gameOver->NinjaTexture)
+	{
+		rect.w *= 1.3;
+		rect.h *= 1.3;
+	}
+
+	else if (texture == App->gameOver->GameOverTexture)
+	{
+		rect.w *= 1.5;
+		rect.h *= 1.5;
 	}
 
 	else

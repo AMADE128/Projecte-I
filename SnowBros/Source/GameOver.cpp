@@ -18,7 +18,15 @@
 
 GameOver::GameOver(bool startEnabled) : Module(startEnabled)
 {
+	Ninja.PushBack({ 207, 9, 66, 72 });
+	Ninja.PushBack({ 15, 204, 63, 75 });
+	Ninja.loop = true;
+	Ninja.speed = 0.07f;
 
+	Rana.PushBack({ 5, 3, 25, 26 });
+	Rana.PushBack({ 34, 227, 28, 26  });
+	Rana.loop = true;
+	Rana.speed = 0.07f;
 }
 
 GameOver::~GameOver()
@@ -51,6 +59,8 @@ bool GameOver::Start()
 update_status GameOver::Update()
 {
 	//SDL_GetTicks
+	Ninja.Update();
+	Rana.Update();
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -59,7 +69,13 @@ update_status GameOver::Update()
 update_status GameOver::PostUpdate()
 {
 	// Draw everything ---
-	App->render->Blit(GameOverTexture, 20, 20, &GameOverRect); //1539 147 570 90
+	App->render->Blit(GameOverTexture, 450, 350, &GameOverRect);
+
+	SDL_Rect rect = (&Ninja)->GetCurrentFrame();
+	App->render->Blit(NinjaTexture, 800, 500, &rect);
+
+	rect = (&Rana)->GetCurrentFrame();
+	App->render->Blit(RanaTexture, 700, 500, &rect);
 
 	return update_status::UPDATE_CONTINUE;
 }
