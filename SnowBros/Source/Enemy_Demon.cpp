@@ -15,8 +15,6 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	//Idle animation
 	idle.PushBack({ 3,2,29,30 });
 
-	//life of the Enemy
-
 	//Left Walk Animation
 	l_walk.PushBack({ 32, 0, 32, 32 });
 	l_walk.PushBack({ 64, 0, 32, 32 });
@@ -43,12 +41,13 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	r_stun.loop = true;
 	r_stun.speed = 0.05f;
 
-
+	//path of the enemy
 	path.PushBack({ 1, 0 }, 1000, &r_walk);
 	path.PushBack({ 1, 0 }, 2000, &l_walk);
 	path.PushBack({ 0, 0 }, 594058, &r_stun);
 	path.PushBack({ 0, 0 }, 594058, &l_stun);
 
+	//add the collider 
 	collider = App->collisions->AddCollider({ (position.x) + 14, position.y, 32 * 4 - 15, 32 * 4 - 15 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
@@ -57,6 +56,7 @@ void Enemy_Demon::Update()
 
 	path.Update();
 
+	//depending on if he's walking right or left, move it
 	if (currentAnim == &r_walk)
 	{
 		position.x+= 2;
@@ -100,7 +100,7 @@ void Enemy_Demon::Fall(Collider* collider) {
 
 void Enemy_Demon::StopMovement(Collider* collider) {
 
-	//position.x = 0;
+	//When the enemy stops, changes direction
 	if (currentAnim == &r_walk)
 	{
 		currentAnim = &l_walk;
@@ -110,7 +110,6 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 
 	else if (currentAnim == &l_walk)
 	{
-		//path.relativePosition = { 0,0 };
 		currentAnim = &r_walk;
 		path.currentStep = 0;
 		path.currentStepFrame = 0;
@@ -146,9 +145,12 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		path.currentStepFrame = 0;
 	}
 
+
+	//switch for all the hits (life) the enemy has.
 	switch (life)
 	{
 	case 1:
+		//If it's 1, he's dead
 		App->player->score += 500;
 		App->particles->snowball[3].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
