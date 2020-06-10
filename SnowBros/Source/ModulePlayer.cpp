@@ -134,6 +134,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	spritesheet = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
+	score_bg = App->textures->Load("Assets/Sprites/Menu & UI/score_bg.png");
 	currentAnimation = &r_idleAnim;
 
 	shotFx = App->audio->LoadFx("Assets/Audio/SFX/Player/#028.wav");
@@ -398,8 +399,6 @@ update_status ModulePlayer::Update()
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 200);
 			//App->audio->PlayFx(looseFx);
 			pHealth = 4;
-			score = 0;
-
 		}
 		else {
 			App->audio->PlayFx(deathFx);
@@ -431,13 +430,15 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
 	}
 
+	App->render->Blit(score_bg, 0, 0);
+
 	sprintf_s(lifeText, 10, "%d", pHealth);
 	sprintf_s(scoreText, 10, "%d", score);
 
-	App->fonts->BlitText(80, 40, lifeFont, lifeText);
-	App->fonts->BlitText(1200, 53, scoreFont, scoreText);
+	App->fonts->BlitText(80, 10, lifeFont, lifeText);
+	App->fonts->BlitText(1200, 25, scoreFont, scoreText);
 
-	App->render->Blit(App->particles->texture, -10, -20, &App->particles->healthFace.anim.GetCurrentFrame());
+	App->render->Blit(App->particles->texture, -10, -45, &App->particles->healthFace.anim.GetCurrentFrame());
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -547,8 +548,7 @@ bool ModulePlayer::CleanUp()
 
 	// Delete collider and texture
 	App->textures->Unload(spritesheet);
-	App->fonts->UnLoad(lifeFont);
-	App->fonts->UnLoad(scoreFont);
+	App->textures->Unload(score_bg);
 	App->collisions->RemoveCollider(collider);
 	App->audio->UnloadFx(shotFx);
 	App->audio->UnloadFx(looseFx);
