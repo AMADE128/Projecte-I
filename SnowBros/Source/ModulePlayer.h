@@ -64,6 +64,7 @@ public:
 
 	// The player spritesheets loaded into an SDL_Texture
 	SDL_Texture* spritesheet = nullptr;
+	SDL_Texture* score_bg = nullptr;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

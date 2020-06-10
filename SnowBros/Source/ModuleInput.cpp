@@ -36,7 +36,7 @@ update_status ModuleInput::PreUpdate()
 
 	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
 	{
-		return update_status::UPDATE_ERROR;
+		return update_status::UPDATE_STOP;
 	}
 
 	//Read all keyboard data and update our custom array
