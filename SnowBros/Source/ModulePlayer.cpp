@@ -13,6 +13,7 @@
 #include "ModuleEnemies.h"
 #include "SceneLevel1.h"
 #include "Enemy_Demon.h"
+#include "GameOver.h"
 
 #include <stdio.h>
 
@@ -396,7 +397,7 @@ update_status ModulePlayer::Update()
 	{
 		pHealth--;
 		if (pHealth == 0) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 200);
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 120);
 			//App->audio->PlayFx(looseFx);
 			pHealth = 4;
 		}

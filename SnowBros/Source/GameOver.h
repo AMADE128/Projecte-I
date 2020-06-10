@@ -47,6 +47,11 @@ public:
 	Animation Rana;
 	Animation Mono;
 	Animation Demonio;
+
+	int ScoreFont = -1;
+
+	int startTime;
+	int actualTime;
 };
 
 #endif

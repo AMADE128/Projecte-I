@@ -54,6 +54,8 @@ bool GameOver::Start()
 
 	bool ret = true;
 
+	startTime = SDL_GetTicks();
+
 	GameOverTexture = App->textures->Load("Assets/Sprites/Menu & UI/LetterANDOthers.png");
 	NinjaTexture = App->textures->Load("Assets/Sprites/Enemies/brujo barbiazul.png");
 	RanaTexture = App->textures->Load("Assets/Sprites/Enemies/Rana.png");
@@ -61,7 +63,7 @@ bool GameOver::Start()
 	DemonioTexture = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
 
 	char life_score_Table[] = { "0123456789" };
-	App->player->score = App->fonts->Load("Assets/Sprites/Menu & UI/points.png",life_score_Table, 1);
+	ScoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/points.png",life_score_Table, 1);
 	
 	
 	App->enemies->Disable();
@@ -102,7 +104,14 @@ update_status GameOver::PostUpdate()
 	App->render->Blit(DemonioTexture, 465, 500, &rect);
 
 	sprintf_s(App->player->scoreText, 10, "%d", App->player->score);
-	App->fonts->BlitText(1200, 53, App->player->score, App->player->scoreText);
+	App->fonts->BlitText(1200, 53, ScoreFont, App->player->scoreText);
+
+	actualTime = SDL_GetTicks();
+
+	if (actualTime - startTime >= 3000)
+	{
+		App->fade->FadeToBlack((Module*)App->gameOver, (Module*)App->sceneIntro, 120);
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
