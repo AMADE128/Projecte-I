@@ -8,11 +8,7 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
-
 #include "GameOver.h"
-
-#include "ModuleWindow.h"
-
 
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_scancode.h"

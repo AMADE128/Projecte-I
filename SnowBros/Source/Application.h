@@ -46,8 +46,7 @@ public:
 	Module* modules[NUM_MODULES];
 
 	// All the modules stored individually
-	Module
-		* window = nullptr;
+	ModuleWindow* window = nullptr;
 	ModuleInput* input = nullptr;
 	ModuleTextures* textures = nullptr;
 	ModuleAudio* audio = nullptr;
