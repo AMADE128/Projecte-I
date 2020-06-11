@@ -397,9 +397,22 @@ update_status ModulePlayer::Update()
 	{
 		pHealth--;
 		if (pHealth == 0) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 120);
-			//App->audio->PlayFx(looseFx);
-			pHealth = 4;
+			if (App->modules[5]->IsEnabled() == true)
+			{
+				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+			}
+			else if (App->modules[6]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_2, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+			}
+			else if (App->modules[7]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_3, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+			}
 		}
 		else {
 			App->audio->PlayFx(deathFx);

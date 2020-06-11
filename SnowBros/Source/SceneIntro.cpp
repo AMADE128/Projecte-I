@@ -40,6 +40,8 @@ bool SceneIntro::Start()
 	App->particles->Disable();
 	App->collisions->Disable();
 
+	App->player->score = 0;
+
 	return ret;
 }
 
