@@ -481,7 +481,7 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed_x != 0)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && speed_x != 0 && position.x > SCREEN_WIDTH/2)
 		{
 			speed_x = 0;
 			leftCollision = false;
@@ -489,7 +489,7 @@ void ModulePlayer::StopMovement(Collider* c1, Collider* c2)
 
 		}
 		
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed_x != 0)
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && speed_x != 0 && position.x < SCREEN_WIDTH / 2)
 		{
 			speed_x = 0;
 			rightCollision = false;
