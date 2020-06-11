@@ -32,7 +32,7 @@ bool SceneLevel5::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl1.png");
+	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl5.png");
 	App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
 
 	//Bottomside collider
