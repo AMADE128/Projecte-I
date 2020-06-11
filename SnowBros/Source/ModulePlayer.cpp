@@ -452,7 +452,7 @@ update_status ModulePlayer::PostUpdate()
 	App->fonts->BlitText(80, 10, lifeFont, lifeText);
 	App->fonts->BlitText(1200, 25, scoreFont, scoreText);
 
-	App->render->Blit(App->particles->texture, -10, -45, &App->particles->healthFace.anim.GetCurrentFrame());
+	App->render->Blit(App->particles->player_shot, -10, -45, &App->particles->healthFace.anim.GetCurrentFrame());
 
 	return update_status::UPDATE_CONTINUE;
 }

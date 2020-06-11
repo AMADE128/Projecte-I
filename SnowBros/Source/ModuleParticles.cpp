@@ -29,7 +29,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
+	player_shot = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
 
 	//Health face
 	healthFace.anim.PushBack({ 112, 16, 32, 32 });
@@ -111,6 +111,19 @@ bool ModuleParticles::Start()
 	FirstPushBack = true;
 	}
 
+	frog_particle = App->textures->Load("Assets/Sprites/Enemies/Nick_right_left.png");
+
+	//left fire ball
+	fire_ball.anim.PushBack({ 96, 384, 96, 90 });
+	fire_ball.anim.PushBack({ 96, 285, 96, 90 });
+	fire_ball.anim.PushBack({ 96, 189, 96, 90 });
+	fire_ball.anim.PushBack({ 96, 285, 96, 90 });
+	fire_ball.anim.PushBack({ 96, 0, 96, 90 });
+	fire_ball.speed.x = 10;
+	fire_ball.lifetime = 180;
+	fire_ball.anim.speed = 0.2f;
+
+
 	return true;
 }
 
@@ -128,7 +141,7 @@ bool ModuleParticles::CleanUp()
 		}
 	}
 
-	App->textures->Unload(texture);
+	App->textures->Unload(player_shot);
 
 	return true;
 }
@@ -178,7 +191,7 @@ update_status ModuleParticles::PostUpdate()
 
 		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x != shotright.anim.frames[0].x && particle->anim.frames[0].x != shotleft.anim.frames[0].x)
 		{
-			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
 		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotright.anim.frames[0].x)
@@ -192,7 +205,7 @@ update_status ModuleParticles::PostUpdate()
 			
 			particle->position.x += path.steps[path.currentStep].speed.x;
 			particle->position.y += path.steps[path.currentStep].speed.y;
-			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
 		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotleft.anim.frames[0].x)
@@ -211,8 +224,9 @@ update_status ModuleParticles::PostUpdate()
 
 			particle->position.x += path.steps[path.currentStep].speed.x;
 			particle->position.y += path.steps[path.currentStep].speed.y;
-			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
+
 	}
 
 	return update_status::UPDATE_CONTINUE;

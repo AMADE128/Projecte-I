@@ -38,9 +38,7 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	//SOBRA 5: HAY SONIDO DE EXPLOSION?
-	//App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	//App->audio->PlayFx(destroyedFx);
+
 }
 
 void Enemy::Fall(Collider* collider) {

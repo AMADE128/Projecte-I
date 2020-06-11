@@ -56,7 +56,8 @@ private:
 
 public:
 	// Particles spritesheet loaded into an SDL Texture
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* player_shot = nullptr;
+	SDL_Texture* frog_particle = nullptr;
 
 	// Lifes face texture
 	Particle healthFace;
@@ -67,6 +68,8 @@ public:
 	Particle snowball[5];
 	Particle death;
 	Particle snowDeath;
+
+	Particle fire_ball;
 
 	Path path;
 

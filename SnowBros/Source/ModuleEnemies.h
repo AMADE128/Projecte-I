@@ -9,6 +9,7 @@ enum class ENEMY_TYPE
 {
 	NO_TYPE,
 	DEMON,
+	FROG
 };
 
 struct EnemySpawnpoint
@@ -68,6 +69,7 @@ public:
 
 	// The enemies sprite sheet
 	SDL_Texture* demon = nullptr;
+	SDL_Texture* frog = nullptr;
 	/*SDL_Texture* snow = nullptr;*/
 
 	// All spawned enemies in the scene
