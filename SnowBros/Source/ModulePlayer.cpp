@@ -169,7 +169,7 @@ update_status ModulePlayer::Update()
 		if (godmode == false)
 		{
 			godmode = true;
-			collider->type = Collider::NONE;
+			collider->type = Collider::GODMODE;
 		}
 		else if (godmode == true)
 		{

@@ -123,7 +123,6 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALLPUSHL] = NOTHING;
 
-
 }
 
 // Destructor
@@ -279,9 +278,13 @@ void ModuleCollisions::DebugDraw()
 			break;
 		case Collider::Type::WALLPUSHL: //light blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 150, alpha);
-
+			break;
 		case Collider::Type::WALLPUSHR: //light blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 150, alpha);
+			break;
+		case Collider::Type::GODMODE: //light blue
+			App->render->DrawQuad(colliders[i]->rect, 212, 172, 45, alpha);
+			break;
 
 		}
 	}
