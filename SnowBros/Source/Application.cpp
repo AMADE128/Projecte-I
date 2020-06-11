@@ -46,8 +46,8 @@ Application::Application()
 	modules[12] = sceneLevel_8 = new SceneLevel8(false);	
 	modules[13] = sceneLevel_9 = new SceneLevel9(false);
 	modules[14] = sceneLevel_10 = new SceneLevel10(false);		//Gameplay scene starts disabled
-	modules[17] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[16] = particles = new ModuleParticles(false);
+	modules[16] = player = new ModulePlayer(false);	//Player starts disabled
+	modules[17] = particles = new ModuleParticles(false);
 	modules[15] = enemies = new ModuleEnemies(false);	//Enemies start disabled
 	modules[21] = gameOver = new GameOver(false);
 

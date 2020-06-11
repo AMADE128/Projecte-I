@@ -239,10 +239,18 @@ void ModuleEnemies::WinCondition() {
 	}
 	if (wincondition == 0)
 	{
-		win = true;
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 90);
-		App->player->pHealth = 3;
-		App->player->score = 0;
+		if (App->modules[5]->IsEnabled() == true)
+		{
+			win = true;
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_2, 90);
+			App->player->pHealth = 3;
+			App->player->score = 0;
+		}
+		else if (App->modules[6]->IsEnabled() == true) {
+			win = true;
+			App->fade->FadeToBlack((Module*)App->sceneLevel_2, (Module*)App->sceneLevel_3, 90);
+			App->player->score = 0;
+		}
 	}
 }
 
