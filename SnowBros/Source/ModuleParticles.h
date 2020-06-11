@@ -69,6 +69,8 @@ public:
 	Particle snowDeath;
 
 	Path path;
+
+	bool FirstPushBack = false;
 };
 
 #endif // !__MODULEPARTICLES_H__

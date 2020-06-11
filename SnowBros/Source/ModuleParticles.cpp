@@ -86,6 +86,8 @@ bool ModuleParticles::Start()
 	snowDeath.lifetime = 100;
 	snowDeath.anim.speed = 0.09f;
 
+ 	if (FirstPushBack == false)
+	{
 	path.PushBack({ 1, 0 }, 5, &shotright.anim);
 	path.PushBack({ 1, 0.25 }, 3, &shotright.anim);
 	path.PushBack({ 1, 0.5 }, 3, &shotright.anim);
@@ -105,7 +107,9 @@ bool ModuleParticles::Start()
 	path.PushBack({ -0.75, 4 }, 2, &shotleft.anim);
 	path.PushBack({ -0.75, 8 }, 2, &shotleft.anim);
 	path.PushBack({ -0.75, 12 }, 2, &shotleft.anim);
-	
+
+	FirstPushBack = true;
+	}
 
 	return true;
 }
@@ -136,9 +140,9 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
-			path.Reset();
 			delete particles[i];
 			particles[i] = nullptr;
+			path.Reset();
 			break;
 		}
 	}
@@ -185,7 +189,7 @@ update_status ModuleParticles::PostUpdate()
 			{
 				path.currentStep = 8;
 			}
-
+			
 			particle->position.x += path.steps[path.currentStep].speed.x;
 			particle->position.y += path.steps[path.currentStep].speed.y;
 			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));

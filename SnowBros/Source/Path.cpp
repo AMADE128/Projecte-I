@@ -12,6 +12,11 @@ void Path::PushBack(fPoint speed, uint frames, Animation* animation)
 
 void Path::Update()
 {
+	if (currentStep > 100)
+	{
+		Path::Reset();
+	}
+
 	currentStepFrame += 1;
 
   	if (currentStepFrame > steps[currentStep].framesDuration)
