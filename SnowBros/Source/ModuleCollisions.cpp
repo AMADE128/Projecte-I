@@ -75,7 +75,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::AIR] = NOTHING;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::NONE] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALLPUSHR] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALLPUSHL] = DIE;
 
@@ -94,7 +94,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::NONE][Collider::Type::GROUND] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::PLAYER] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::ENEMY] = NOTHING;
-	matrix[Collider::Type::NONE][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::NONE][Collider::Type::PLAYER_SHOT] = FREEZE;
 	matrix[Collider::Type::NONE][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::AIR] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::NONE] = NOTHING;

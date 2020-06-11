@@ -169,9 +169,13 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
 		break;
 	case 5:
+		App->player->score += 10;
+		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
+		break;
 	case 6:
 		App->player->score += 10;
 		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
+		this->collider->type = this->collider->NONE;
 		break;
 	case 7:
 		break;
