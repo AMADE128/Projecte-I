@@ -52,15 +52,20 @@ bool SceneLevel4::Start()
 	App->collisions->AddCollider({ 630, 777, 185, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 630, 622, 185, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 360, 460, 280, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 460, 280, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1190, 460, 280, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 985, 316, 200, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 40, 155, 400, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 1250, 155, 200, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 315, 145, 2 }, Collider::Type::AIR);
 
 	//Last platform walls
 	App->collisions->AddCollider({ 160, 630, 2, 150 }, Collider::Type::WALLPUSHR);
 	App->collisions->AddCollider({ 1260, 630, 2, 150 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 220, 325, 2, 150 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 170, 325, 2, 90 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 1210, 165, 2, 300 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 1260, 165, 2, 240 }, Collider::Type::WALLPUSHR);
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 0, 0, 40, 1390 }, Collider::Type::WALL);
