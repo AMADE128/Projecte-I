@@ -57,6 +57,7 @@ bool SceneLevel4::Start()
 	App->collisions->AddCollider({ 985, 316, 200, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 40, 155, 400, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 1250, 155, 200, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 315, 145, 2 }, Collider::Type::AIR);
 
 	//Last platform walls
 	App->collisions->AddCollider({ 160, 630, 2, 150 }, Collider::Type::WALLPUSHR);

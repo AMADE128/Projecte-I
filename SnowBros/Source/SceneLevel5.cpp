@@ -32,48 +32,54 @@ bool SceneLevel5::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl5.png");
+	bgTexture = App->textures->Load("Assets/Sprites/Maps/lv5.png");
 	App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
 
 	//Bottomside collider
 	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::GROUND);
 
 	//Platform colliders
-	App->collisions->AddCollider({ 40, 780, 300, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 535, 780, 352, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1090, 780, 310, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 275, 625, 880, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 40, 471, 570, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 815, 471, 583, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 185, 319, 175, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 362, 241, 698, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1061, 319, 175, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 180, 780, 450, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 800, 780, 450, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 40, 625, 320, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1080, 625, 320, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 180, 471, 450, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 800, 471, 450, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 40, 319, 320, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1080, 319, 320, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 540, 319, 360, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 180, 160, 1080, 2 }, Collider::Type::GROUND);
 
 	//Fall colliders
-	App->collisions->AddCollider({ 341, 777, 193, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 888, 777, 201, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 40, 622, 234, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1156, 622, 244, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 611, 460, 203, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 40, 316, 144, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 258, 200, 100, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1061, 200, 100, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1237, 316, 163, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 777, 140, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1250, 777, 140, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 360, 622, 180, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 900, 622, 180, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 460, 140, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1250, 460, 140, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 360, 316, 180, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 900, 316, 180, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1260, 150, 140, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 150, 140, 2 }, Collider::Type::AIR);
 
 	//Last platform walls
-	App->collisions->AddCollider({ 361, 245, 2, 76 }, Collider::Type::WALLPUSHL);
-	App->collisions->AddCollider({ 1060, 245, 2, 76 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 630, 165, 2, 150 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 810, 165, 2, 150 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 630, 680, 2, 100 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 810, 680, 2, 100 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 540, 325, 2, 380 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 900, 325, 2, 380 }, Collider::Type::WALLPUSHL);
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 0, 0, 40, 1390 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1400, 0, 40, 1390 }, Collider::Type::WALL);
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 120);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 916, 120);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 250, 350);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1132, 350);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 372, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 45, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1200, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 670);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 910, 670);
+	
 
 	App->enemies->win = false;
 
