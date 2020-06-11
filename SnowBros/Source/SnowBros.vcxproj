@@ -170,6 +170,15 @@
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="SceneLevel10.h" />
+    <ClInclude Include="SceneLevel2.h" />
+    <ClInclude Include="SceneLevel3.h" />
+    <ClInclude Include="SceneLevel4.h" />
+    <ClInclude Include="SceneLevel5.h" />
+    <ClInclude Include="SceneLevel6.h" />
+    <ClInclude Include="SceneLevel7.h" />
+    <ClInclude Include="SceneLevel8.h" />
+    <ClInclude Include="SceneLevel9.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -197,6 +206,15 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Path.cpp" />
+    <ClCompile Include="SceneLevel10.cpp" />
+    <ClCompile Include="SceneLevel2.cpp" />
+    <ClCompile Include="SceneLevel3.cpp" />
+    <ClCompile Include="SceneLevel4.cpp" />
+    <ClCompile Include="SceneLevel5.cpp" />
+    <ClCompile Include="SceneLevel6.cpp" />
+    <ClCompile Include="SceneLevel7.cpp" />
+    <ClCompile Include="SceneLevel8.cpp" />
+    <ClCompile Include="SceneLevel9.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

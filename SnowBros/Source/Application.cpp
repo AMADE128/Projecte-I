@@ -8,6 +8,15 @@
 #include "ModulePlayer.h"
 #include "SceneIntro.h"
 #include "SceneLevel1.h"
+#include "SceneLevel2.h"
+#include "SceneLevel3.h"
+#include "SceneLevel4.h"
+#include "SceneLevel5.h"
+#include "SceneLevel6.h"
+#include "SceneLevel7.h"
+#include "SceneLevel8.h"
+#include "SceneLevel9.h"
+#include "SceneLevel10.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
 #include "ModuleCollisions.h"
@@ -27,7 +36,16 @@ Application::Application()
 	modules[3] = audio = new ModuleAudio(true);
 
 	modules[4] = sceneIntro = new SceneIntro(true);
-	modules[5] = sceneLevel_1 = new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[5] = sceneLevel_1 = new SceneLevel1(false);	
+	modules[13] = sceneLevel_2 = new SceneLevel2(false);	
+	modules[14] = sceneLevel_3 = new SceneLevel3(false);	
+	modules[15] = sceneLevel_4 = new SceneLevel4(false);	
+	modules[16] = sceneLevel_5 = new SceneLevel5(false);	
+	modules[17] = sceneLevel_6 = new SceneLevel6(false);	
+	modules[18] = sceneLevel_7 = new SceneLevel7(false);	
+	modules[19] = sceneLevel_8 = new SceneLevel8(false);	
+	modules[20] = sceneLevel_9 = new SceneLevel9(false);
+	modules[21] = sceneLevel_10 = new SceneLevel10(false);		//Gameplay scene starts disabled
 	modules[7] = player = new ModulePlayer(false);	//Player starts disabled
 	modules[8] = particles = new ModuleParticles(false);
 	modules[6] = enemies = new ModuleEnemies(false);	//Enemies start disabled
@@ -37,7 +55,7 @@ Application::Application()
 	modules[10] = fade = new ModuleFadeToBlack(true);
 
 	modules[11] = fonts = new ModuleFonts(true);
-	modules[13] = render = new ModuleRender(true);
+	modules[22] = render = new ModuleRender(true);
 	
 	
 }
