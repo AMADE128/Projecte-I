@@ -47,6 +47,7 @@ bool ModuleEnemies::Start()
 update_status ModuleEnemies::Update()
 {
 	HandleEnemiesSpawn();
+	char life_score_Table[] = { "0123456789" };
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -56,6 +57,7 @@ update_status ModuleEnemies::Update()
 		if (enemies[i] != nullptr && time - enemies[i]->current_time >= 10000)
 		{
 			App->fonts->UnLoad(enemydiesFont);
+			//enemydiesFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
 		}
 	}
 

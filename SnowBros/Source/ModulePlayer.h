@@ -50,6 +50,8 @@ public:
 
 	int pHealth = 3;
 
+	bool fontstop = false;
+
 	// Position of the player in the map
 	iPoint position;
 

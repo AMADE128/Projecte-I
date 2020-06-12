@@ -567,6 +567,8 @@ bool ModulePlayer::CleanUp()
 	App->audio->UnloadFx(shotFx);
 	App->audio->UnloadFx(looseFx);
 	App->audio->UnloadFx(deathFx);
+	App->fonts->UnLoad(lifeFont);
+	App->fonts->UnLoad(scoreFont);
 	
 	return true;
 }

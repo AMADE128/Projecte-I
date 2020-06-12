@@ -35,10 +35,22 @@ bool SceneIntro::Start()
 
 	bgTexture = App->textures->Load("Assets/Sprites/Menu & UI/logoblack.png");
 
-	App->enemies->Disable();
-	App->player->Disable();
-	App->particles->Disable();
-	App->collisions->Disable();
+	if (App->enemies->IsEnabled() == true)
+	{
+		App->enemies->Disable();
+	}
+	if (App->player->IsEnabled() == true)
+	{
+		App->player->Disable();
+	}
+	if (App->particles->IsEnabled() == true)
+	{
+		App->particles->Disable();
+	}
+	if (App->collisions->IsEnabled() == true)
+	{
+		App->collisions->Disable();
+	}
 
 	App->player->score = 0;
 
@@ -68,10 +80,10 @@ update_status SceneIntro::PostUpdate()
 bool SceneIntro::CleanUp()
 {
 
-	App->collisions->Disable();
+	/*App->collisions->Disable();
 	App->particles->Disable();
 	App->player->Disable();
-	App->enemies->Disable();
+	App->enemies->Disable();*/
 
 	SDL_DestroyTexture(bgTexture);
 

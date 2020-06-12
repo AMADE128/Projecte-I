@@ -20,13 +20,11 @@ Frog::Frog(int x, int y) : Enemy(x, y)
 	l_idle.PushBack({ 0,0,32,32 });
 	l_idle.PushBack({ 0,0,32,32 });
 	l_idle.PushBack({ 0,0,32,32 });
-	l_idle.PushBack({ 0,0,32,32 });
 	l_idle.PushBack({ 0, 32, 32, 32 });
 	l_idle.speed = 0.01f;
 	l_idle.loop = true;
 
 	//Right Idle animation
-	r_idle.PushBack({ 224,0,32,32 });
 	r_idle.PushBack({ 224,0,32,32 });
 	r_idle.PushBack({ 224,0,32,32 });
 	r_idle.PushBack({ 224,0,32,32 });
