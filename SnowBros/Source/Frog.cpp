@@ -61,13 +61,30 @@ Frog::Frog(int x, int y) : Enemy(x, y)
 
 void Frog::Update()
 {
-	if (App->player->position.x > position.x)
+	if (App->player->position.x > position.x && life >= 7)
 	{
 		currentAnim = &r_idle;
 	}
-	else if (App->player->position.x < position.x)
+	else if (App->player->position.x < position.x && life >= 7)
 	{
 		currentAnim = &l_idle;
+	}
+
+	if (currentAnim->GetCurrentFrame().x == l_idle.frames[0].x)
+	{
+		shot = 0;
+	}
+
+	if (currentAnim == &l_idle && l_idle.GetCurrentFrame().y == 32 && life >= 7 && shot == 0)
+	{
+		App->particles->AddParticle(App->particles->fire_ball, position.x, position.y, Collider::Type::ENEMY_SHOT);
+		shot += 1;
+	}
+
+	if (currentAnim == &r_idle && r_idle.GetCurrentFrame().y == 32 && life >= 7 && shot == 0)
+	{
+		App->particles->AddParticle(App->particles->fire_ball, position.x, position.y, Collider::Type::ENEMY_SHOT);
+		shot += 1;
 	}
 
 	//path.Update();
@@ -187,6 +204,7 @@ void Frog::Freeze(Collider* collider) {
 	case 6:
 		App->player->score += 10;
 		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
+		this->collider->type = this->collider->NONE;
 		break;
 	case 7:
 		break;

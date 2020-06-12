@@ -30,6 +30,7 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	player_shot = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
+	frog_particle = App->textures->Load("Assets/Sprites/Enemies/fire_ball.png");
 
 	//Health face
 	healthFace.anim.PushBack({ 112, 16, 32, 32 });
@@ -111,8 +112,6 @@ bool ModuleParticles::Start()
 	FirstPushBack = true;
 	}
 
-	frog_particle = App->textures->Load("Assets/Sprites/Enemies/Nick_right_left.png");
-
 	//left fire ball
 	fire_ball.anim.PushBack({ 96, 384, 96, 90 });
 	fire_ball.anim.PushBack({ 96, 285, 96, 90 });
@@ -189,12 +188,12 @@ update_status ModuleParticles::PostUpdate()
 	{
 		Particle* particle = particles[i];
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x != shotright.anim.frames[0].x && particle->anim.frames[0].x != shotleft.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x != shotright.anim.frames[0].x && particle->anim.frames[0].x != shotleft.anim.frames[0].x && particle->anim.frames[0].x != fire_ball.anim.frames[0].x)
 		{
 			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotright.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotright.anim.frames[0].x && particle->anim.frames[0].x != fire_ball.anim.frames[0].x)
 		{
 			path.Update();
 
@@ -208,7 +207,7 @@ update_status ModuleParticles::PostUpdate()
 			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotleft.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotleft.anim.frames[0].x && particle->anim.frames[0].x != fire_ball.anim.frames[0].x)
 		{
 			path.Update();
 
@@ -225,6 +224,12 @@ update_status ModuleParticles::PostUpdate()
 			particle->position.x += path.steps[path.currentStep].speed.x;
 			particle->position.y += path.steps[path.currentStep].speed.y;
 			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == fire_ball.anim.frames[0].x)
+		{
+			particle->position.x += particle->speed.x;
+			App->render->Blit(frog_particle, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
 	}

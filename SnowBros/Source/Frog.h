@@ -44,6 +44,8 @@ private:
 
 	int shoot_cicle = 0;
 
+	int shot = 0;
+
 };
 
 #endif 
