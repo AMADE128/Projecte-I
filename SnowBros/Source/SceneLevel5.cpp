@@ -68,7 +68,7 @@ bool SceneLevel5::Start()
 	App->collisions->AddCollider({ 630, 680, 2, 100 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 810, 680, 2, 100 }, Collider::Type::WALLPUSHR);
 	App->collisions->AddCollider({ 540, 325, 2, 380 }, Collider::Type::WALLPUSHL);
-	App->collisions->AddCollider({ 900, 325, 2, 380 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 900, 325, 2, 380 }, Collider::Type::WALLPUSHR);
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 0, 0, 40, 1390 }, Collider::Type::WALL);
