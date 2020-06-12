@@ -74,7 +74,7 @@ bool SceneLevel2::Start()
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 370, 665);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 900, 510);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 650, 205);
+	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 650, 205);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 750, 45);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 290, 45);
 
