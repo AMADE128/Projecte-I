@@ -65,10 +65,10 @@ bool SceneLevel6::Start()
 	App->collisions->AddCollider({ 1172, 155, 220, 2 }, Collider::Type::AIR);
 
 	//Last platform walls
-	App->collisions->AddCollider({ 361, 472, 2, 200 }, Collider::Type::WALLPUSHL);
-	App->collisions->AddCollider({ 810, 472, 2, 200 }, Collider::Type::WALLPUSHL);
-	App->collisions->AddCollider({ 361+270, 472, 2, 200 }, Collider::Type::WALLPUSHR);
-	App->collisions->AddCollider({ 810+270, 472, 2, 200 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 361, 472, 2, 160 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 810, 472, 2, 160 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 361+270, 472, 2, 160 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 810+270, 472, 2, 160 }, Collider::Type::WALLPUSHR);
 	
 
 	//First two columns colliders
