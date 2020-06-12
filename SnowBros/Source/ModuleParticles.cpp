@@ -112,16 +112,49 @@ bool ModuleParticles::Start()
 	FirstPushBack = true;
 	}
 
-	//left fire ball
-	fire_ball.anim.PushBack({ 96, 384, 96, 90 });
-	fire_ball.anim.PushBack({ 96, 285, 96, 90 });
-	fire_ball.anim.PushBack({ 96, 189, 96, 90 });
-	fire_ball.anim.PushBack({ 96, 285, 96, 90 });
-	fire_ball.anim.PushBack({ 96, 0, 96, 90 });
-	fire_ball.speed.x = 10;
-	fire_ball.lifetime = 180;
-	fire_ball.anim.speed = 0.2f;
+	//right & left fire ball
+	l_fire_ball.anim.PushBack({ 96, 384, 96, 90 });
+	l_fire_ball.anim.PushBack({ 96, 285, 96, 90 });
+	l_fire_ball.anim.PushBack({ 96, 189, 96, 90 });
+	l_fire_ball.anim.PushBack({ 96, 285, 96, 90 });
+	l_fire_ball.anim.PushBack({ 96, 0, 96, 90 });
+	l_fire_ball.speed.x = -3;
+	l_fire_ball.lifetime = 220;
+	l_fire_ball.anim.speed = 0.15f;
+	l_fire_ball.anim.loop = false;
 
+	r_fire_ball.anim.PushBack({ 197, 378, 96, 90 });
+	r_fire_ball.anim.PushBack({ 197, 279, 96, 90 });
+	r_fire_ball.anim.PushBack({ 197, 183, 96, 90 });
+	r_fire_ball.anim.PushBack({ 198, 89, 96, 90 });
+	r_fire_ball.anim.PushBack({ 200, 0, 96, 90 });
+	r_fire_ball.speed.x = 3;
+	r_fire_ball.lifetime = 220;
+	r_fire_ball.anim.speed = 0.15f;
+	r_fire_ball.anim.loop = false;
+
+	//right & left fire ball explosions
+	l_fire_death.anim.PushBack({ 0, 384, 96, 90 });
+	l_fire_death.anim.PushBack({ 0, 294, 96, 90 });
+	l_fire_death.anim.PushBack({ 0, 194, 96, 90 });
+	l_fire_death.anim.PushBack({ 0, 96, 96, 90 });
+	
+	l_fire_death.speed.x = 0;
+	l_fire_death.speed.y = 0;
+	l_fire_death.anim.speed = 0.2f;
+	l_fire_death.anim.loop = false;
+	l_fire_death.lifetime = 35;
+
+	r_fire_death.anim.PushBack({ 294, 384, 96, 90 });
+	r_fire_death.anim.PushBack({ 294, 294, 96, 90 });
+	r_fire_death.anim.PushBack({ 294, 194, 96, 90 });
+	r_fire_death.anim.PushBack({ 294, 96, 96, 90 });
+	
+	r_fire_death.speed.x = 0;
+	r_fire_death.speed.y = 0;
+	r_fire_death.anim.speed = 0.2f;
+	r_fire_death.anim.loop = false;
+	r_fire_death.lifetime = 35;
 
 	return true;
 }
@@ -152,6 +185,16 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (particles[i] != nullptr && particles[i]->collider == c1)
 		{
+			if (particles[i]->anim.frames[0].x == l_fire_ball.anim.frames[0].x)
+			{
+				AddParticle(l_fire_death, particles[i]->position.x, particles[i]->position.y, Collider::Type::GODMODE);
+			}
+
+			if (particles[i]->anim.frames[0].x == r_fire_ball.anim.frames[0].x)
+			{
+				AddParticle(r_fire_death, particles[i]->position.x, particles[i]->position.y, Collider::Type::GODMODE);
+			}
+
 			delete particles[i];
 			particles[i] = nullptr;
 			path.Reset();
@@ -188,12 +231,12 @@ update_status ModuleParticles::PostUpdate()
 	{
 		Particle* particle = particles[i];
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x != shotright.anim.frames[0].x && particle->anim.frames[0].x != shotleft.anim.frames[0].x && particle->anim.frames[0].x != fire_ball.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x != shotright.anim.frames[0].x && particle->anim.frames[0].x != shotleft.anim.frames[0].x && particle->anim.frames[0].x != l_fire_ball.anim.frames[0].x && particle->anim.frames[0].x != r_fire_ball.anim.frames[0].x && particle->anim.frames[0].x != l_fire_death.anim.frames[0].x && particle->anim.frames[0].x != r_fire_death.anim.frames[0].x)
 		{
 			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotright.anim.frames[0].x && particle->anim.frames[0].x != fire_ball.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotright.anim.frames[0].x && particle->anim.frames[0].x != l_fire_ball.anim.frames[0].x && particle->anim.frames[0].x != r_fire_ball.anim.frames[0].x && particle->anim.frames[0].x != l_fire_death.anim.frames[0].x && particle->anim.frames[0].x != r_fire_death.anim.frames[0].x)
 		{
 			path.Update();
 
@@ -207,7 +250,7 @@ update_status ModuleParticles::PostUpdate()
 			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotleft.anim.frames[0].x && particle->anim.frames[0].x != fire_ball.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == shotleft.anim.frames[0].x && particle->anim.frames[0].x != l_fire_ball.anim.frames[0].x && particle->anim.frames[0].x != r_fire_ball.anim.frames[0].x && particle->anim.frames[0].x != l_fire_death.anim.frames[0].x && particle->anim.frames[0].x != r_fire_death.anim.frames[0].x)
 		{
 			path.Update();
 
@@ -226,9 +269,25 @@ update_status ModuleParticles::PostUpdate()
 			App->render->Blit(player_shot, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 
-		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].x == fire_ball.anim.frames[0].x)
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].y == l_fire_ball.anim.frames[0].y)
 		{
 			particle->position.x += particle->speed.x;
+			App->render->Blit(frog_particle, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && particle->anim.frames[0].y == r_fire_ball.anim.frames[0].y)
+		{
+			particle->position.x += particle->speed.x;
+			App->render->Blit(frog_particle, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && particle == &r_fire_death)
+		{
+			App->render->Blit(frog_particle, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+		}
+
+		if (particle != nullptr && particle->isAlive && particle == &l_fire_death)
+		{
 			App->render->Blit(frog_particle, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
 		}
 

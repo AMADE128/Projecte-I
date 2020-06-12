@@ -70,20 +70,25 @@ void Frog::Update()
 		currentAnim = &l_idle;
 	}
 
-	if (currentAnim->GetCurrentFrame().x == l_idle.frames[0].x)
+	if (currentAnim == &l_idle && currentAnim->GetCurrentFrame().y == l_idle.frames[0].y)
 	{
 		shot = 0;
 	}
 
-	if (currentAnim == &l_idle && l_idle.GetCurrentFrame().y == 32 && life >= 7 && shot == 0)
+	if (currentAnim == &r_idle && currentAnim->GetCurrentFrame().y == r_idle.frames[0].y)
 	{
-		App->particles->AddParticle(App->particles->fire_ball, position.x, position.y, Collider::Type::ENEMY_SHOT);
-		shot += 1;
+		shot = 0;
 	}
 
 	if (currentAnim == &r_idle && r_idle.GetCurrentFrame().y == 32 && life >= 7 && shot == 0)
 	{
-		App->particles->AddParticle(App->particles->fire_ball, position.x, position.y, Collider::Type::ENEMY_SHOT);
+		App->particles->AddParticle(App->particles->r_fire_ball, position.x, position.y, Collider::Type::ENEMY_SHOT);
+		shot += 1;
+	}
+
+	if (currentAnim == &l_idle && l_idle.GetCurrentFrame().y == 32 && life >= 7 && shot == 0)
+	{
+		App->particles->AddParticle(App->particles->l_fire_ball, position.x, position.y, Collider::Type::ENEMY_SHOT);
 		shot += 1;
 	}
 

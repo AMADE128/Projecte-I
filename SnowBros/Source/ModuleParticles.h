@@ -69,7 +69,10 @@ public:
 	Particle death;
 	Particle snowDeath;
 
-	Particle fire_ball;
+	Particle r_fire_ball;
+	Particle l_fire_ball;
+	Particle r_fire_death;
+	Particle l_fire_death;
 
 	Path path;
 
