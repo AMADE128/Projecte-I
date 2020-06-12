@@ -110,8 +110,8 @@ bool SceneLevel2::CleanUp()
 	App->particles->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
-	Mix_FreeMusic(App->audio->music);
 
+	Mix_FreeMusic(App->audio->music);
 	SDL_DestroyTexture(bgTexture);
 
 	return true;
