@@ -262,6 +262,14 @@ void ModuleEnemies::WinCondition() {
 			win = true;
 			App->fade->FadeToBlack((Module*)App->sceneLevel_4, (Module*)App->sceneLevel_5, 90);
 		}
+		else if (App->modules[9]->IsEnabled() == true) {
+			win = true;
+			App->fade->FadeToBlack((Module*)App->sceneLevel_5, (Module*)App->sceneLevel_6, 90);
+		}
+		else if (App->modules[10]->IsEnabled() == true) {
+			win = true;
+			App->fade->FadeToBlack((Module*)App->sceneLevel_6, (Module*)App->sceneLevel_7, 90);
+		}
 	}
 }
 

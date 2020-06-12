@@ -174,6 +174,7 @@ bool ModuleParticles::CleanUp()
 	}
 
 	App->textures->Unload(player_shot);
+	App->textures->Unload(frog_particle);
 
 	return true;
 }
