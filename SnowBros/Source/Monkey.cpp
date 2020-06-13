@@ -152,7 +152,6 @@ void Monkey::Freeze(Collider* collider) {
 		App->player->score += 500;
 		App->particles->snowball[3].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
-		this->collider->type = this->collider->FREEZE_BALL;
 		break;
 	case 2:
 		App->player->score += 10;

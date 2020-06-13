@@ -81,7 +81,7 @@ bool SceneLevel5::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 910, 670);
 	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 910, 510-160);
 	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 400, 510-160);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 750, 510-156*3);
+	App->enemies->AddEnemy(ENEMY_TYPE::MONKEY, 750, 510-156*3);
 	
 
 	App->enemies->win = false;
