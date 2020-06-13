@@ -52,8 +52,8 @@ bool SceneLevel4::Start()
 	App->collisions->AddCollider({ 630, 777, 185, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 630, 622, 185, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 360, 460, 280, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 40, 460, 280, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1190, 460, 280, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40, 460, 170, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1220, 460, 280, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 985, 316, 200, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 40, 155, 400, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 1250, 155, 200, 2 }, Collider::Type::AIR);
