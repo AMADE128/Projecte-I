@@ -14,6 +14,7 @@
 #include "Enemy.h"
 #include "Enemy_Demon.h"
 #include "Frog.h"
+#include "Monkey.h"
 
 #include "SDL/include/SDL.h"
 
@@ -35,6 +36,7 @@ bool ModuleEnemies::Start()
 {
 	demon = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
 	frog = App->textures->Load("Assets/Sprites/Enemies/Rana.png");
+	monkey = App->textures->Load("Assets/Sprites/Enemies/mono.png");
 
 	char life_score_Table[] = { "0123456789" };
 	App->enemies->enemydiesFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
@@ -98,6 +100,7 @@ bool ModuleEnemies::CleanUp()
 	App->fonts->UnLoad(enemydiesFont);
 	App->textures->Unload(demon);
 	App->textures->Unload(frog);
+	App->textures->Unload(monkey);
 
 	return true;
 }
@@ -172,6 +175,10 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			case ENEMY_TYPE::FROG:
 				enemies[i] = new Frog(info.x, info.y);
 				enemies[i]->texture = frog;
+				break;
+			case ENEMY_TYPE::MONKEY:
+				enemies[i] = new Monkey(info.x, info.y);
+				enemies[i]->texture = monkey;
 				break;
 			}
 			break;
