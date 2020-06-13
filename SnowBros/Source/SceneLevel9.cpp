@@ -32,7 +32,7 @@ bool SceneLevel9::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/Maps/lvl9.png");
+	bgTexture9 = App->textures->Load("Assets/Sprites/Maps/lvl9.png");
 	App->audio->PlayMusic("Assets/Audio/Music/Stages/1.#035 Yukidama-Ondo (Stage 1, 3).ogg", 1.0f);
 
 	//Bottomside collider
@@ -96,7 +96,7 @@ update_status SceneLevel9::Update()
 update_status SceneLevel9::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTexture9, 0, 0, NULL);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -107,9 +107,9 @@ bool SceneLevel9::CleanUp()
 	App->particles->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
-	Mix_FreeMusic(App->audio->music);
 
-	App->textures->Unload(bgTexture);
+
+	App->textures->Unload(bgTexture9);
 
 	return true;
 }
