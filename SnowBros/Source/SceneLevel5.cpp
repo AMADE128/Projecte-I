@@ -67,8 +67,8 @@ bool SceneLevel5::Start()
 	App->collisions->AddCollider({ 810, 165, 2, 150 }, Collider::Type::WALLPUSHR);
 	App->collisions->AddCollider({ 630, 680, 2, 100 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 810, 680, 2, 100 }, Collider::Type::WALLPUSHR);
-	App->collisions->AddCollider({ 540, 325, 2, 380 }, Collider::Type::WALLPUSHL);
-	App->collisions->AddCollider({ 900, 325, 2, 380 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 540, 325, 2, 330 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 900, 325, 2, 330 }, Collider::Type::WALLPUSHR);
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 0, 0, 40, 1390 }, Collider::Type::WALL);
@@ -79,6 +79,9 @@ bool SceneLevel5::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1200, 510);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 670);
 	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 910, 670);
+	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 910, 510-160);
+	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 400, 510-160);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 750, 510-156*3);
 	
 
 	App->enemies->win = false;

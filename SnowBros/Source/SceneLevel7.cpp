@@ -60,7 +60,7 @@ bool SceneLevel7::Start()
 	App->collisions->AddCollider({ 1060, 667, 100, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 800, 617, 170, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 550, 617 - 160, 170, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 350, 617 - 170, 100, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 350, 617 - 210, 100, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 90, 617 - 170, 100, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 1170, 617 - 190, 170, 2 }, Collider::Type::AIR);
 	App->collisions->AddCollider({ 970, 617 - 320, 120, 2 }, Collider::Type::AIR);
@@ -71,7 +71,7 @@ bool SceneLevel7::Start()
 	App->collisions->AddCollider({ 1230, 617 - 490, 120, 2 }, Collider::Type::AIR);
 
 	//Last platform walls
-	App->collisions->AddCollider({ 1170, 701, 2, 76 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 1170, 705, 2, 76 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 900, 166, 2, 76 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 630, 242, 2, 76 }, Collider::Type::WALLPUSHL);
 	App->collisions->AddCollider({ 250, 701, 2, 76 }, Collider::Type::WALLPUSHR);
