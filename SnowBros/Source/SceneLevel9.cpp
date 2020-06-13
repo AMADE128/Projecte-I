@@ -39,41 +39,49 @@ bool SceneLevel9::Start()
 	App->collisions->AddCollider({ 40, 933, 1390, 60 }, Collider::Type::GROUND);
 
 	//Platform colliders
-	App->collisions->AddCollider({ 40, 780, 300, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 535, 780, 352, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1090, 780, 310, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 275, 625, 880, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 40, 471, 570, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 815, 471, 583, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 185, 319, 175, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 362, 241, 698, 2 }, Collider::Type::GROUND);
-	App->collisions->AddCollider({ 1061, 319, 175, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 160, 780, 460, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 160+460+190, 780, 460, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 40, 625, 230, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 270+180, 625, 540, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1170, 625, 230, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 160, 471, 460, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 160+460+190, 471, 460, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 40, 319, 140, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 540, 319, 360, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 360, 160, 720, 2 }, Collider::Type::GROUND);
+	App->collisions->AddCollider({ 1260, 319, 140, 2 }, Collider::Type::GROUND);
 
 	//Fall colliders
-	App->collisions->AddCollider({ 341, 777, 193, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 888, 777, 201, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 40, 622, 234, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1156, 622, 244, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 611, 460, 203, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 40, 316, 144, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 258, 200, 100, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1061, 200, 100, 2 }, Collider::Type::AIR);
-	App->collisions->AddCollider({ 1237, 316, 163, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 160+460, 777, 190, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 40+230, 622, 180, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 270+180+540, 622, 180, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 160+460, 460, 190, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 185, 316, 175, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 258, 140, 100, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1080, 140, 100, 2 }, Collider::Type::AIR);
+	App->collisions->AddCollider({ 1080, 316, 180, 2 }, Collider::Type::AIR);
 
 	//Last platform walls
-	App->collisions->AddCollider({ 361, 245, 2, 76 }, Collider::Type::WALLPUSHL);
-	App->collisions->AddCollider({ 1060, 245, 2, 76 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 530, 165, 2, 73*2 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 540+370, 165, 2, 73*2 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 361, 165, 2, 50 * 3 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 1080, 165, 2, 50 * 3 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 180, 325, 2, 73 * 2 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 1260, 325, 2, 73 * 2 }, Collider::Type::WALLPUSHL);
+	App->collisions->AddCollider({ 160, 630, 2, 73 * 2 }, Collider::Type::WALLPUSHR);
+	App->collisions->AddCollider({ 160 + 460 + 190+460, 630, 2, 73 * 2 }, Collider::Type::WALLPUSHL);
 
 	//First two columns colliders
 	App->collisions->AddCollider({ 0, 0, 40, 1390 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1400, 0, 40, 1390 }, Collider::Type::WALL);
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 120);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 916, 120);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 250, 350);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1132, 350);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 372, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 700, 510-155*2);
+	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 45, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 1260, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 400, 510+160);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 1050, 510 + 160);
+	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 45, 500 + 160*2);
 
 	App->enemies->win = false;
 
