@@ -50,7 +50,8 @@ public:
 		FREEZE,
 		NOTHING,
 		PUSHR,
-		PUSHL
+		PUSHL,
+		PUSH,
 	};
 
 	// All existing colliders in the scene

@@ -46,6 +46,8 @@ public:
 
 	void PushL(Collider* c1, Collider* c2) override;
 
+	void Push(Collider* c1, Collider* c2) override;
+
 	//Player Health
 
 	int pHealth = 3;

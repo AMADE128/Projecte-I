@@ -24,6 +24,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::WALL][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::WALL][Collider::Type::FREEZE_BALL] = NOTHING;
 
 	matrix[Collider::Type::GROUND][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::GROUND] = NOTHING;
@@ -36,6 +37,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::GROUND][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::GROUND][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::GROUND][Collider::Type::FREEZE_BALL] = NOTHING;
 
 	matrix[Collider::Type::AIR][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::AIR][Collider::Type::GROUND] = NOTHING;
@@ -48,6 +50,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::AIR][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::AIR][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::AIR][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::AIR][Collider::Type::FREEZE_BALL] = FALL;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::PLAYER][Collider::Type::GROUND] = STOP_Y;
@@ -60,6 +63,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::WALLPUSHR] = PUSHR;
 	matrix[Collider::Type::PLAYER][Collider::Type::WALLPUSHL] = PUSHL;
 	matrix[Collider::Type::PLAYER][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::PLAYER][Collider::Type::FREEZE_BALL] = NOTHING;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = STOP_Y;
@@ -72,6 +76,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::WALLPUSHR] = STOP;
 	matrix[Collider::Type::ENEMY][Collider::Type::WALLPUSHL] = STOP;
 	matrix[Collider::Type::ENEMY][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::ENEMY][Collider::Type::FREEZE_BALL] = DIE;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GROUND] = DIE;
@@ -84,6 +89,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALLPUSHR] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALLPUSHL] = DIE;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::FREEZE_BALL] = DIE;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = DIE;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::GROUND] = DIE;
@@ -96,6 +102,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALLPUSHR] = DIE;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALLPUSHL] = DIE;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::FREEZE_BALL] = DIE;
 
 	matrix[Collider::Type::NONE][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::GROUND] = NOTHING;
@@ -108,6 +115,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::NONE][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::NONE][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::NONE][Collider::Type::FREEZE_BALL] = NOTHING;
 
 	matrix[Collider::Type::WALLPUSHR][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::WALLPUSHR][Collider::Type::GROUND] = NOTHING;
@@ -120,6 +128,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALLPUSHR][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::WALLPUSHR][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::WALLPUSHR][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::WALLPUSHR][Collider::Type::FREEZE_BALL] = NOTHING;
 
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::GROUND] = NOTHING;
@@ -132,6 +141,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::WALLPUSHL][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::WALLPUSHL][Collider::Type::FREEZE_BALL] = NOTHING;
 
 	matrix[Collider::Type::GODMODE][Collider::Type::WALL] = NOTHING;
 	matrix[Collider::Type::GODMODE][Collider::Type::GROUND] = NOTHING;
@@ -144,6 +154,19 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::GODMODE][Collider::Type::WALLPUSHR] = NOTHING;
 	matrix[Collider::Type::GODMODE][Collider::Type::WALLPUSHL] = NOTHING;
 	matrix[Collider::Type::GODMODE][Collider::Type::GODMODE] = NOTHING;
+	matrix[Collider::Type::GODMODE][Collider::Type::FREEZE_BALL] = NOTHING;
+
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::WALL] = STOP;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::GROUND] = STOP_Y;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::ENEMY] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::ENEMY_SHOT] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::AIR] = FALL;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::NONE] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::WALLPUSHR] = STOP;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::WALLPUSHL] = STOP;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::GODMODE] = NOTHING;
 
 }
 
@@ -228,6 +251,12 @@ update_status ModuleCollisions::PreUpdate()
 
 				if (matrix[c2->type][c1->type] == PUSHL && c2->listener)
 					c2->listener->PushL(c2, c1);
+
+				if (matrix[c1->type][c2->type] == PUSH && c1->listener)
+					c1->listener->PushL(c1, c2);
+
+				if (matrix[c2->type][c1->type] == PUSH && c2->listener)
+					c2->listener->PushL(c2, c1);
 			}
 
 			//SOBRA 7: INTENTO DE QUE CAIGA EL JUGADOR SI NO ESTÁ EN UNA PLATAFORMA
@@ -306,6 +335,9 @@ void ModuleCollisions::DebugDraw()
 			break;
 		case Collider::Type::GODMODE: //light blue
 			App->render->DrawQuad(colliders[i]->rect, 212, 172, 45, alpha);
+			break;
+		case Collider::Type::FREEZE_BALL: //light blue
+			App->render->DrawQuad(colliders[i]->rect, 150, 172, 45, alpha);
 			break;
 
 		}

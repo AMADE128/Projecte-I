@@ -20,6 +20,7 @@ struct Collider
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		GODMODE,
+		FREEZE_BALL,
 		
 
 		MAX

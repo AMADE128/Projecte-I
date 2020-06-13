@@ -494,22 +494,19 @@ update_status ModulePlayer::Update()
 }
 
 update_status ModulePlayer::PostUpdate()
-{/*
-	if (!destroyed)
-	{*/
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(spritesheet, position.x, position.y, &rect);
-	//}
+{
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	App->render->Blit(spritesheet, position.x, position.y, &rect);
 
 	App->render->Blit(score_bg, 0, 0);
 
 	sprintf_s(lifeText, 10, "%d", pHealth);
 	sprintf_s(scoreText, 10, "%d", score);
 
-	App->fonts->BlitText(80, 10, lifeFont, lifeText);
-	App->fonts->BlitText(1200, 25, scoreFont, scoreText);
+	App->fonts->BlitText(80, 85, lifeFont, lifeText);
+	App->fonts->BlitText(80, 15, lifeFont, scoreText);
 
-	App->render->Blit(App->particles->player_shot, -10, -45, &App->particles->healthFace.anim.GetCurrentFrame());
+	App->render->Blit(App->particles->player_shot, -10, 25, &App->particles->healthFace.anim.GetCurrentFrame());
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -518,11 +515,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
-		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
-		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		App->audio->PlayFx(explosionFx);
 		if (pHealth >= 0)
@@ -614,6 +606,11 @@ void ModulePlayer::PushR(Collider* c1, Collider* c2)
 void ModulePlayer::PushL(Collider* c1, Collider* c2)
 {
 	position.x-=4;
+}
+
+void ModulePlayer::Push(Collider* c1, Collider* c2)
+{
+	
 }
 
 bool ModulePlayer::CleanUp()

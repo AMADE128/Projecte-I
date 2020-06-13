@@ -83,6 +83,9 @@ public:
 	//WIN CONDITION
 	bool win = false;
 
+	int enemydiesFont = -1;
+	char enemydiesText[10] = { "\0" };
+
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -90,9 +93,6 @@ private:
 private:
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
-
-	int enemydiesFont = -1;
-	char enemydiesText[10] = { "\0" };
 
 	// The audio fx for destroying an enemy
 	//int enemyDestroyedFx = 0;

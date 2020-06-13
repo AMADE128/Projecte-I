@@ -37,7 +37,7 @@ bool ModuleEnemies::Start()
 	frog = App->textures->Load("Assets/Sprites/Enemies/Rana.png");
 
 	char life_score_Table[] = { "0123456789" };
-	enemydiesFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
+	App->enemies->enemydiesFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
 
 	//enemyDestroyedFx = App->audio->LoadFx("Assets/");
 
@@ -95,6 +95,7 @@ bool ModuleEnemies::CleanUp()
 		}
 	}
 
+	App->fonts->UnLoad(enemydiesFont);
 	App->textures->Unload(demon);
 	App->textures->Unload(frog);
 
@@ -146,7 +147,7 @@ void ModuleEnemies::HandleEnemiesDespawn()
 	{
 		if (enemies[i] != nullptr)
 		{
-			if (enemies[i]->life < 2)
+			if (enemies[i]->life < 1)
 			{
 				delete enemies[i];
 				enemies[i] = nullptr;
@@ -182,7 +183,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1 && life < 7)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
