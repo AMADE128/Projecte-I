@@ -13,6 +13,7 @@ public:
 	bool loop = true;
 	// Allows the animation to keep going back and forth
 	bool pingpong = false;
+	bool finish = false;
 
 private:
 	int totalFrames = 0;
@@ -29,6 +30,7 @@ public:
 
 	void Reset()
 	{
+		finish = false;
 		currentFrame = 0;
 	}
 
@@ -44,6 +46,8 @@ public:
 		{
 			currentFrame = (loop || pingpong) ? 0.0f : totalFrames - 1; // si tienes un loop o un ping pong y estas en el maximo de frames, vuelves al primero (0.0f) o te mantienes en el último (totalFrames - 1)
 			++loopCount;
+
+			finish = true;
 
 			if (pingpong)
 				pingpongDirection = -pingpongDirection;

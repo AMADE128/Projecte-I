@@ -125,11 +125,11 @@ bool GameOver::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 
-	SDL_DestroyTexture(GameOverTexture);
-	SDL_DestroyTexture(NinjaTexture);
-	SDL_DestroyTexture(RanaTexture);
-	SDL_DestroyTexture(MonoTexture);
-	SDL_DestroyTexture(DemonioTexture);
+	App->textures->Unload(GameOverTexture);
+	App->textures->Unload(NinjaTexture);
+	App->textures->Unload(RanaTexture);
+	App->textures->Unload(MonoTexture);
+	App->textures->Unload(DemonioTexture);
 
 
 	return true;

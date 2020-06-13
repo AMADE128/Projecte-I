@@ -86,6 +86,7 @@ public:
 	Animation l_shootAnim;
 	Animation r_jumpShoot;
 	Animation l_jumpShoot;
+	Animation deathAnim;
 
 	//Chech ground collision
 	bool groundCollision;
@@ -101,7 +102,7 @@ public:
 	bool destroyed = false;
 
 	// A countdown to when the player gets destroyed. After a while, the game exits
-	uint destroyedCountdown = 120;
+	uint destroyedCountdown = 200;
 
 	uint score = 000;
 	int scoreFont = -1;
@@ -110,6 +111,8 @@ public:
 	char scoreText[10] = { "\0" };
 
 	bool godmode = false;
+	bool death = false;
+	int deathtime = 120;
 
 	// Sound effects indices
 	uint shotFx = 0;

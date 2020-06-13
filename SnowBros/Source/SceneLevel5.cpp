@@ -114,8 +114,8 @@ bool SceneLevel5::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 
-	Mix_FreeMusic(App->audio->music);
-	SDL_DestroyTexture(bgTexture);
+	
+	App->textures->Unload(bgTexture);
 
 	return true;
 }

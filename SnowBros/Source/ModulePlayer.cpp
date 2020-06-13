@@ -120,6 +120,21 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	l_jumpShoot.PushBack({ 793, 304, 32, 32 });
 	l_jumpShoot.loop = false;
 	l_jumpShoot.speed = 0.16f;
+
+	//Death
+	deathAnim.PushBack({ 15,527,32,32 });
+	for (int i = 0; i < 4; i++)
+	{
+		deathAnim.PushBack({ 52,527,32,32 });
+		deathAnim.PushBack({ 90,527,32,32 });
+	}
+	deathAnim.PushBack({ 127,527,32,32 });
+	deathAnim.PushBack({ 164,527,32,32 });
+	deathAnim.PushBack({ 203,527,32,32 });
+	deathAnim.PushBack({ 243,527,32,32 });
+	deathAnim.PushBack({ 283,527,32,32 });
+	deathAnim.loop = false;
+	deathAnim.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -146,6 +161,8 @@ bool ModulePlayer::Start()
 	position.y = 955 - (32 * 4.2);
 
 	destroyed = false;
+	death = false;
+	deathAnim.Reset();
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
@@ -159,6 +176,224 @@ update_status ModulePlayer::Update()
 
 	// Moving the player with the camera scroll
 	//App->player->position.x += 1;
+
+	if (death == false)
+	{
+		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
+		{
+			// Enable to escape collision
+			if (rightCollision == true)
+			{
+				speed_x = 2;
+			}
+
+			if (rightCollision == false && leftCollision == false && speed_x == 0)
+			{
+				speed_x = 2;
+			}
+
+			if (fall == true)
+			{
+				speed_y = SPEED_Y;
+			}
+
+			// Move player
+			position.x -= speed_x * 1.5;
+
+			//change sprite while jumping
+			if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x)
+			{
+				leftjumpAnim.currentFrame = 18;
+				currentAnimation = &leftjumpAnim;
+			}
+
+			if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim && currentAnimation != &rightjumpAnim && (currentAnimation != &l_shootAnim || (currentAnimation == &l_shootAnim && l_shootAnim.GetCurrentFrame().x == 956)))
+			{
+				sideLeftAnim.Reset();
+				currentAnimation = &sideLeftAnim;
+			}
+		}
+
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
+		{
+			if (leftCollision == true)
+			{
+				speed_x = 2;
+			}
+
+			if (rightCollision == false && leftCollision == false && speed_x == 0)
+			{
+				speed_x = 2;
+			}
+
+			if (fall == true)
+			{
+				speed_y = SPEED_Y;
+			}
+
+
+			position.x += speed_x * 1.5;
+
+			//change sprite while jumping
+			if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x)
+			{
+				rightjumpAnim.currentFrame = 10;
+				currentAnimation = &rightjumpAnim;
+			}
+
+			if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim && currentAnimation != &leftjumpAnim && (currentAnimation != &r_shootAnim || (currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)))
+			{
+				sideRightAnim.Reset();
+				currentAnimation = &sideRightAnim;
+			}
+		}
+
+		//SOBRA 3: EL PERSONAJE NO PUEDE MOVERSE HACIA ABAJO
+
+		if (godmode == true)
+		{
+			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+			{
+				position.y -= speed_y;
+			}
+			if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+			{
+				position.y += speed_y;
+			}
+		}
+
+		//right jump
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false && godmode == false && App->enemies->win == false)
+		{
+			if (rightCollision == true)
+			{
+				speed_x = 2;
+			}
+
+			if (leftCollision == false)
+			{
+				rightCollision = false;
+			}
+
+			if (groundCollision == true)
+			{
+				speed_y = SPEED_Y;
+				groundCollision = false;
+			}
+
+			position.y -= speed_y;
+			if (currentAnimation != &rightjumpAnim && (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim))
+			{
+				rightjumpAnim.Reset();
+				currentAnimation = &rightjumpAnim;
+			}
+		}
+
+		//left jump
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false && godmode == false && App->enemies->win == false)
+		{
+			if (leftCollision == true)
+			{
+				speed_x = 2;
+			}
+
+			if (rightCollision == false)
+			{
+				leftCollision = false;
+			}
+
+			if (groundCollision == true)
+			{
+				speed_y = SPEED_Y;
+				groundCollision = false;
+			}
+
+			position.y -= speed_y;
+			if (currentAnimation != &leftjumpAnim && (currentAnimation == &l_idleAnim || currentAnimation == &sideLeftAnim))
+			{
+				leftjumpAnim.Reset();
+				currentAnimation = &leftjumpAnim;
+			}
+		}
+
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->enemies->win == false)
+		{
+			if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
+			{
+				r_shootAnim.Reset();
+				currentAnimation = &r_shootAnim;
+				App->particles->AddParticle(App->particles->shotright, position.x + 75, position.y + 20, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shotFx);
+			}
+			else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
+			{
+				l_shootAnim.Reset();
+				currentAnimation = &l_shootAnim;
+				App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y + 20, Collider::Type::PLAYER_SHOT);
+				App->audio->PlayFx(shotFx);
+			}
+		}
+
+		//We make the player go up or down
+
+		if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x != lastLeftJumpSprite.x))
+		{
+			position.y -= (speed_y + 1);
+		}
+
+		if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x) && groundCollision == false)
+		{
+			position.y += speed_y;
+		}
+
+		if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x != lastRightJumpSprite.x))
+		{
+			position.y -= (speed_y + 1);
+		}
+
+		if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x) && groundCollision == false)
+		{
+			position.y += speed_y;
+		}
+
+		//GRAVEDAD 1
+
+		//Gravity
+
+		if (fall == true && App->enemies->win == false)
+		{
+			position.y += speed_y;
+
+			if (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim) {
+				currentAnimation = &fallRightAnim;
+			}
+
+			if (currentAnimation == &l_idleAnim || currentAnimation == &sideLeftAnim) {
+				currentAnimation = &fallLeftAnim;
+			}
+		}
+
+		// If no up / left / right movement detected, set the current animation back to idle
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
+		{
+			//groundCollision = false;
+
+			speed_y = SPEED_Y;
+
+			if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)
+			{
+				currentAnimation = &r_idleAnim;
+			}
+			if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true) || (currentAnimation == &fallLeftAnim && fall == false) || currentAnimation == &l_shootAnim && l_shootAnim.GetCurrentFrame().x == 956)
+			{
+				currentAnimation = &l_idleAnim;
+			}
+		}
+
+		collider->SetPos(position.x, position.y);
+
+		currentAnimation->Update();
+	}
 
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
@@ -174,251 +409,77 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
-	{
-		// Enable to escape collision
-		if (rightCollision == true)
-		{
-			speed_x = 2;
-		}
-
-		if (rightCollision == false && leftCollision == false && speed_x == 0)
-		{
-			speed_x = 2;
-		}
-
-		if (fall == true)
-		{
-			speed_y = SPEED_Y;
-		}
-
-		// Move player
-		position.x -= speed_x * 1.5;
-
-		//change sprite while jumping
-		if (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x)
-		{
-			leftjumpAnim.currentFrame = 18;
-			currentAnimation = &leftjumpAnim;
-		}
-
-		if (currentAnimation != &leftjumpAnim && currentAnimation != &sideLeftAnim && currentAnimation != &rightjumpAnim && (currentAnimation != &l_shootAnim || (currentAnimation == &l_shootAnim && l_shootAnim.GetCurrentFrame().x == 956)))
-		{
-			sideLeftAnim.Reset();
-			currentAnimation = &sideLeftAnim;
-		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
-	{
-		if (leftCollision == true)
-		{
-			speed_x = 2;
-		}
-
-		if (rightCollision == false && leftCollision == false && speed_x == 0)
-		{
-			speed_x = 2;
-		}
-
-		if (fall == true)
-		{
-			speed_y = SPEED_Y;
-		}
-
-
-		position.x += speed_x * 1.5;
-
-		//change sprite while jumping
-		if (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x)
-		{
-			rightjumpAnim.currentFrame = 10;
-			currentAnimation = &rightjumpAnim;
-		}
-
-		if (currentAnimation != &rightjumpAnim && currentAnimation != &sideRightAnim && currentAnimation != &leftjumpAnim && (currentAnimation != &r_shootAnim || (currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)))
-		{
-			sideRightAnim.Reset();
-			currentAnimation = &sideRightAnim;
-		}
-	}
-
-	//SOBRA 3: EL PERSONAJE NO PUEDE MOVERSE HACIA ABAJO
-
-	if (godmode == true)
-	{
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-		{
-			position.y -= speed_y;
-		}
-		if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
-		{
-			position.y += speed_y;
-		}
-	}
-
-	//right jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false && godmode == false && App->enemies->win == false)
-	{
-		if (rightCollision == true)
-		{
-			speed_x = 2;
-		}
-
-		if (leftCollision == false)
-		{
-			rightCollision = false;
-		}
-
-		if (groundCollision == true)
-		{
-			speed_y = SPEED_Y;
-			groundCollision = false;
-		}
-
-		position.y -= speed_y;
-		if (currentAnimation != &rightjumpAnim && (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim))
-		{
-			rightjumpAnim.Reset();
-			currentAnimation = &rightjumpAnim;
-		}
-	}
-
-	//left jump
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false && godmode == false && App->enemies->win == false)
-	{
-		if (leftCollision == true)
-		{
-			speed_x = 2;
-		}
-
-		if (rightCollision == false)
-		{
-			leftCollision = false;
-		}
-
-		if (groundCollision == true)
-		{
-			speed_y = SPEED_Y;
-			groundCollision = false;
-		}
-
-		position.y -= speed_y;
-		if (currentAnimation != &leftjumpAnim && (currentAnimation == &l_idleAnim || currentAnimation == &sideLeftAnim))
-		{
-			leftjumpAnim.Reset();
-			currentAnimation = &leftjumpAnim;
-		}
-	}
-
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->enemies->win == false)
-	{
-		if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
-		{
-			r_shootAnim.Reset();
-			currentAnimation = &r_shootAnim;
-			App->particles->AddParticle(App->particles->shotright, position.x + 75, position.y + 20, Collider::Type::PLAYER_SHOT);
-			App->audio->PlayFx(shotFx);
-		}
-		else if (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim)
-		{
-			l_shootAnim.Reset();
-			currentAnimation = &l_shootAnim;
-			App->particles->AddParticle(App->particles->shotleft, position.x - 20, position.y + 20, Collider::Type::PLAYER_SHOT);
-			App->audio->PlayFx(shotFx);
-		}
-	}
-
-	//We make the player go up or down
-
-	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x != lastLeftJumpSprite.x))
-	{
-		position.y -= (speed_y + 1);
-	}
-
-	if (currentAnimation == &leftjumpAnim && (currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x) && groundCollision == false)
-	{
-		position.y += speed_y;
-	}
-
-	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x != lastRightJumpSprite.x))
-	{
-		position.y -= (speed_y + 1);
-	}
-
-	if (currentAnimation == &rightjumpAnim && (currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x) && groundCollision == false)
-	{
-		position.y += speed_y;
-	}
-
-	//GRAVEDAD 1
-
-	//Gravity
-
-	if (fall == true && App->enemies->win == false)
-	{
-		position.y += speed_y;
-
-		if (currentAnimation == &r_idleAnim || currentAnimation == &sideRightAnim) {
-			currentAnimation = &fallRightAnim;
-		}
-
-		if (currentAnimation == &l_idleAnim || currentAnimation == &sideLeftAnim) {
-			currentAnimation = &fallLeftAnim;
-		}
-	}
-
-	// If no up / left / right movement detected, set the current animation back to idle
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
-	{
-		//groundCollision = false;
-
-		speed_y = SPEED_Y;
-
-		if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)
-		{
-			currentAnimation = &r_idleAnim;
-		}
-		if (currentAnimation == &sideLeftAnim || (currentAnimation == &leftjumpAnim && currentAnimation->GetCurrentFrame().x == lastLeftJumpSprite.x && groundCollision == true) || (currentAnimation == &fallLeftAnim && fall == false) || currentAnimation == &l_shootAnim && l_shootAnim.GetCurrentFrame().x == 956)
-		{
-			currentAnimation = &l_idleAnim;
-		}
-	}
-
-	collider->SetPos(position.x, position.y);
-
-	currentAnimation->Update();
+	
 
 	if (destroyed)
 	{
-		pHealth--;
-		if (pHealth == 0) {
+		if (pHealth <= 0) {
 			if (App->modules[5]->IsEnabled() == true)
 			{
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
+				destroyed = false;
 			}
 			else if (App->modules[6]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_2, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
+				destroyed = false;
 			}
 			else if (App->modules[7]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_3, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
+				destroyed = false;
+			}
+			else if (App->modules[7]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_4, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+				destroyed = false;
+			}
+			else if (App->modules[7]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_5, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+				destroyed = false;
+			}
+			else if (App->modules[7]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_6, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+				destroyed = false;
+			}
+			else if (App->modules[7]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_7, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+				destroyed = false;
+			}
+			else if (App->modules[7]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_8, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+				destroyed = false;
 			}
 		}
-		else {
+		else if (death == true) {
+			this->collider->type = this->collider->NONE;
 			App->audio->PlayFx(deathFx);
-			speed_x = 0;
-			speed_y = 0,
-			destroyed = false;
-			position.x = 528;
-			position.y = 955 - (32 * 4.2);
-			App->particles->AddParticle(App->particles->snowDeath, position.x - 55, position.y - 60, Collider::NONE);
-			collider->SetPos(position.x, position.y);
+			if (deathAnim.finish == true)
+			{
+				position.x = 528;
+				position.y = 955 - (32 * 4.2);
+				App->particles->AddParticle(App->particles->snowDeath, position.x - 55, position.y - 60, Collider::NONE);
+				this->collider->type = this->collider->PLAYER;
+				collider->SetPos(position.x, position.y);
+				currentAnimation = &r_idleAnim;
+				death = false;
+				destroyed = false;
+				deathAnim.Reset();
+			}
+			deathAnim.Update();
 		}
 	}
 
@@ -433,12 +494,12 @@ update_status ModulePlayer::Update()
 }
 
 update_status ModulePlayer::PostUpdate()
-{
+{/*
 	if (!destroyed)
-	{
+	{*/
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(spritesheet, position.x, position.y, &rect);
-	}
+	//}
 
 	App->render->Blit(score_bg, 0, 0);
 
@@ -464,10 +525,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		App->audio->PlayFx(explosionFx);
-
+		if (pHealth >= 0)
+		{
+			pHealth--;
+			death = true;
+			currentAnimation = &deathAnim;
+		}
 		destroyed = true;
-
-		App->particles->AddParticle(App->particles->death, position.x, position.y, Collider::NONE);
 	}
 }
 

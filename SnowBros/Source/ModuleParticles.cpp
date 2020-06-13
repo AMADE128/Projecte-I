@@ -57,21 +57,6 @@ bool ModuleParticles::Start()
 	snowball[3].anim.PushBack({ 107, 703, 28, 32 });
 	snowball[4].anim.PushBack({ 140, 702, 28, 32 });
 
-	//Death
-	death.anim.PushBack({ 15,527,32,32 });
-	for (int i = 0; i < 4; i++)
-	{
-		death.anim.PushBack({ 52,527,32,32 });
-		death.anim.PushBack({ 90,527,32,32 });
-	}
-	death.anim.PushBack({ 127,527,32,32 });
-	death.anim.PushBack({ 164,527,32,32 });
-	death.anim.PushBack({ 203,527,32,32 });
-	death.anim.PushBack({ 243,527,32,32 });
-	death.anim.PushBack({ 283,527,32,32 });
-	death.lifetime = 200;
-	death.anim.speed = 0.07f;
-
 	//Snow Death animation
 	snowDeath.anim.PushBack({ 7, 608, 50, 48 });
 	snowDeath.anim.PushBack({ 53, 608, 50, 48 });
@@ -206,7 +191,6 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 update_status ModuleParticles::Update()
 {
-	death.anim.Reset();
 
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
