@@ -71,7 +71,7 @@ update_status SceneIntro::Update()
 update_status SceneIntro::PostUpdate()
 {
 	// Draw everything ---
-	App->render->Blit(bgTexture, 0, 0, NULL);
+ 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	return update_status::UPDATE_CONTINUE;
 }
