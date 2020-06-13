@@ -21,6 +21,8 @@ public:
 
 	void Freeze(Collider* collider) override;
 
+	//void BallPush(Collider* collider) override;
+
 	// This enemy has one sprite and one frame
     // We are keeping it an animation for consistency with other enemies
 	Animation idle;

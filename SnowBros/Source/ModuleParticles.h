@@ -49,8 +49,6 @@ public:
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
 	void AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
-private:
-
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };
 
@@ -65,7 +63,7 @@ public:
 	//Template particle for a shot
 	Particle shotright;
 	Particle shotleft;
-	Particle snowball[5];
+	//Particle snowball[5];
 	Particle snowDeath;
 
 	Particle r_fire_ball;

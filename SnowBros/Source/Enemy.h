@@ -37,6 +37,8 @@ public:
 
 	virtual void Freeze(Collider* collider);
 
+	virtual void BallPush(Collider* collider);
+
 public:
 	// The current position in the world
 	iPoint position;

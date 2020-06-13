@@ -185,28 +185,28 @@ void Frog::Freeze(Collider* collider) {
 	{
 	case 1:
 		App->player->score += 500;
-		App->particles->snowball[3].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[3].lifetime = 0;
+		//App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
 		break;
 	case 2:
 		App->player->score += 10;
-		App->particles->snowball[2].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[2].lifetime = 0;
+		//App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
 		break;
 	case 3:
 		App->player->score += 10;
-		App->particles->snowball[1].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[1].lifetime = 0;
+		//App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
 		break;
 	case 4:
 		App->player->score += 10;
-		App->particles->snowball[0].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[0].lifetime = 0;
+		//App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
 		break;
 	case 5:
 	case 6:
 		App->player->score += 10;
-		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
+		//App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
 		this->collider->type = this->collider->NONE;
 		break;
 	case 7:

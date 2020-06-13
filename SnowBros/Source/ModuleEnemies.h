@@ -56,6 +56,8 @@ public:
 
 	void Freeze(Collider* c1, Collider* c2) override;
 
+	//void BallPush(Collider* c1, Collider* c2) override;
+
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(ENEMY_TYPE type, int x, int y);
 

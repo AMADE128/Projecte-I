@@ -101,6 +101,22 @@ void Enemy_Demon::Fall(Collider* collider) {
 void Enemy_Demon::StopMovement(Collider* collider) {
 
 	//position.x = 0;
+	/*if (this->collider->type == collider->FREEZE_BALL && App->player->pushing == true)
+	{
+		if (App->player->currentAnimation == &App->player->sideRightAnim)
+		{
+			position.x--;
+		}
+
+		if (App->player->currentAnimation == &App->player->sideLeftAnim)
+		{
+			position.x++;
+		}
+		
+		this->collider->SetPos(this->position.x, this->position.y);
+		App->player->wallCollision = true;
+	}*/
+
 	if (currentAnim == &r_walk)
 	{
 		currentAnim = &l_walk;
@@ -127,7 +143,7 @@ bool Enemy_Demon::CleanUp()
 
 void Enemy_Demon::Freeze(Collider* collider) {
 
-	if (life >= 0)
+   	if (life >= 0)
 	{
 		life--;
 	}
@@ -150,37 +166,54 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	{
 	case 1:
 		App->player->score += 500;
-		App->particles->snowball[3].lifetime = 0;
+		/*App->particles->snowball[3].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
-		this->collider->type = this->collider->FREEZE_BALL;
+		this->collider->type = this->collider->FREEZE_BALL;*/
 		break;
 	case 2:
 		App->player->score += 10;
-		App->particles->snowball[2].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[2].lifetime = 0;
+		/*App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);*/
 		break;
 	case 3:
 		App->player->score += 10;
-		App->particles->snowball[1].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[1].lifetime = 0;
+		/*App->particles->AddParticle(App->particles->snowball[2], position.x, position.y, Collider::NONE);*/
 		break;
 	case 4:
 		App->player->score += 10;
-		App->particles->snowball[0].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);
+		//App->particles->snowball[0].lifetime = 0;
+		/*App->particles->AddParticle(App->particles->snowball[1], position.x, position.y, Collider::NONE);*/
 		break;
 	case 5:
 		App->player->score += 10;
-		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
+		/*App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);*/
 		break;
 	case 6:
 		App->player->score += 10;
-		App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
+		/*App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);*/
 		this->collider->type = this->collider->NONE;
 		break;
 	case 7:
 		break;
 
 	}
-
 }
+
+/*void Enemy_Demon::BallPush(Collider* c1)
+{
+	if (this->collider->type == this->collider->FREEZE_BALL && App->player->pushing == true)
+	{
+
+		for (int i = 0; i < 100; i++)
+		{
+			if (App->particles->particles[i] != nullptr && App->particles->particles[i]->position.x == this->position.x && App->particles->particles[i]->position.y == this->position.y)
+			{
+				App->particles->particles[i]->position.x++;
+			}
+		}
+
+		this->position.x++;
+		this->collider->SetPos(this->collider->rect.x + 1, this->collider->rect.y);
+	}
+}*/

@@ -64,9 +64,11 @@ void Module::PushL(Collider* c1, Collider* c2) {
 
 }
 
-void Module::Push(Collider* c1, Collider* c2) {
+/*void Module::BallPush(Collider* c1, Collider* c2) 
+{
 
-}
+
+}*/
 
 void Module::Enable()
 {

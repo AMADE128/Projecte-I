@@ -179,6 +179,12 @@ update_status ModulePlayer::Update()
 
 	if (death == false)
 	{
+
+		/*if (wallCollision == true && pushing == true && currentAnimation != &r_idleAnim && currentAnimation != &l_idleAnim)
+		{
+			position.x--;
+		}*/
+
 		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
 		{
 			// Enable to escape collision
@@ -196,6 +202,12 @@ update_status ModulePlayer::Update()
 			{
 				speed_y = SPEED_Y;
 			}
+
+			/*if (pushing == true && (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim || currentAnimation == &l_idleAnim))
+			{
+				speed_x = 2;
+				pushing = false;
+			}*/
 
 			// Move player
 			position.x -= speed_x * 1.5;
@@ -231,6 +243,11 @@ update_status ModulePlayer::Update()
 				speed_y = SPEED_Y;
 			}
 
+			/*if (pushing == true && (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim || currentAnimation == &r_idleAnim))
+			{
+				speed_x = 2;
+				pushing = false;
+			}*/
 
 			position.x += speed_x * 1.5;
 
@@ -608,10 +625,11 @@ void ModulePlayer::PushL(Collider* c1, Collider* c2)
 	position.x-=4;
 }
 
-void ModulePlayer::Push(Collider* c1, Collider* c2)
+/*void ModulePlayer::BallPush(Collider* c1, Collider* c2)
 {
-	
-}
+	speed_x = 1.5;
+	pushing = true;
+}*/
 
 bool ModulePlayer::CleanUp()
 {

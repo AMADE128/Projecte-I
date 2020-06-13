@@ -63,7 +63,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::WALLPUSHR] = PUSHR;
 	matrix[Collider::Type::PLAYER][Collider::Type::WALLPUSHL] = PUSHL;
 	matrix[Collider::Type::PLAYER][Collider::Type::GODMODE] = NOTHING;
-	matrix[Collider::Type::PLAYER][Collider::Type::FREEZE_BALL] = NOTHING;
+	matrix[Collider::Type::PLAYER][Collider::Type::FREEZE_BALL] = PUSH;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::ENEMY][Collider::Type::GROUND] = STOP_Y;
@@ -158,7 +158,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::WALL] = STOP;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::GROUND] = STOP_Y;
-	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER] = PUSH;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::ENEMY] = NOTHING;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER_SHOT] = NOTHING;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::ENEMY_SHOT] = NOTHING;
@@ -252,11 +252,11 @@ update_status ModuleCollisions::PreUpdate()
 				if (matrix[c2->type][c1->type] == PUSHL && c2->listener)
 					c2->listener->PushL(c2, c1);
 
-				if (matrix[c1->type][c2->type] == PUSH && c1->listener)
-					c1->listener->PushL(c1, c2);
+				/*if (matrix[c1->type][c2->type] == PUSH && c1->listener)
+					c1->listener->BallPush(c1, c2);
 
 				if (matrix[c2->type][c1->type] == PUSH && c2->listener)
-					c2->listener->PushL(c2, c1);
+					c2->listener->BallPush(c2, c1);*/
 			}
 
 			//SOBRA 7: INTENTO DE QUE CAIGA EL JUGADOR SI NO ESTÁ EN UNA PLATAFORMA
