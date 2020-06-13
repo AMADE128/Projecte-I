@@ -124,7 +124,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 		rect.h *= 1.3;
 	}
 
-	else if (texture == App->gameOver->MonoTexture)
+	else if (texture == App->gameOver->MonoTexture || texture == App->enemies->monkey)
 	{
 		rect.w *= 1.6;
 		rect.h *= 1.6;

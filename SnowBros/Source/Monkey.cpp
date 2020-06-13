@@ -1,4 +1,4 @@
-#include "Enemy_Demon.h"
+#include "Monkey.h"
 
 #include <stdio.h>
 #include "Application.h"
@@ -9,37 +9,37 @@
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 
-Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
+Monkey::Monkey(int x, int y) : Enemy(x, y)
 {
 
 	//Idle animation
-	idle.PushBack({ 3,2,29,30 });
+	idle.PushBack({ 32,32,80,80 });
 
 	//life of the Enemy
 
 	//Left Walk Animation
-	l_walk.PushBack({ 32, 0, 32, 32 });
-	l_walk.PushBack({ 64, 0, 32, 32 });
-	l_walk.PushBack({ 96, 0, 32, 32 });
+	l_walk.PushBack({ 128, 32, 80, 80 });
+	l_walk.PushBack({ 240, 32, 80, 80 });
+	l_walk.PushBack({ 336, 32, 80, 80 });
 	l_walk.loop = true;
 	l_walk.speed = 0.07f;
 
 	//Right Walk
-	r_walk.PushBack({ 256, 0, 32, 32 });
-	r_walk.PushBack({ 224, 0, 32, 32 });
-	r_walk.PushBack({ 192, 0, 32, 32 });
+	r_walk.PushBack({ 880, 32, 80, 80 });
+	r_walk.PushBack({ 784, 32, 80, 80 });
+	r_walk.PushBack({ 672, 32, 80, 80 });
 	r_walk.loop = true;
 	r_walk.speed = 0.07f;
 
 	//Left Stun
-	l_stun.PushBack({ 0, 32, 32, 32 });
-	l_stun.PushBack({ 32, 32, 32, 32 });
+	l_stun.PushBack({ 448, 32, 80, 80 });
+	l_stun.PushBack({ 32, 144, 80, 80 });
 	l_stun.loop = true;
 	l_stun.speed = 0.05f;
 
 	//Right Snowball
-	r_stun.PushBack({ 256, 32, 32, 32 });
-	r_stun.PushBack({ 288, 32, 32, 32 });
+	r_stun.PushBack({ 576, 32, 80, 80 });
+	r_stun.PushBack({ 976, 144, 80, 80 });
 	r_stun.loop = true;
 	r_stun.speed = 0.05f;
 
@@ -52,20 +52,20 @@ Enemy_Demon::Enemy_Demon(int x, int y) : Enemy(x, y)
 	collider = App->collisions->AddCollider({ (position.x) + 14, position.y, 32 * 4 - 15, 32 * 4 - 15 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
-void Enemy_Demon::Update()
+void Monkey::Update()
 {
 
 	path.Update();
 
 	if (currentAnim == &r_walk)
 	{
-		position.x+= 2;
+		position.x += 2;
 	}
 
 	if (currentAnim == &l_walk)
 	{
 		//position = spawnPos - path.GetRelativePosition();
-		position.x-= 2;
+		position.x -= 2;
 	}
 
 	if (life >= 7)
@@ -78,7 +78,7 @@ void Enemy_Demon::Update()
 	Enemy::Update();
 }
 
-void Enemy_Demon::Fall(Collider* collider) {
+void Monkey::Fall(Collider* collider) {
 
 	//position.x = 0;
 	if (currentAnim == &r_walk)
@@ -98,7 +98,7 @@ void Enemy_Demon::Fall(Collider* collider) {
 
 }
 
-void Enemy_Demon::StopMovement(Collider* collider) {
+void Monkey::StopMovement(Collider* collider) {
 
 	//position.x = 0;
 	if (currentAnim == &r_walk)
@@ -118,14 +118,14 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 
 }
 
-bool Enemy_Demon::CleanUp()
+bool Monkey::CleanUp()
 {
 	App->collisions->RemoveCollider(collider);
 
 	return true;
 }
 
-void Enemy_Demon::Freeze(Collider* collider) {
+void Monkey::Freeze(Collider* collider) {
 
 	if (life >= 0)
 	{
@@ -152,6 +152,7 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		App->player->score += 500;
 		App->particles->snowball[3].lifetime = 0;
 		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
+		this->collider->type = this->collider->FREEZE_BALL;
 		break;
 	case 2:
 		App->player->score += 10;

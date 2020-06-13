@@ -72,11 +72,11 @@ bool SceneLevel2::Start()
 	App->collisions->AddCollider({ 1400, 0, 40, 1390 }, Collider::Type::WALL);
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 370, 665);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 900, 510);
+	App->enemies->AddEnemy(ENEMY_TYPE::MONKEY, 370, 665);
+	App->enemies->AddEnemy(ENEMY_TYPE::MONKEY, 900, 510);
 	App->enemies->AddEnemy(ENEMY_TYPE::FROG, 650, 205);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 750, 45);
-	App->enemies->AddEnemy(ENEMY_TYPE::DEMON, 290, 45);
+	App->enemies->AddEnemy(ENEMY_TYPE::MONKEY, 750, 45);
+	App->enemies->AddEnemy(ENEMY_TYPE::MONKEY, 290, 45);
 
 	App->enemies->win = false;
 
