@@ -56,7 +56,7 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing sound FX, closing Mixer and Audio subsystem");
 
-	if (music != NULL && App->sceneIntro->IsEnabled() == false)
+	if (music != NULL /*&& App->sceneIntro->IsEnabled() == false*/)
 	{
 		Mix_FreeMusic(music);
 	}

@@ -49,13 +49,13 @@ Application::Application()
 	modules[16] = player = new ModulePlayer(false);	//Player starts disabled
 	modules[17] = particles = new ModuleParticles(false);
 	modules[15] = enemies = new ModuleEnemies(false);	//Enemies start disabled
-	modules[21] = gameOver = new GameOver(false);
+	modules[20] = gameOver = new GameOver(false);
 
 	modules[18] = collisions = new ModuleCollisions(false);
 	modules[19] = fade = new ModuleFadeToBlack(true);
 
-	modules[20] = fonts = new ModuleFonts(true);
-	modules[22] = render = new ModuleRender(true);
+	modules[22] = fonts = new ModuleFonts(true);
+	modules[21] = render = new ModuleRender(true);
 	
 	
 }

@@ -147,10 +147,6 @@ bool ModulePlayer::Start()
 
 	destroyed = false;
 
-	char life_score_Table[] = { "0123456789" };
-	lifeFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
-	scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/points.png", life_score_Table, 1);
-
 	collider = App->collisions->AddCollider({ position.x, position.y, 32 * 3, 28 * 4}, Collider::Type::PLAYER, this);
 
 	return ret;

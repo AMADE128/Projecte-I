@@ -85,7 +85,7 @@ bool SceneIntro::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();*/
 
-	//SDL_DestroyTexture(bgTexture);
+	App->textures->Unload(bgTexture);
 
 	return true;
 }
