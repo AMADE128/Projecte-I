@@ -1,0 +1,9 @@
+﻿  GameOver.cpp
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\Animation.h(56,19): warning C4244: 'inicializando': conversión de 'const float' a 'int'; posible pérdida de datos
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\Animation.h(58,30): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\GameOver.cpp(71,3): error C2146: error de sintaxis: falta ';' delante del identificador '_Table'
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\GameOver.cpp(71,3): error C2065: '_Table': identificador no declarado
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\GameOver.cpp(65,10): error C2059: error de sintaxis: ']'
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\GameOver.cpp(65,14): error C2143: error de sintaxis: falta ';' delante de '{'
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\GameOver.cpp(65,29): error C2143: error de sintaxis: falta ';' delante de '}'
+C:\Users\Pol\Documents\GitHub\Snow-Bros\Snow-Bros\SnowBros\Source\GameOver.cpp(72,69): error C2065: 'life_score_Table': identificador no declarado
