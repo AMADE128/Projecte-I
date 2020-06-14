@@ -103,12 +103,12 @@ update_status SceneLevel1::PostUpdate()
 
 bool SceneLevel1::CleanUp()
 {
+	App->textures->Unload(bgTexture1);
+
 	App->collisions->Disable();
 	App->particles->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
-
-	App->textures->Unload(bgTexture1);
 
 	return true;
 }

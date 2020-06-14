@@ -1,5 +1,6 @@
-#include "SceneIntro.h"
+#include "SceneWon.h"
 
+#include "SceneIntro.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -16,24 +17,24 @@
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
 
-SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
+SceneWon::SceneWon(bool startEnabled) : Module(startEnabled)
 {
 
 }
 
-SceneIntro::~SceneIntro()
+SceneWon::~SceneWon()
 {
 
 }
 
 // Load assets
-bool SceneIntro::Start()
+bool SceneWon::Start()
 {
 	LOG("Loading background assets");
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/Menu & UI/logoblack.png");
+	bgTextureWon = App->textures->Load("Assets/Sprites/Menu & UI/won_screen.png");
 
 	if (App->enemies->IsEnabled() == true)
 	{
@@ -53,32 +54,31 @@ bool SceneIntro::Start()
 	}
 
 	App->player->score = 0;
-	App->player->pHealth = 3;
 
 	return ret;
 }
 
-update_status SceneIntro::Update()
+update_status SceneWon::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_8, 90);
+		App->fade->FadeToBlack(this, (Module*)App->sceneIntro, 90);
 	}
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
-update_status SceneIntro::PostUpdate()
+update_status SceneWon::PostUpdate()
 {
 	// Draw everything ---
- 	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTextureWon, 0, 0, NULL);
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 
-bool SceneIntro::CleanUp()
+bool SceneWon::CleanUp()
 {
 
 	/*App->collisions->Disable();
@@ -86,7 +86,7 @@ bool SceneIntro::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();*/
 
-	App->textures->Unload(bgTexture);
+	App->textures->Unload(bgTextureWon);
 
 	return true;
 }

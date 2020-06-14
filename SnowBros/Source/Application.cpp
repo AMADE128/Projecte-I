@@ -25,6 +25,7 @@
 #include "ModuleRender.h"
 #include "ModuleFonts.h"
 #include "GameOver.h"
+#include "SceneWon.h"
 
 Application::Application()
 {
@@ -48,16 +49,17 @@ Application::Application()
 	modules[13] = sceneLevel_9 = new SceneLevel9(false);
 	modules[14] = sceneLevel_10 = new SceneLevel10(false);		//Gameplay scene starts disabled
 	modules[15] = sceneCredits = new SceneCredits(true);
-	modules[17] = player = new ModulePlayer(false);	//Player starts disabled
-	modules[18] = particles = new ModuleParticles(false);
-	modules[16] = enemies = new ModuleEnemies(false);	//Enemies start disabled
-	modules[21] = gameOver = new GameOver(false);
+	modules[16] = sceneWon = new SceneWon(false);
+	modules[18] = player = new ModulePlayer(false);	//Player starts disabled
+	modules[19] = particles = new ModuleParticles(false);
+	modules[17] = enemies = new ModuleEnemies(false);	//Enemies start disabled
+	modules[22] = gameOver = new GameOver(false);
 
-	modules[19] = collisions = new ModuleCollisions(false);
-	modules[20] = fade = new ModuleFadeToBlack(true);
+	modules[20] = collisions = new ModuleCollisions(false);
+	modules[21] = fade = new ModuleFadeToBlack(true);
 
-	modules[23] = fonts = new ModuleFonts(true);
-	modules[22] = render = new ModuleRender(true);
+	modules[24] = fonts = new ModuleFonts(true);
+	modules[23] = render = new ModuleRender(true);
 	
 	
 }

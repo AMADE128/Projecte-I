@@ -23,7 +23,6 @@ bool ModuleFonts::Init()
 
 	char life_score_Table[] = { "0123456789" };
 	App->player->lifeFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png", life_score_Table, 1);
-	App->player->scoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/points.png", life_score_Table, 1);
 	
 
 	return true;

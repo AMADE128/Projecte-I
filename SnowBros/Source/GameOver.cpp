@@ -63,7 +63,7 @@ bool GameOver::Start()
 	DemonioTexture = App->textures->Load("Assets/Sprites/Enemies/Demonio.png");
 
 	char life_score_Table[] = { "0123456789" };
-	ScoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/points.png",life_score_Table, 1);
+	ScoreFont = App->fonts->Load("Assets/Sprites/Menu & UI/numbers.png",life_score_Table, 1);
 	
 	
 	App->enemies->Disable();

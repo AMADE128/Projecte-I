@@ -424,6 +424,11 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	{
+		destroyed = true;
+		pHealth = 0;
+	}
 	
 
 	if (destroyed)
@@ -433,61 +438,51 @@ update_status ModulePlayer::Update()
 			{
 				App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[6]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_2, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[7]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_3, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[8]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_4, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[9]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_5, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[10]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_6, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[11]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_7, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[12]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_8, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 			else if (App->modules[13]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_9, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
-				pHealth = 4;
 				destroyed = false;
 			}
 		}
 		else if (death == true) {
 			this->collider->type = this->collider->NONE;
-			App->audio->PlayFx(deathFx);
 			if (deathAnim.finish == true)
 			{
 				position.x = 528;
@@ -540,6 +535,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->audio->PlayFx(explosionFx);
 		if (pHealth >= 0)
 		{
+			App->audio->PlayFx(deathFx);
 			pHealth--;
 			death = true;
 			currentAnimation = &deathAnim;

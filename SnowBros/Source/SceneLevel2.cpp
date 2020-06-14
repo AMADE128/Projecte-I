@@ -106,13 +106,13 @@ update_status SceneLevel2::PostUpdate()
 
 bool SceneLevel2::CleanUp()
 {
+	App->textures->Unload(bgTexture2);
+
 	App->collisions->Disable();
 	App->particles->Disable();
 	App->player->Disable();
 	App->enemies->Disable();
-
 	//Mix_FreeMusic(App->audio->music);
-	App->textures->Unload(bgTexture2);
 
 	return true;
 }
