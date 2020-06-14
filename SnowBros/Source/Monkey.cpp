@@ -62,15 +62,11 @@ void Monkey::Update()
 		if (lastAnim == &r_walk)
 		{
 			path.currentStep = 0;
-			path.currentStepFrame = 0;
-			currentAnim = &r_walk;
 		}
 
 		else if (lastAnim == &l_walk)
 		{
 			path.currentStep = 1;
-			path.currentStepFrame = 0;
-			currentAnim = &l_walk;
 		}
 
 		this->collider->type = this->collider->ENEMY;

@@ -57,20 +57,16 @@ void Enemy_Demon::Update()
 
 	path.Update();
 
-	if ((life == 7) && (currentAnim != &r_walk && currentAnim != &l_walk && currentAnim != nullptr))
+	if ((life == 7 && stunt == true) && (currentAnim != &r_walk && currentAnim != &l_walk && currentAnim != nullptr))
 	{
 		if(lastAnim == &r_walk)
 		{
- 			path.currentStep = 0;
-			path.currentStepFrame = 0;
-			currentAnim = &r_walk;
+			path.currentStep = 0;
 		}
 
 		else if (lastAnim == &l_walk)
 		{
 			path.currentStep = 1; 
-			path.currentStepFrame = 0;
-			currentAnim = &l_walk;
 		}
 
 		this->collider->type = this->collider->ENEMY;
@@ -83,6 +79,7 @@ void Enemy_Demon::Update()
 		this->collider->type = this->collider->NONE;
 	}
 
+	
 
 	/*if (fall == true)
 	{
@@ -172,6 +169,7 @@ void Enemy_Demon::StopMovement(Collider* collider) {
 		path.currentStep = 0;
 		path.currentStepFrame = 0;
 	}
+
 }
 
 bool Enemy_Demon::CleanUp()
@@ -190,7 +188,7 @@ void Enemy_Demon::Freeze(Collider* collider) {
 
 	if (currentAnim == &r_walk && life > 0)
 	{
-   		lastAnim = &r_walk;
+		lastAnim = &r_walk;
 		currentAnim = &r_stun;
 		path.currentStep = 2;
 		path.currentStepFrame = 0;
