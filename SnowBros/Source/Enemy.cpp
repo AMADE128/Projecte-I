@@ -40,7 +40,7 @@ void Enemy::Update()
 	if (currentAnim != nullptr)
 		currentAnim->Update();
 
-	if (life < 7)
+	if (life < 7 && App->player->pushing == false)
 	{
 		int currentTime = SDL_GetTicks();
 
@@ -63,33 +63,34 @@ void Enemy::Update()
 			position.x -= App->player->speed_x * 1.5;
 	}
 	
-	switch (life)
-	{
-	case 7:
-		SnowballAnim.SetCurrentFrame(0);
-		break;
-	case 6:
-	case 5:
-		SnowballAnim.SetCurrentFrame(1);
-		break;
-	case 4:
-		SnowballAnim.SetCurrentFrame(2);
-		break;
-	case 3:
-		SnowballAnim.SetCurrentFrame(3);
-		break;
-	case 2:
-		SnowballAnim.SetCurrentFrame(4);
-		break;
-	case 1:
-	case 0:
-		SnowballAnim.SetCurrentFrame(5);
-		break;
-	default:
-		break;
-	}
+		switch (life)
+		{
+		case 7:
+			SnowballAnim.SetCurrentFrame(0);
+			break;
+		case 6:
+		case 5:
+			SnowballAnim.SetCurrentFrame(1);
+			break;
+		case 4:
+			SnowballAnim.SetCurrentFrame(2);
+			break;
+		case 3:
+			SnowballAnim.SetCurrentFrame(3);
+			break;
+		case 2:
+			SnowballAnim.SetCurrentFrame(4);
+			break;
+		case 1:
+		case 0:
+			SnowballAnim.SetCurrentFrame(5);
+			break;
+		default:
+			break;
+		}
 
-	currentSnowAnim = &SnowballAnim;
+		currentSnowAnim = &SnowballAnim;
+	
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
