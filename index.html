@@ -1,169 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+       <head> 
+            <meta charset="utf-8" />
+            <title>Aprending Team</title>
+            <meta name="description" content="Apredning Team Web"/>
+            <meta name="author" content="Aprending Team">
+            <link rel="stylesheet" href="styles.css">
+            <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+       </head>
+       <body class= "cabecera">
 
-<head>
+         <div class= "agrupar">
+            
+            <header class= "header">
+              <h2 class="titular">Aprending Team: Project I</h2>
+              <img class="logo" src="images/logocitm.png" alt="Citm Logo">
+            </header>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+            <section class="section">
+              <article>
+                  <hgroup class="titular">
+                      <h1>Aprending Team</h1>
+                  </hgroup>
+                  <div class="card">
+                    <div class="front"><img src="images/Team.jpeg"></div>
+                    <div class="back">
+                      <div class="details">
+                        <h2>Aprending Team<br><span>Game Developers</span></h2>
+                        <div class="social-icon">
+                          <a href="https://github.com/AMADE128/Snow-Bros" target = "_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 <time datetime="11-06-2020">Aprending Team Members</time>
+                 <p class="texto">We are 4 students cursing the first year of the videogame design degree at CITM (Terrassa, Barcelona) </p>
+                 <p class ="texto">Himar Bravo, Pol Vazquez, Marc Pavon, Denis Deconinck</p>
+              </article>
+              <article id="header2">
+                  <hgroup>
+                      <h1 class="titular">About our game</h1>
+                  </hgroup>
+                  <img class= "imag"src="images/SnowBros.jpg" alt="Snow Bros Game">
+                <time datetime="11-06-2020">Snow Bros by Toaplan</time>
+                <p class="texto">Snow Bros is a game created by Toaplan. In this plattform game, you have to defeat all the enemies by turning them into snowballs to pass to the next level. If you get hit 3 times, you lose.</p>
+               <footer class="down">
+                 <p class="descarga">Click here to download our version of the game: </p>
+                 <adress class = "link">
+                  <div class="buttons">
+                     <button1>
+                      <a href="Release/AprendingTeam_SnowBros_v.0.5.zip" download="Snow Bros - 0.5">
+                       Snow Bros - Download
+                      </a>
+                     </button1>
+                  </adress>
+                </div>
+               
+               </footer>
+              </article>
+          </section>
 
-  <title> Aprending Team - Project I</title>
+          <aside class="columna">
+              <blockquote>
+                Demo of the gameplay: 
+                <a class = "button" href="images/SnowBrosGameplay.mp4">Snow Bros Gameplay</a>
+              </button>
+              </blockquote>
+              <blockquote>
+                <a href = "https://github.com/AMADE128/Snow-Bros" target = "_blank"> Visit our repository here </a>
+              </blockquote>
+              <blockquote>
+                <ul class = "nombres">
+                  <li> <a href = "https://github.com/himar33" target = "_blank"> Himar Bravo </a> </li>
+                  <p class = "margen">Level Design</p>
+                  <li><a href = "https://github.com/AMADE128" target = "_blank"> Pol Vazquez </a></li>
+                  <p class = "margen">Level Design</p>
+                  <li><a href = "https://github.com/Denisdrk6" target = "_blank"> Denis Deconinck </a></li>
+                  <p class = "margen">Pgrogramming</p>
+                  <li><a href = "https://github.com/Marckitus" target = "_blank"> Marc Pavon </a></li>
+                  <p class = "margen">Level Design</p>
+                </ul>
+              </blockquote>
+          </aside>
 
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+          <footer class="pie">
+              All Rights Reserved 2020
+          </footer>
+         </div>
 
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-  <!-- Custom styles for this template -->
-  <link href="css/landing-page.min.css" rel="stylesheet">
-
-</head>
-
-<body>
-  <!-- Masthead -->
-  <header class="masthead text-white text-center">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-9 mx-auto">
-          <h1 class="mb-5">Univeristy Project - Aprending Team</h1>
-        </div>
-        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form>
-            <div class="form-row">
-              <div class="col-12 col-md-9 mb-2 mb-md-0">
-              </div>
-              <div class="col-12 col-md-3">
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Icons Grid -->
-  <section class="features-icons bg-light text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-              <i class="icon-screen-desktop m-auto text-primary"></i>
-            </div>
-            <div class="row" ><div class="col-lg4">Programmed in C++</div><div class="col"></div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-            <div class="features-icons-icon d-flex">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Image Showcases -->
-  <section class="showcase">
-    <div class="container-fluid p-0">
-      <div class="row no-gutters">
-        </div>
-      </div>
-      <div class="row no-gutters">
-        <div class="col-lg-6 text-white showcase-img" style="background-image: url('img/bg-showcase-2.jpg');"></div>
-        <div class="col-lg-6 my-auto showcase-text">
-          <h2>About the Team</h2>
-          <p class="lead mb-0">We are 4 students from the CITM, actually cursing our first year in a videogame design degree. We are all new in the world of programing</p>
-        </div>
-      </div>
-      <div class="row no-gutters">
-        <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/bg-showcase-3.jpg');"></div>
-        <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-          <h2>About the Game</h2>
-          <p class="lead mb-0"> This platforms game is a recreation of the original game Snow Bros by Toaplan. In this version you have to defeat the enemies by turning them into snowballs. If they hit you 3 times, you lose.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials text-center bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-            <img class="img-fluid rounded-circle mb-3" src="img/Team.jpeg" alt="">
-            <h5>Aprending Team </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-
-  <!-- Footer -->
-  <footer class="footer bg-light">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="#">About</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Contact</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-            <li class="list-inline-item">&sdot;</li>
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-          </ul>
-          <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2019. All Rights Reserved.</p>
-        </div>
-        <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-facebook fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item mr-3">
-              <a href="#">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-instagram fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
+       </body>
 </html>
