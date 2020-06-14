@@ -126,19 +126,12 @@ time {
     margin-left: 100px;
 }
 
-.button {
-    background-color: #14085c;
-    color: #fcfcfc;
-    margin-top: 50px;
-    text-decoration:none;
-    border-radius: 30px;
-    
-  }
   
-button1 {
+button {
     position: relative;
     height: 60px;
     width: 200px;
+    margin: 0 35px;
     margin-left: 140px;
     border-radius: 50px;
     border: none;
@@ -152,18 +145,18 @@ button1 {
     font-family: Helvetica;
 }
 
-button1:first-child:hover {
+button:first-child:hover {
     background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
     background-size: 200%;
 }
 
-button1:last-child:hover {
+button:last-child:hover {
     background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
     background-size: 200%;
 }
 
-button1:first-child:before,
-button1:last-child::before{
+button:first-child:before,
+button:last-child::before{
     content: '';
     position:absolute;
     background:inherit;
@@ -177,13 +170,13 @@ button1:last-child::before{
     transition: opacity .5s;
 }
 
-button1:hover:first-child:before,
-button1:hover:last-child:before{
+button:hover:first-child:before,
+button:hover:last-child:before{
     opacity: 1;
     z-index: -1;
 }
 
-button1:hover{
+button:hover{
     z-index: 1;
     animation: glow 2s linear infinite;
 }
