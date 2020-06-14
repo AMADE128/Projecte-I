@@ -177,15 +177,16 @@ update_status ModulePlayer::Update()
 	// Moving the player with the camera scroll
 	//App->player->position.x += 1;
 
+	GamePad& pad = App->input->pads[0];
+
 	if (death == false)
 	{
-
 		/*if (wallCollision == true && pushing == true && currentAnimation != &r_idleAnim && currentAnimation != &l_idleAnim)
 		{
 			position.x--;
 		}*/
 
-		if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
+		if ((App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] != KEY_STATE::KEY_REPEAT || pad.l_x < 0.0f) && App->enemies->win == false)
 		{
 			// Enable to escape collision
 			if (rightCollision == true)
@@ -225,7 +226,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
+		if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT || pad.l_x > 0.0f && App->input->keys[SDL_SCANCODE_A] != KEY_STATE::KEY_REPEAT && App->enemies->win == false)
 		{
 			if (leftCollision == true)
 			{
@@ -267,18 +268,18 @@ update_status ModulePlayer::Update()
 
 		if (godmode == true)
 		{
-			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || pad.b == true)
 			{
 				position.y -= speed_y;
 			}
-			if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+			if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT || pad.l_y > 0.0f)
 			{
 				position.y += speed_y;
 			}
 		}
 
 		//right jump
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &leftjumpAnim && fall == false && godmode == false && App->enemies->win == false)
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || pad.b == true && currentAnimation != &leftjumpAnim && fall == false && godmode == false && App->enemies->win == false)
 		{
 			if (rightCollision == true)
 			{
@@ -305,7 +306,7 @@ update_status ModulePlayer::Update()
 		}
 
 		//left jump
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && currentAnimation != &rightjumpAnim && fall == false && godmode == false && App->enemies->win == false)
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN || pad.b == true && currentAnimation != &rightjumpAnim && fall == false && godmode == false && App->enemies->win == false)
 		{
 			if (leftCollision == true)
 			{
@@ -331,7 +332,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN && App->enemies->win == false)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || pad.a == true && App->enemies->win == false)
 		{
 			if (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim)
 			{
@@ -389,7 +390,7 @@ update_status ModulePlayer::Update()
 		}
 
 		// If no up / left / right movement detected, set the current animation back to idle
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
+		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE || pad.b == true && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
 		{
 			//groundCollision = false;
 
@@ -410,7 +411,7 @@ update_status ModulePlayer::Update()
 		currentAnimation->Update();
 	}
 
-	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN || pad.l1 == true)
 	{
 		if (godmode == false)
 		{
@@ -424,60 +425,10 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN || pad.l2 == true)
 	{
 		destroyed = true;
 		pHealth = 0;
-	}
-
-	if (App->input->keys[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN)
-	{
-		if (App->modules[5]->IsEnabled() == true)
-		{
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[6]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_2, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[7]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_3, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[8]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_4, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[9]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_5, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[10]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_6, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[11]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_7, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[12]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_8, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-		}
-		else if (App->modules[13]->IsEnabled() == true) {
-			App->fade->FadeToBlack((Module*)App->sceneLevel_9, (Module*)App->sceneWon, 120);
-			//App->audio->PlayFx(looseFx);
-			destroyed = false;
-
 	}
 	
 
@@ -507,7 +458,7 @@ update_status ModulePlayer::Update()
 			}
 			else if (App->modules[9]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_5, (Module*)App->gameOver, 120);
-			    //App->audio->PlayFx(looseFx);
+				//App->audio->PlayFx(looseFx);
 				destroyed = false;
 			}
 			else if (App->modules[10]->IsEnabled() == true) {
@@ -532,6 +483,7 @@ update_status ModulePlayer::Update()
 			}
 		}
 		else if (death == true) {
+			App->input->ShakeController(0, 12, 0.33f);
 			this->collider->type = this->collider->NONE;
 			if (deathAnim.finish == true)
 			{

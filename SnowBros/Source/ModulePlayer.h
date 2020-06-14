@@ -127,6 +127,8 @@ public:
 	uint deathFx = 0;
 	uint explosionFx = 0;
 
+	bool debugGamepadInfo = false;
+
 };
 
 #endif //!__MODULE_PLAYER_H__
