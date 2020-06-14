@@ -65,11 +65,15 @@ void Frog::Update()
 		if (lastAnim == &r_idle)
 		{
 			path.currentStep = 0;
+			path.currentStepFrame = 0;
+			currentAnim = &r_idle;
 		}
 
 		else if (lastAnim == &l_idle)
 		{
 			path.currentStep = 1;
+			path.currentStepFrame = 0;
+			currentAnim = &l_idle;
 		}
 
 		this->collider->type = this->collider->ENEMY;
