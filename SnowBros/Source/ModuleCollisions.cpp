@@ -252,11 +252,11 @@ update_status ModuleCollisions::PreUpdate()
 				if (matrix[c2->type][c1->type] == PUSHL && c2->listener)
 					c2->listener->PushL(c2, c1);
 
-				/*if (matrix[c1->type][c2->type] == PUSH && c1->listener)
+				if (matrix[c1->type][c2->type] == PUSH && c1->listener)
 					c1->listener->BallPush(c1, c2);
 
 				if (matrix[c2->type][c1->type] == PUSH && c2->listener)
-					c2->listener->BallPush(c2, c1);*/
+					c2->listener->BallPush(c2, c1);
 			}
 
 			//SOBRA 7: INTENTO DE QUE CAIGA EL JUGADOR SI NO ESTÁ EN UNA PLATAFORMA

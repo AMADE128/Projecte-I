@@ -52,7 +52,7 @@ update_status ModuleEnemies::Update()
 
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->life > 2)
+		if (enemies[i] != nullptr && enemies[i]->life > 0)
 			enemies[i]->Update();
 	}
 
@@ -67,12 +67,12 @@ update_status ModuleEnemies::PostUpdate()
 {
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
-		if (enemies[i] != nullptr && enemies[i]->life > 2)
+		if (enemies[i] != nullptr && enemies[i]->life > 0)
 		{
 			enemies[i]->Draw();
 		}
 
-		if (enemies[i] != nullptr && enemies[i]->life <= 2)
+		if (enemies[i] != nullptr && enemies[i]->life <= 1)
 		{
 			sprintf_s(enemydiesText, 10, "%d", scoreD);
 			App->fonts->BlitText(enemies[i]->position.x, enemies[i]->position.y - 50, enemydiesFont, enemydiesText);
@@ -220,6 +220,18 @@ void ModuleEnemies::StopMovement(Collider* c1, Collider* c2)
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
 			enemies[i]->StopMovement(c2); //Notify the enemy of a collision
+			break;
+		}
+	}
+}
+
+void ModuleEnemies::StopMovementY(Collider* c1, Collider* c2)
+{
+	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
+		{
+			enemies[i]->StopMovementY(c2); //Notify the enemy of a collision
 			break;
 		}
 	}

@@ -74,22 +74,22 @@ bool ModuleParticles::Start()
 
  	if (FirstPushBack == false)
 	{
-	path.PushBack({ 1, 0 }, 5, &shotright.anim);
-	path.PushBack({ 1, 0.25 }, 3, &shotright.anim);
-	path.PushBack({ 1, 0.5 }, 3, &shotright.anim);
-	path.PushBack({ 1, 1 }, 2, &shotright.anim);
-	path.PushBack({ 1, 1.5 }, 2, &shotright.anim);
-	path.PushBack({ 1, 2 }, 2, &shotright.anim);
+	path.PushBack({ 1, 0 }, 2, &shotright.anim);
+	path.PushBack({ 1, 0.25 }, 2, &shotright.anim);
+	path.PushBack({ 1, 0.5 }, 1, &shotright.anim);
+	path.PushBack({ 1, 1 }, 1, &shotright.anim);
+	path.PushBack({ 1, 1.5 }, 1, &shotright.anim);
+	path.PushBack({ 1, 2 }, 1, &shotright.anim);
 	path.PushBack({ 0.75, 4 }, 2, &shotright.anim);
 	path.PushBack({ 0.75, 8 }, 2, &shotright.anim);
 	path.PushBack({ 0.75, 12 }, 2, &shotright.anim);
 
-	path.PushBack({ -1, 0 }, 5, &shotleft.anim);
-	path.PushBack({ -1, 0.25 }, 3, &shotleft.anim);
-	path.PushBack({ -1, 0.5 }, 3, &shotleft.anim);
-	path.PushBack({ -1, 1 }, 2, &shotleft.anim);
-	path.PushBack({ -1, 1.5 }, 2, &shotleft.anim);
-	path.PushBack({ -1, 2 }, 2, &shotleft.anim);
+	path.PushBack({ -1, 0 }, 2, &shotleft.anim);
+	path.PushBack({ -1, 0.25 }, 1, &shotleft.anim);
+	path.PushBack({ -1, 0.5 }, 1, &shotleft.anim);
+	path.PushBack({ -1, 1 }, 1, &shotleft.anim);
+	path.PushBack({ -1, 1.5 }, 1, &shotleft.anim);
+	path.PushBack({ -1, 2 }, 1, &shotleft.anim);
 	path.PushBack({ -0.75, 4 }, 2, &shotleft.anim);
 	path.PushBack({ -0.75, 8 }, 2, &shotleft.anim);
 	path.PushBack({ -0.75, 12 }, 2, &shotleft.anim);

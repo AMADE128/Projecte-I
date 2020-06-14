@@ -55,6 +55,8 @@ public:
 
 	void StopMovement(Collider* c1, Collider* c2) override;
 
+	void StopMovementY(Collider* c1, Collider* c2) override;
+
 	void Freeze(Collider* c1, Collider* c2) override;
 
 	//void BallPush(Collider* c1, Collider* c2) override;

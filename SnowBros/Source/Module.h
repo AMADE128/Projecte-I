@@ -52,7 +52,7 @@ public:
 
 	virtual void PushL(Collider* c1, Collider* c2);
 
-	//virtual void BallPush(Collider* c1, Collider* c2);
+	virtual void BallPush(Collider* c1, Collider* c2);
 
 	inline bool IsEnabled() const { return isEnabled; }
 

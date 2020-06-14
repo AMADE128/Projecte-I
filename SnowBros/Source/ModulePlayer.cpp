@@ -203,11 +203,10 @@ update_status ModulePlayer::Update()
 				speed_y = SPEED_Y;
 			}
 
-			/*if (pushing == true && (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim || currentAnimation == &l_idleAnim))
+			if (pushing == true && (currentAnimation == &sideRightAnim || currentAnimation == &r_idleAnim || currentAnimation == &l_idleAnim))
 			{
-				speed_x = 2;
 				pushing = false;
-			}*/
+			}
 
 			// Move player
 			position.x -= speed_x * 1.5;
@@ -243,11 +242,10 @@ update_status ModulePlayer::Update()
 				speed_y = SPEED_Y;
 			}
 
-			/*if (pushing == true && (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim || currentAnimation == &r_idleAnim))
+			if (pushing == true && (currentAnimation == &sideLeftAnim || currentAnimation == &l_idleAnim || currentAnimation == &r_idleAnim))
 			{
-				speed_x = 2;
 				pushing = false;
-			}*/
+			}
 
 			position.x += speed_x * 1.5;
 
@@ -625,11 +623,10 @@ void ModulePlayer::PushL(Collider* c1, Collider* c2)
 	position.x-=4;
 }
 
-/*void ModulePlayer::BallPush(Collider* c1, Collider* c2)
+void ModulePlayer::BallPush(Collider* c1, Collider* c2)
 {
-	speed_x = 1.5;
 	pushing = true;
-}*/
+}
 
 bool ModulePlayer::CleanUp()
 {

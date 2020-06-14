@@ -63,6 +63,11 @@ public:
 
 		return frames[actualFrame];
 	}
+
+	void SetCurrentFrame(int frame)
+	{
+		currentFrame = frame;
+	}
 };
 
 #endif

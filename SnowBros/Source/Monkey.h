@@ -29,7 +29,11 @@ public:
 	Animation l_stun;
 	Animation r_stun;
 
+	Animation* lastAnim;
+
 	Animation snowball;
+
+	bool stunt = false;
 
 	bool CleanUp();
 

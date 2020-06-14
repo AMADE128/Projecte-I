@@ -39,6 +39,11 @@ public:
 
 	virtual void BallPush(Collider* collider);
 
+	virtual void StopMovementY(Collider* collider);
+
+	int tiempo = 3000;
+	int descongelar = 0;
+
 public:
 	// The current position in the world
 	iPoint position;
@@ -51,6 +56,10 @@ public:
 
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+	Animation* currentSnowAnim = nullptr;
+
+	Animation SnowballAnim;
+	Animation SnowballPushed;
 
 	int life = 7;
 

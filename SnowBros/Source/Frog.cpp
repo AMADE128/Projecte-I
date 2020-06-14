@@ -59,6 +59,24 @@ Frog::Frog(int x, int y) : Enemy(x, y)
 
 void Frog::Update()
 {
+
+	if ((life == 7 && stunt == true) && (currentAnim != &r_idle && currentAnim != &l_idle && currentAnim != nullptr))
+	{
+		if (lastAnim == &r_idle)
+		{
+			path.currentStep = 0;
+		}
+
+		else if (lastAnim == &l_idle)
+		{
+			path.currentStep = 1;
+		}
+
+		this->collider->type = this->collider->ENEMY;
+
+		stunt = false;
+	}
+
 	if (App->player->position.x > position.x && life >= 7)
 	{
 		currentAnim = &r_idle;
@@ -169,6 +187,7 @@ void Frog::Freeze(Collider* collider) {
 
 	if (life > 0)
 	{
+		lastAnim = &r_idle;
 		currentAnim = &r_stun;
 		path.currentStep = 2;
 		path.currentStepFrame = 0;
@@ -176,6 +195,7 @@ void Frog::Freeze(Collider* collider) {
 
 	else if (life > 0)
 	{
+		lastAnim = &l_idle;
 		currentAnim = &l_stun;
 		path.currentStep = 3;
 		path.currentStepFrame = 0;
@@ -208,6 +228,7 @@ void Frog::Freeze(Collider* collider) {
 		App->player->score += 10;
 		//App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);
 		this->collider->type = this->collider->NONE;
+		stunt = true;
 		break;
 	case 7:
 		break;

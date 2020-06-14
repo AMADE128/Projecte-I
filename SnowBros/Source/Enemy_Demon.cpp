@@ -57,6 +57,41 @@ void Enemy_Demon::Update()
 
 	path.Update();
 
+	if ((life == 7 && stunt == true) && (currentAnim != &r_walk && currentAnim != &l_walk && currentAnim != nullptr))
+	{
+		if(lastAnim == &r_walk)
+		{
+			path.currentStep = 0;
+		}
+
+		else if (lastAnim == &l_walk)
+		{
+			path.currentStep = 1; 
+		}
+
+		this->collider->type = this->collider->ENEMY;
+		
+		stunt = false;
+	}
+
+	if (life > 1 && this->collider->type != this->collider->NONE && this->collider->type != this->collider->ENEMY)
+	{
+		this->collider->type = this->collider->NONE;
+	}
+
+	
+
+	/*if (fall == true)
+	{
+		//groundCollision = false;
+		position.y += 2;
+	}
+
+	if (groundCollision == true)
+	{
+		fall = false;
+	}*/
+
 	if (currentAnim == &r_walk)
 	{
 		position.x+= 2;
@@ -80,6 +115,13 @@ void Enemy_Demon::Update()
 
 void Enemy_Demon::Fall(Collider* collider) {
 
+	/*if (fall == false)
+	{
+		fall = true;
+	}*/
+	
+	
+	
 	//position.x = 0;
 	if (currentAnim == &r_walk)
 	{
@@ -87,7 +129,7 @@ void Enemy_Demon::Fall(Collider* collider) {
 		path.currentStep = 1;
 		path.currentStepFrame = 0;
 	}
-
+	
 	else if (currentAnim == &l_walk)
 	{
 		//path.relativePosition = { 0,0 };
@@ -98,25 +140,21 @@ void Enemy_Demon::Fall(Collider* collider) {
 
 }
 
-void Enemy_Demon::StopMovement(Collider* collider) {
+void Enemy_Demon::StopMovementY(Collider* collider) {
+	/*if(groundCollision == false)
+	{
+		groundCollision = true;
+	}*/
+}
 
+void Enemy_Demon::StopMovement(Collider* collider) {
+		
 	//position.x = 0;
 	/*if (this->collider->type == collider->FREEZE_BALL && App->player->pushing == true)
-	{
-		if (App->player->currentAnimation == &App->player->sideRightAnim)
-		{
-			position.x--;
-		}
-
-		if (App->player->currentAnimation == &App->player->sideLeftAnim)
-		{
-			position.x++;
-		}
-		
-		this->collider->SetPos(this->position.x, this->position.y);
+	{	
 		App->player->wallCollision = true;
 	}*/
-
+	
 	if (currentAnim == &r_walk)
 	{
 		currentAnim = &l_walk;
@@ -150,6 +188,7 @@ void Enemy_Demon::Freeze(Collider* collider) {
 
 	if (currentAnim == &r_walk && life > 0)
 	{
+		lastAnim = &r_walk;
 		currentAnim = &r_stun;
 		path.currentStep = 2;
 		path.currentStepFrame = 0;
@@ -157,6 +196,7 @@ void Enemy_Demon::Freeze(Collider* collider) {
 
 	else if (currentAnim == &l_walk && life > 0)
 	{
+		lastAnim = &l_walk;
 		currentAnim = &l_stun;
 		path.currentStep = 3;
 		path.currentStepFrame = 0;
@@ -167,12 +207,13 @@ void Enemy_Demon::Freeze(Collider* collider) {
 	case 1:
 		App->player->score += 500;
 		/*App->particles->snowball[3].lifetime = 0;
-		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
-		this->collider->type = this->collider->FREEZE_BALL;*/
+		App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);*/
+		this->collider->type = this->collider->FREEZE_BALL;
 
 		break;
 	case 2:
 		App->player->score += 10;
+ 		this->collider->type = this->collider->NONE;
 		//App->particles->snowball[2].lifetime = 0;
 		/*App->particles->AddParticle(App->particles->snowball[3], position.x, position.y, Collider::NONE);*/
 		break;
@@ -192,8 +233,10 @@ void Enemy_Demon::Freeze(Collider* collider) {
 		break;
 	case 6:
 		App->player->score += 10;
+		
 		/*App->particles->AddParticle(App->particles->snowball[0], position.x, position.y, Collider::NONE);*/
 		this->collider->type = this->collider->NONE;
+		stunt = true;
 		break;
 	case 7:
 		break;

@@ -46,7 +46,7 @@ public:
 
 	void PushL(Collider* c1, Collider* c2) override;
 
-	//void BallPush(Collider* c1, Collider* c2) override;
+	void BallPush(Collider* c1, Collider* c2) override;
 
 	//Player Health
 
@@ -66,7 +66,7 @@ public:
 
 	bool fall;
 
-	//bool wallCollision = false;
+	bool wallCollision = false;
 
 	// The player spritesheets loaded into an SDL_Texture
 	SDL_Texture* spritesheet = nullptr;
@@ -106,7 +106,7 @@ public:
 	bool destroyed = false;
 
 	// A flag to detect when the player is pushing a snowball
-	//bool pushing = false;
+	bool pushing = false;
 
 	// A countdown to when the player gets destroyed. After a while, the game exits
 	uint destroyedCountdown = 200;

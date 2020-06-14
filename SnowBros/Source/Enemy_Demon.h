@@ -19,6 +19,8 @@ public:
 
 	void StopMovement(Collider* collider) override;
 
+	void StopMovementY(Collider* collider) override;
+
 	void Freeze(Collider* collider) override;
 
 	//void BallPush(Collider* collider) override;
@@ -31,7 +33,11 @@ public:
 	Animation l_stun;
 	Animation r_stun;
 
+	Animation* lastAnim;
+
 	Animation snowball;
+
+	bool stunt = false;
 
 	bool CleanUp();
 
@@ -41,7 +47,7 @@ private:
 	Path path;
 
 	bool fall = false;
-	bool groundCollision = true;
+	bool groundCollision = false;
 
 };
 
