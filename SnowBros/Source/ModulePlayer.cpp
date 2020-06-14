@@ -268,7 +268,7 @@ update_status ModulePlayer::Update()
 
 		if (godmode == true)
 		{
-			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || pad.b == true)
+			if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT || pad.l_y < 0)
 			{
 				position.y -= speed_y;
 			}
@@ -390,13 +390,13 @@ update_status ModulePlayer::Update()
 		}
 
 		// If no up / left / right movement detected, set the current animation back to idle
-		if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE || pad.b == true && App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE && App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
+		if ((App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE || pad.b == true) && (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE || pad.l_x < 0) && (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE || pad.l_x < 0) && (pad.l_x == 0.0f && pad.l_y == 0.0f) && ((currentAnimation != &leftjumpAnim && currentAnimation != &rightjumpAnim)) || ((currentAnimation == &leftjumpAnim || currentAnimation == &rightjumpAnim)))
 		{
 			//groundCollision = false;
 
 			speed_y = SPEED_Y;
 
-			if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232)
+			if (currentAnimation == &sideRightAnim || (currentAnimation == &rightjumpAnim && currentAnimation->GetCurrentFrame().x == lastRightJumpSprite.x && groundCollision == true) || (currentAnimation == &fallRightAnim && fall == false) || currentAnimation == &r_shootAnim && r_shootAnim.GetCurrentFrame().x == 232 )
 			{
 				currentAnimation = &r_idleAnim;
 			}
@@ -483,7 +483,6 @@ update_status ModulePlayer::Update()
 			}
 		}
 		else if (death == true) {
-			App->input->ShakeController(0, 12, 0.33f);
 			this->collider->type = this->collider->NONE;
 			if (deathAnim.finish == true)
 			{
