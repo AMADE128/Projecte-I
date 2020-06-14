@@ -160,7 +160,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::GROUND] = STOP_Y;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER] = PUSH;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::ENEMY] = NOTHING;
-	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER_SHOT] = NOTHING;
+	matrix[Collider::Type::FREEZE_BALL][Collider::Type::PLAYER_SHOT] = FREEZE;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::ENEMY_SHOT] = NOTHING;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::AIR] = FALL;
 	matrix[Collider::Type::FREEZE_BALL][Collider::Type::NONE] = NOTHING;

@@ -448,32 +448,38 @@ update_status ModulePlayer::Update()
 				pHealth = 4;
 				destroyed = false;
 			}
-			else if (App->modules[7]->IsEnabled() == true) {
+			else if (App->modules[8]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_4, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
 				destroyed = false;
 			}
-			else if (App->modules[7]->IsEnabled() == true) {
+			else if (App->modules[9]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_5, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
 				destroyed = false;
 			}
-			else if (App->modules[7]->IsEnabled() == true) {
+			else if (App->modules[10]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_6, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
 				destroyed = false;
 			}
-			else if (App->modules[7]->IsEnabled() == true) {
+			else if (App->modules[11]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_7, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
 				destroyed = false;
 			}
-			else if (App->modules[7]->IsEnabled() == true) {
+			else if (App->modules[12]->IsEnabled() == true) {
 				App->fade->FadeToBlack((Module*)App->sceneLevel_8, (Module*)App->gameOver, 120);
+				//App->audio->PlayFx(looseFx);
+				pHealth = 4;
+				destroyed = false;
+			}
+			else if (App->modules[13]->IsEnabled() == true) {
+				App->fade->FadeToBlack((Module*)App->sceneLevel_9, (Module*)App->gameOver, 120);
 				//App->audio->PlayFx(looseFx);
 				pHealth = 4;
 				destroyed = false;

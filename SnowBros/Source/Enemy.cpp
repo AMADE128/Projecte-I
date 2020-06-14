@@ -49,6 +49,14 @@ void Enemy::Update()
 
 		else if (currentTime - descongelar >= tiempo)
 		{
+			if (life == 1)
+			{
+				App->player->score -= 500;
+			}
+			else
+			{
+				App->player->score -= 10;
+			}
 			life++;
 			descongelar = 0;
 		}

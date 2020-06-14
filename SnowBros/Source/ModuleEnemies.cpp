@@ -72,7 +72,7 @@ update_status ModuleEnemies::PostUpdate()
 			enemies[i]->Draw();
 		}
 
-		if (enemies[i] != nullptr && enemies[i]->life <= 1)
+		if (enemies[i] != nullptr && enemies[i]->life < 2)
 		{
 			sprintf_s(enemydiesText, 10, "%d", scoreD);
 			App->fonts->BlitText(enemies[i]->position.x, enemies[i]->position.y - 50, enemydiesFont, enemydiesText);
@@ -296,6 +296,14 @@ void ModuleEnemies::WinCondition() {
 		else if (App->modules[10]->IsEnabled() == true) {
 			win = true;
 			App->fade->FadeToBlack((Module*)App->sceneLevel_6, (Module*)App->sceneLevel_7, 90);
+		}
+		else if (App->modules[11]->IsEnabled() == true) {
+			win = true;
+			App->fade->FadeToBlack((Module*)App->sceneLevel_7, (Module*)App->sceneLevel_8, 90);
+		}
+		else if (App->modules[12]->IsEnabled() == true) {
+			win = true;
+			App->fade->FadeToBlack((Module*)App->sceneLevel_8, (Module*)App->sceneLevel_9, 90);
 		}
 	}
 }

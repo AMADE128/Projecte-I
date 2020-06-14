@@ -77,6 +77,11 @@ void Frog::Update()
 		stunt = false;
 	}
 
+	if (life > 1 && this->collider->type != this->collider->NONE && this->collider->type != this->collider->ENEMY)
+	{
+		this->collider->type = this->collider->NONE;
+	}
+
 	if (App->player->position.x > position.x && life >= 7)
 	{
 		currentAnim = &r_idle;
@@ -207,6 +212,7 @@ void Frog::Freeze(Collider* collider) {
 		App->player->score += 500;
 		//App->particles->snowball[3].lifetime = 0;
 		//App->particles->AddParticle(App->particles->snowball[4], position.x, position.y, Collider::NONE);
+		this->collider->type = this->collider->FREEZE_BALL;
 		break;
 	case 2:
 		App->player->score += 10;

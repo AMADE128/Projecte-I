@@ -79,18 +79,6 @@ void Enemy_Demon::Update()
 		this->collider->type = this->collider->NONE;
 	}
 
-	
-
-	/*if (fall == true)
-	{
-		//groundCollision = false;
-		position.y += 2;
-	}
-
-	if (groundCollision == true)
-	{
-		fall = false;
-	}*/
 
 	if (currentAnim == &r_walk)
 	{

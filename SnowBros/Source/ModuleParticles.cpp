@@ -19,18 +19,6 @@ ModuleParticles::ModuleParticles(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		particles[i] = nullptr;
-}
-
-ModuleParticles::~ModuleParticles()
-{
-
-}
-
-bool ModuleParticles::Start()
-{
-	LOG("Loading particles");
-	player_shot = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
-	frog_particle = App->textures->Load("Assets/Sprites/Enemies/fire_ball.png");
 
 	//Health face
 	healthFace.anim.PushBack({ 112, 16, 32, 32 });
@@ -72,29 +60,29 @@ bool ModuleParticles::Start()
 	snowDeath.lifetime = 100;
 	snowDeath.anim.speed = 0.09f;
 
- 	if (FirstPushBack == false)
+	if (FirstPushBack == false)
 	{
-	path.PushBack({ 1, 0 }, 2, &shotright.anim);
-	path.PushBack({ 1, 0.25 }, 2, &shotright.anim);
-	path.PushBack({ 1, 0.5 }, 1, &shotright.anim);
-	path.PushBack({ 1, 1 }, 1, &shotright.anim);
-	path.PushBack({ 1, 1.5 }, 1, &shotright.anim);
-	path.PushBack({ 1, 2 }, 1, &shotright.anim);
-	path.PushBack({ 0.75, 4 }, 2, &shotright.anim);
-	path.PushBack({ 0.75, 8 }, 2, &shotright.anim);
-	path.PushBack({ 0.75, 12 }, 2, &shotright.anim);
+		path.PushBack({ 1, 0 }, 2, &shotright.anim);
+		path.PushBack({ 1, 0.25 }, 2, &shotright.anim);
+		path.PushBack({ 1, 0.5 }, 1, &shotright.anim);
+		path.PushBack({ 1, 1 }, 1, &shotright.anim);
+		path.PushBack({ 1, 1.5 }, 1, &shotright.anim);
+		path.PushBack({ 1, 2 }, 1, &shotright.anim);
+		path.PushBack({ 0.75, 4 }, 2, &shotright.anim);
+		path.PushBack({ 0.75, 8 }, 2, &shotright.anim);
+		path.PushBack({ 0.75, 12 }, 2, &shotright.anim);
 
-	path.PushBack({ -1, 0 }, 2, &shotleft.anim);
-	path.PushBack({ -1, 0.25 }, 1, &shotleft.anim);
-	path.PushBack({ -1, 0.5 }, 1, &shotleft.anim);
-	path.PushBack({ -1, 1 }, 1, &shotleft.anim);
-	path.PushBack({ -1, 1.5 }, 1, &shotleft.anim);
-	path.PushBack({ -1, 2 }, 1, &shotleft.anim);
-	path.PushBack({ -0.75, 4 }, 2, &shotleft.anim);
-	path.PushBack({ -0.75, 8 }, 2, &shotleft.anim);
-	path.PushBack({ -0.75, 12 }, 2, &shotleft.anim);
+		path.PushBack({ -1, 0 }, 2, &shotleft.anim);
+		path.PushBack({ -1, 0.25 }, 1, &shotleft.anim);
+		path.PushBack({ -1, 0.5 }, 1, &shotleft.anim);
+		path.PushBack({ -1, 1 }, 1, &shotleft.anim);
+		path.PushBack({ -1, 1.5 }, 1, &shotleft.anim);
+		path.PushBack({ -1, 2 }, 1, &shotleft.anim);
+		path.PushBack({ -0.75, 4 }, 2, &shotleft.anim);
+		path.PushBack({ -0.75, 8 }, 2, &shotleft.anim);
+		path.PushBack({ -0.75, 12 }, 2, &shotleft.anim);
 
-	FirstPushBack = true;
+		FirstPushBack = true;
 	}
 
 	//right & left fire ball
@@ -123,7 +111,7 @@ bool ModuleParticles::Start()
 	l_fire_death.anim.PushBack({ 0, 294, 96, 90 });
 	l_fire_death.anim.PushBack({ 0, 194, 96, 90 });
 	l_fire_death.anim.PushBack({ 0, 96, 96, 90 });
-	
+
 	l_fire_death.speed.x = 0;
 	l_fire_death.speed.y = 0;
 	l_fire_death.anim.speed = 0.2f;
@@ -134,12 +122,24 @@ bool ModuleParticles::Start()
 	r_fire_death.anim.PushBack({ 294, 294, 96, 90 });
 	r_fire_death.anim.PushBack({ 294, 194, 96, 90 });
 	r_fire_death.anim.PushBack({ 294, 96, 96, 90 });
-	
+
 	r_fire_death.speed.x = 0;
 	r_fire_death.speed.y = 0;
 	r_fire_death.anim.speed = 0.2f;
 	r_fire_death.anim.loop = false;
 	r_fire_death.lifetime = 35;
+}
+
+ModuleParticles::~ModuleParticles()
+{
+
+}
+
+bool ModuleParticles::Start()
+{
+	LOG("Loading particles");
+	player_shot = App->textures->Load("Assets/Sprites/Player/Nick_right_left.png");
+	frog_particle = App->textures->Load("Assets/Sprites/Enemies/fire_ball.png");
 
 	return true;
 }
